@@ -1,13 +1,12 @@
 package com.mentors.HiringProcess.dto;
 
-import com.mentors.HiringProcess.model.Flow;
 import com.mentors.HiringProcess.model.HiringFlowType;
 
 public class HiringFlowDto {
   
     private Long id;
 	
-	private HiringFlowDto type;
+	private HiringFlowType type;
 	
 	private String description;
 	
@@ -31,11 +30,13 @@ public class HiringFlowDto {
 		this.description = description;
 	}
 
-	public HiringFlowDto getType() {
+
+	
+	public HiringFlowType getType() {
 		return type;
 	}
 
-	public void setType(HiringFlowDto type) {
+	public void setType(HiringFlowType type) {
 		this.type = type;
 	}
 

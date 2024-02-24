@@ -1,5 +1,8 @@
 package com.mentors.HiringProcess.dto;
 
+import java.util.List;
+
+
 public class RoleDto {
 	
     private Long id;
@@ -7,6 +10,8 @@ public class RoleDto {
 	private String name;
 	
 	private String description;
+	
+	private List<PermissionDto> permissions;
 
 	public Long getId() {
 		return id;
@@ -30,6 +35,14 @@ public class RoleDto {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public List<PermissionDto> getPermissions() {
+		return permissions;
+	}
+
+	public void setPermissions(List<PermissionDto> permissions) {
+		this.permissions = permissions;
 	}
 	
 	
