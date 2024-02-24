@@ -19,13 +19,13 @@ private Long id;
 	
 	private String description;
 	
-	private Department department;
+	private DepartmentDto department;
 	
 	private long openings;
 	
 	private LocalDate targetHireDate;
 	
-	private CurrencyType currney;
+	private CurrencyTypeDto currney;
 	
 	private Double salaryMinimum;
 
@@ -33,15 +33,15 @@ private Long id;
 	
 	private JobType type;
 	
-	private List<Location> locations;
+	private List<LocationDto> locations;
 	
-	private List<HiringFlow> flows;
+	private List<HiringFlowDto> flows;
 	
 	private Double experience;
 	
-	private List<Candidate> candidates;
+	private List<CandidateDto> candidates;
 	
-	private List<Recruiter> recruiters;
+	private List<RecruiterDto> recruiters;
 
 	public Long getId() {
 		return id;
@@ -67,11 +67,11 @@ private Long id;
 		this.description = description;
 	}
 
-	public Department getDepartment() {
+	public DepartmentDto getDepartment() {
 		return department;
 	}
 
-	public void setDepartment(Department department) {
+	public void setDepartment(DepartmentDto department) {
 		this.department = department;
 	}
 
@@ -91,11 +91,11 @@ private Long id;
 		this.targetHireDate = targetHireDate;
 	}
 
-	public CurrencyType getCurrney() {
+	public CurrencyTypeDto getCurrney() {
 		return currney;
 	}
 
-	public void setCurrney(CurrencyType currney) {
+	public void setCurrney(CurrencyTypeDto currney) {
 		this.currney = currney;
 	}
 
@@ -123,19 +123,19 @@ private Long id;
 		this.type = type;
 	}
 
-	public List<Location> getLocations() {
+	public List<LocationDto> getLocations() {
 		return locations;
 	}
 
-	public void setLocations(List<Location> locations) {
+	public void setLocations(List<LocationDto> locations) {
 		this.locations = locations;
 	}
 
-	public List<HiringFlow> getFlows() {
+	public List<HiringFlowDto> getFlows() {
 		return flows;
 	}
 
-	public void setFlows(List<HiringFlow> flows) {
+	public void setFlows(List<HiringFlowDto> flows) {
 		this.flows = flows;
 	}
 
@@ -147,22 +147,21 @@ private Long id;
 		this.experience = experience;
 	}
 
-	public List<Candidate> getCandidates() {
+	public List<CandidateDto> getCandidates() {
 		return candidates;
 	}
 
-	public void setCandidates(List<Candidate> candidates) {
+	public void setCandidates(List<CandidateDto> candidates) {
 		this.candidates = candidates;
 	}
 
-	public List<Recruiter> getRecruiters() {
+	public List<RecruiterDto> getRecruiters() {
 		return recruiters;
 	}
 
-	public void setRecruiters(List<Recruiter> recruiters) {
+	public void setRecruiters(List<RecruiterDto> recruiters) {
 		this.recruiters = recruiters;
 	}
-	
-	
 
+	
 }

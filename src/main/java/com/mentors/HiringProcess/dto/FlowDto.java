@@ -10,7 +10,7 @@ public class FlowDto {
 	
 	private String name;
 	
-	private List<FlowStep> steps;
+	private List<FlowStepDto> steps;
 
 	public Long getId() {
 		return id;
@@ -28,13 +28,14 @@ public class FlowDto {
 		this.name = name;
 	}
 
-	public List<FlowStep> getSteps() {
+	public List<FlowStepDto> getSteps() {
 		return steps;
 	}
 
-	public void setSteps(List<FlowStep> steps) {
+	public void setSteps(List<FlowStepDto> steps) {
 		this.steps = steps;
 	}
 
+	
 	
 }

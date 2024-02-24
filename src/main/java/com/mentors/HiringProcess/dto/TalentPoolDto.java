@@ -13,7 +13,7 @@ public class TalentPoolDto {
 	
 	private String description;
 	
-	private List<Candidate> candidates;
+	private List<CandidateDto> candidates;
 
 	public Long getId() {
 		return id;
@@ -39,13 +39,15 @@ public class TalentPoolDto {
 		this.description = description;
 	}
 
-	public List<Candidate> getCandidates() {
+	public List<CandidateDto> getCandidates() {
 		return candidates;
 	}
 
-	public void setCandidates(List<Candidate> candidates) {
+	public void setCandidates(List<CandidateDto> candidates) {
 		this.candidates = candidates;
 	}
+
+	
 
 	
 }

@@ -1,6 +1,6 @@
 package com.mentors.HiringProcess.dto;
 
-public class DepartmenDto {
+public class DepartmentDto {
 	
     private Long id;
 	

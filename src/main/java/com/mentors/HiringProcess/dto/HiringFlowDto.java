@@ -7,11 +7,11 @@ public class HiringFlowDto {
   
     private Long id;
 	
-	private HiringFlowType type;
+	private HiringFlowDto type;
 	
 	private String description;
 	
-	private Flow source;
+	private FlowDto source;
 
 	public Long getId() {
 		return id;
@@ -21,13 +21,7 @@ public class HiringFlowDto {
 		this.id = id;
 	}
 
-	public HiringFlowType getType() {
-		return type;
-	}
-
-	public void setType(HiringFlowType type) {
-		this.type = type;
-	}
+	
 
 	public String getDescription() {
 		return description;
@@ -37,13 +31,22 @@ public class HiringFlowDto {
 		this.description = description;
 	}
 
-	public Flow getSource() {
+	public HiringFlowDto getType() {
+		return type;
+	}
+
+	public void setType(HiringFlowDto type) {
+		this.type = type;
+	}
+
+	public FlowDto getSource() {
 		return source;
 	}
 
-	public void setSource(Flow source) {
+	public void setSource(FlowDto source) {
 		this.source = source;
 	}
+
 	
 	
 }

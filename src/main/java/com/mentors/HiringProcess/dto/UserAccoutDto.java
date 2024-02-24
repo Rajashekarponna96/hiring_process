@@ -12,7 +12,7 @@ public class UserAccoutDto {
 	
 	private  boolean active;
 	
-	private Role role;
+	private RoleDto role;
 
 	public Long getId() {
 		return id;
@@ -46,13 +46,15 @@ public class UserAccoutDto {
 		this.active = active;
 	}
 
-	public Role getRole() {
+	public RoleDto getRole() {
 		return role;
 	}
 
-	public void setRole(Role role) {
+	public void setRole(RoleDto role) {
 		this.role = role;
 	}
+
+	
 	
 	
 

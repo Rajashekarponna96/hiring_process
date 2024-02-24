@@ -14,7 +14,7 @@ public class RecruiterDto {
 	
 	private String mobile;
 	
-	private UserAccout userAccout;
+	private UserAccoutDto userAccout;
 
 	public Long getId() {
 		return id;
@@ -56,13 +56,14 @@ public class RecruiterDto {
 		this.mobile = mobile;
 	}
 
-	public UserAccout getUserAccout() {
+	public UserAccoutDto getUserAccout() {
 		return userAccout;
 	}
 
-	public void setUserAccout(UserAccout userAccout) {
+	public void setUserAccout(UserAccoutDto userAccout) {
 		this.userAccout = userAccout;
 	}
+
 	
 
 	

@@ -26,21 +26,21 @@ public class CandidateDto {
 	
 	private String mobile;
 	
-	private Source source;
+	private SourceDto source;
 	
-	private HiringFlowType stage;
+	private HiringFlowDto stage;
 	
-	private Location current;
+	private LocationDto current;
 	
 	private Long avialToJoin;
 	
-	private Location preferred;
+	private LocationDto preferred;
 	
 	private Double currentSalary;
 	
 	private Double expectedSalary;
 	
-	private CurrencyType  currency;
+	private CurrencyTypeDto  currency;
 	
 	private Gender gender;
 	
@@ -48,13 +48,13 @@ public class CandidateDto {
 	
 	private List<String> skills;
 	
-	private List<Experience> experiences;
+	private List<ExperienceDto> experiences;
 	
-	private List<Education> educations;
+	private List<EducationDto> educations;
 	
-	private TalentPool talentPool;
+	private TalentPoolDto talentPool;
 	
-	private Job job;
+	private JobDto job;
 
 	public Long getId() {
 		return id;
@@ -104,27 +104,27 @@ public class CandidateDto {
 		this.mobile = mobile;
 	}
 
-	public Source getSource() {
+	public SourceDto getSource() {
 		return source;
 	}
 
-	public void setSource(Source source) {
+	public void setSource(SourceDto source) {
 		this.source = source;
 	}
 
-	public HiringFlowType getStage() {
+	public HiringFlowDto getStage() {
 		return stage;
 	}
 
-	public void setStage(HiringFlowType stage) {
+	public void setStage(HiringFlowDto stage) {
 		this.stage = stage;
 	}
 
-	public Location getCurrent() {
+	public LocationDto getCurrent() {
 		return current;
 	}
 
-	public void setCurrent(Location current) {
+	public void setCurrent(LocationDto current) {
 		this.current = current;
 	}
 
@@ -136,11 +136,11 @@ public class CandidateDto {
 		this.avialToJoin = avialToJoin;
 	}
 
-	public Location getPreferred() {
+	public LocationDto getPreferred() {
 		return preferred;
 	}
 
-	public void setPreferred(Location preferred) {
+	public void setPreferred(LocationDto preferred) {
 		this.preferred = preferred;
 	}
 
@@ -160,11 +160,11 @@ public class CandidateDto {
 		this.expectedSalary = expectedSalary;
 	}
 
-	public CurrencyType getCurrency() {
+	public CurrencyTypeDto getCurrency() {
 		return currency;
 	}
 
-	public void setCurrency(CurrencyType currency) {
+	public void setCurrency(CurrencyTypeDto currency) {
 		this.currency = currency;
 	}
 
@@ -192,37 +192,38 @@ public class CandidateDto {
 		this.skills = skills;
 	}
 
-	public List<Experience> getExperiences() {
+	public List<ExperienceDto> getExperiences() {
 		return experiences;
 	}
 
-	public void setExperiences(List<Experience> experiences) {
+	public void setExperiences(List<ExperienceDto> experiences) {
 		this.experiences = experiences;
 	}
 
-	public List<Education> getEducations() {
+	public List<EducationDto> getEducations() {
 		return educations;
 	}
 
-	public void setEducations(List<Education> educations) {
+	public void setEducations(List<EducationDto> educations) {
 		this.educations = educations;
 	}
 
-	public TalentPool getTalentPool() {
+	public TalentPoolDto getTalentPool() {
 		return talentPool;
 	}
 
-	public void setTalentPool(TalentPool talentPool) {
+	public void setTalentPool(TalentPoolDto talentPool) {
 		this.talentPool = talentPool;
 	}
 
-	public Job getJob() {
+	public JobDto getJob() {
 		return job;
 	}
 
-	public void setJob(Job job) {
+	public void setJob(JobDto job) {
 		this.job = job;
 	}
+
 	
 	
 
