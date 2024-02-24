@@ -1,12 +1,12 @@
-package com.mentors.HiringProcess.dto.response;
+package com.mentors.HiringProcess.dto;
 
-public class SourceResponseDto {
+public class LocationDto {
 	
     private Long id;
 	
 	private String name;
 	
-	private String description;
+	private String code;
 
 	public Long getId() {
 		return id;
@@ -24,12 +24,12 @@ public class SourceResponseDto {
 		this.name = name;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getCode() {
+		return code;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setCode(String code) {
+		this.code = code;
 	}
 	
 	

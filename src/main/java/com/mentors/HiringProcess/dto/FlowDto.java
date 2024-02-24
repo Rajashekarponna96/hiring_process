@@ -1,10 +1,10 @@
-package com.mentors.HiringProcess.dto.response;
+package com.mentors.HiringProcess.dto;
 
 import java.util.List;
 
 import com.mentors.HiringProcess.model.FlowStep;
 
-public class FlowResponseDto {
+public class FlowDto {
 	
     private Long id;
 	

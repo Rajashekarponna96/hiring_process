@@ -1,9 +1,9 @@
-package com.mentors.HiringProcess.dto.response;
+package com.mentors.HiringProcess.dto;
 
 import com.mentors.HiringProcess.model.Flow;
 import com.mentors.HiringProcess.model.HiringFlowType;
 
-public class HiringFlowResponseDto {
+public class HiringFlowDto {
   
     private Long id;
 	

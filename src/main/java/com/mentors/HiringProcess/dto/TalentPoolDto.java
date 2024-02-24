@@ -1,10 +1,10 @@
-package com.mentors.HiringProcess.dto.response;
+package com.mentors.HiringProcess.dto;
 
 import java.util.List;
 
 import com.mentors.HiringProcess.model.Candidate;
 
-public class TalentPoolResponseDto {
+public class TalentPoolDto {
 	
     private Long id;
 	

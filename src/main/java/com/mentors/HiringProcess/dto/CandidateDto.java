@@ -1,4 +1,4 @@
-package com.mentors.HiringProcess.dto.response;
+package com.mentors.HiringProcess.dto;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -13,7 +13,7 @@ import com.mentors.HiringProcess.model.Location;
 import com.mentors.HiringProcess.model.Source;
 import com.mentors.HiringProcess.model.TalentPool;
 
-public class CandidateResponseDto {
+public class CandidateDto {
 	private Long id;
 
 	private String firstName;

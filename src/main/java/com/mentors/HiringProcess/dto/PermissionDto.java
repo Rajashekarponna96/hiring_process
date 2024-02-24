@@ -1,6 +1,6 @@
-package com.mentors.HiringProcess.dto.response;
+package com.mentors.HiringProcess.dto;
 
-public class PermissionResponseDto {
+public class PermissionDto {
 	
 	private Long id;
 	private String name;

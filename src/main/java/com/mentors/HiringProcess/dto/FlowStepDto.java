@@ -1,14 +1,12 @@
-package com.mentors.HiringProcess.dto.response;
+package com.mentors.HiringProcess.dto;
 
-public class CurrencyTypeResponseDto {
+public class FlowStepDto {
 	
     private Long id;
 	
 	private String name;
 	
 	private String code;
-	
-	private String symbol;
 
 	public Long getId() {
 		return id;
@@ -34,14 +32,6 @@ public class CurrencyTypeResponseDto {
 		this.code = code;
 	}
 
-	public String getSymbol() {
-		return symbol;
-	}
-
-	public void setSymbol(String symbol) {
-		this.symbol = symbol;
-	}
 	
 	
-
 }

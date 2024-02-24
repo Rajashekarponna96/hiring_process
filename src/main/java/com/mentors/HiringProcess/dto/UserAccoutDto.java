@@ -1,8 +1,8 @@
-package com.mentors.HiringProcess.dto.response;
+package com.mentors.HiringProcess.dto;
 
 import com.mentors.HiringProcess.model.Role;
 
-public class UserAccoutResponseDto {
+public class UserAccoutDto {
 	
   private Long id;
 	

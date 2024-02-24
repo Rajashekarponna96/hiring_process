@@ -1,4 +1,4 @@
-package com.mentors.HiringProcess.dto.response;
+package com.mentors.HiringProcess.dto;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -11,7 +11,7 @@ import com.mentors.HiringProcess.model.JobType;
 import com.mentors.HiringProcess.model.Location;
 import com.mentors.HiringProcess.model.Recruiter;
 
-public class JobResponseDto {
+public class JobDto {
 	
 private Long id;
 	

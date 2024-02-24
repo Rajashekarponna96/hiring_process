@@ -1,8 +1,8 @@
-package com.mentors.HiringProcess.dto.response;
+package com.mentors.HiringProcess.dto;
 
 import java.time.LocalDate;
 
-public class EducationResponseDto {
+public class EducationDto {
 	
     private Long id;
 	

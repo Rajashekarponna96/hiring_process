@@ -1,10 +1,20 @@
-package com.mentors.HiringProcess.dto.request;
+package com.mentors.HiringProcess.dto;
 
-public class DepartmentRequestDto {
- 
-    private String name;
+public class DepartmenDto {
+	
+    private Long id;
+	
+	private String name;
 	
 	private String  code;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
@@ -23,4 +33,5 @@ public class DepartmentRequestDto {
 	}
 	
 	
+
 }
