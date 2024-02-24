@@ -5,9 +5,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mentors.HiringProcess.converter.StringListConverter;
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
@@ -202,8 +203,7 @@ public class Candidate  implements Serializable {
 	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
-	//@JsonIgnore
-	//@OneToMany
+	@Convert(converter = StringListConverter.class)
 	public List<String> getSkills() {
 		return skills;
 	}
