@@ -1,5 +1,6 @@
 package com.mentors.HiringProcess.builder;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.mentors.HiringProcess.dto.RecruiterDto;
@@ -8,11 +9,11 @@ import com.mentors.HiringProcess.model.Recruiter;
 @Component
 public class RecruiterBuilder {
 	
+	
+	@Autowired
 	private UserAccoutBuilder userAccoutBuilder;
 	
-	 public RecruiterBuilder() {
-	        this.userAccoutBuilder = new UserAccoutBuilder();
-	 }
+	
 	
 	
 	public Recruiter toModel(RecruiterDto recruiterDto) {

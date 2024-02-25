@@ -1,17 +1,10 @@
 package com.mentors.HiringProcess.builder;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.mentors.HiringProcess.dto.CandidateDto;
-import com.mentors.HiringProcess.dto.EducationDto;
-import com.mentors.HiringProcess.dto.ExperienceDto;
 import com.mentors.HiringProcess.model.Candidate;
-import com.mentors.HiringProcess.model.Education;
-import com.mentors.HiringProcess.model.Experience;
 @Component
 public class CandidateBuilder {
 	@Autowired
@@ -23,18 +16,22 @@ public class CandidateBuilder {
 	@Autowired
 	private  CurrencyTypeBuilder currencyTypeBuilder;
 
+	@Autowired
 	private TalentPoolBuilder talentPoolBuilder;
 	
+	@Autowired
 	private JobBuilder jobBuilder;
 	
-    public CandidateBuilder() {
-        this.sourceBuilder = new SourceBuilder();
-        this.locationBuilder=new LocationBuilder();
-        this.currencyTypeBuilder=new CurrencyTypeBuilder();
-        this.talentPoolBuilder=new TalentPoolBuilder();
-        this.jobBuilder=new JobBuilder();
-    }
 	
+	@Autowired
+	private ExperienceBuilder experienceBuilder;
+	
+	@Autowired
+	private EducationBuilder educationBuilder;
+	
+	
+	
+   
 	public Candidate toModel(CandidateDto candidateDto) {
 
 		Candidate candidate = new Candidate();
@@ -57,6 +54,9 @@ public class CandidateBuilder {
 		candidate.setTalentPool(talentPoolBuilder.toModel(candidateDto.getTalentPool()));
 		candidate.setJob(jobBuilder.toModel(candidateDto.getJob()));
 		candidate.setSkills(candidateDto.getSkills());
+		
+		candidate.setEducations(educationBuilder.toModelList(candidateDto.getEducations()));
+		candidate.setExperiences(experienceBuilder.toModelList(candidateDto.getExperiences()));
 		return candidate;
 	}
 	
@@ -79,22 +79,10 @@ public class CandidateBuilder {
 		candidatedto.setTalentPool(talentPoolBuilder.toDto(candidate.getTalentPool()));
 		candidatedto.setJob(jobBuilder.toDto(candidate.getJob()));
 		candidatedto.setSkills(candidate.getSkills());
+		candidatedto.setEducations(educationBuilder.toDtoList(candidate.getEducations()));
+		candidatedto.setExperiences(experienceBuilder.toDtoList(candidate.getExperiences()));
 		
-		List<ExperienceDto> experienceDtos = new ArrayList<>();
-	    for (Experience experience : candidate.getExperiences()) {
-	    	ExperienceDto experienceDto = new ExperienceDto();
-	    	experienceDto.setId(candidate.getId());
-	    	experienceDtos.add(experienceDto);
-	    }
-	    candidatedto.setExperiences(experienceDtos);
-	    
-	    List<EducationDto> educationDtos = new ArrayList<>();
-	    for (Education education : candidate.getEducations()) {
-	    	EducationDto educationDto = new EducationDto();
-	    	educationDto.setId(education.getId());
-	    	educationDtos.add(educationDto);
-	    }
-	    candidatedto.setEducations(educationDtos);
+	   
 		
        return candidatedto;
 	}

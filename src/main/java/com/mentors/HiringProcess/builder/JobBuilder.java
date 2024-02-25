@@ -3,6 +3,7 @@ package com.mentors.HiringProcess.builder;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.mentors.HiringProcess.dto.CandidateDto;
@@ -18,15 +19,14 @@ import com.mentors.HiringProcess.model.Recruiter;
 @Component
 public class JobBuilder {
 
+	
+	@Autowired
 	private DepartmentBuilder departmentBuilder;
 	
-	
+	@Autowired
 	private  CurrencyTypeBuilder currencyTypeBuilder;
 	
-	public JobBuilder() {
-        this.departmentBuilder = new DepartmentBuilder();
-        this.currencyTypeBuilder=new CurrencyTypeBuilder();
-	}
+
 	public Job toModel(JobDto jobDto) {
 
 		Job job = new Job();

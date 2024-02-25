@@ -11,9 +11,7 @@ public class HiringFlowBuilder {
 	@Autowired
 	private FlowBuilder flowBuilder;
 
-    public HiringFlowBuilder() {
-        this.flowBuilder = new FlowBuilder();
-    }
+   
 	
 	public HiringFlow toModel(HiringFlowDto hiringFlowDto) {
 
