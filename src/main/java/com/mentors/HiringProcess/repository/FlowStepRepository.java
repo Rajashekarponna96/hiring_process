@@ -1,4 +1,4 @@
-package com.mentors.HiringProcess.Repository;
+package com.mentors.HiringProcess.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

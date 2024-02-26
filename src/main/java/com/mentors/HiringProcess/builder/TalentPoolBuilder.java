@@ -5,9 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.mentors.HiringProcess.dto.CandidateDto;
 import com.mentors.HiringProcess.dto.TalentPoolDto;
-import com.mentors.HiringProcess.model.Candidate;
 import com.mentors.HiringProcess.model.TalentPool;
 
 @Component
@@ -27,16 +25,16 @@ public class TalentPoolBuilder {
 		talentPoolDto.setId(talentPool.getId());
 		talentPoolDto.setName(talentPool.getName());
 		talentPoolDto.setDescription(talentPool.getDescription());
-
-		List<CandidateDto> candidateDtos = new ArrayList<>();
-		for (Candidate candidate : talentPool.getCandidates()) {
-			CandidateDto candidateDto = new CandidateDto();
-			candidateDto.setId(candidate.getId());
-			candidateDtos.add(candidateDto);
-		}
-		talentPoolDto.setCandidates(candidateDtos);
-
 		return talentPoolDto;
 	}
 
+	public List<TalentPoolDto> toDtoList(List<TalentPool> list) {
+
+		List<TalentPoolDto> dtos = new ArrayList<>();
+		for (TalentPool model : list) {
+			dtos.add(toDto(model));
+		}
+		return dtos;
+
+	}
 }
