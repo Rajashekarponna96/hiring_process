@@ -225,6 +225,8 @@ public class CandidateDto {
 	}
 
 	
-	
+	public void validateREquiredAttibutes() {
+		
+	}
 
 }
