@@ -17,7 +17,7 @@ public class UserAccoutBuilder {
 	public UserAccout toModel(UserAccoutDto userAccoutDto) {
 
 		UserAccout userAccout = new UserAccout();
-		userAccout.setId(userAccoutDto.getId());
+		//userAccout.setId(userAccoutDto.getId());
 		userAccout.setUserName(userAccoutDto.getUserName());
 		userAccout.setPassword(userAccoutDto.getPassword());
 		userAccout.setActive(userAccoutDto.isActive());
