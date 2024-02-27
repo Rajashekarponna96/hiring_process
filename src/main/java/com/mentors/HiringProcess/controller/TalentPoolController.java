@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mentors.HiringProcess.dto.TalentPoolDto;
 import com.mentors.HiringProcess.service.TalentPoolServiceI;
 
-//import io.swagger.v3.oas.annotations.parameters.RequestBody;
+
 
 @RestController
 @RequestMapping(value = "/talentPool")
@@ -36,9 +37,9 @@ public class TalentPoolController {
 	public List<TalentPoolDto> findAll(){
 		return talentPoolServiceI.findAll();
 	}
-	@PutMapping("/{id}")
-	public void update(@RequestBody TalentPoolDto talentPoolDto) {
-		talentPoolServiceI.update(talentPoolDto);
+	@PutMapping(value="/{id}")
+	public void update(@RequestBody TalentPoolDto talentPoolDto,@PathVariable Long id) {
+		talentPoolServiceI.update(talentPoolDto,id);
 	}
 
 }

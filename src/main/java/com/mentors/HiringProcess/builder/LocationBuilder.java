@@ -19,6 +19,7 @@ public class LocationBuilder {
 	
 	public LocationDto toDto(Location location) {
 		LocationDto locationDto = new LocationDto();
+		locationDto.setId(location.getId());
 		locationDto.setName(location.getName());
 		locationDto.setCode(location.getCode());
 		return locationDto;
