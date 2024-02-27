@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mentors.HiringProcess.dto.RecruiterDto;
 import com.mentors.HiringProcess.service.RecruiterServiceI;
 
-//import io.swagger.v3.oas.annotations.parameters.RequestBody;
+
 
 @RestController
 @RequestMapping(value = "/recruiter")

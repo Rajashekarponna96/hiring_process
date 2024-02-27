@@ -49,9 +49,11 @@ public class EducationBuilder {
 	
 	public List<Education> toModelList(List<EducationDto> dtos){
 		 List<Education> models = new ArrayList<>();
+		 if(dtos!=null) {
 		    for (EducationDto dto : dtos) {
 		    models.add(toModel(dto));
 		    }
+		 }
 		    
 		    return models;
 		    		

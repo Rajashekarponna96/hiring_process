@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mentors.HiringProcess.dto.CandidateDto;
 import com.mentors.HiringProcess.service.CandidateServiceI;
 
-//import io.swagger.v3.oas.annotations.parameters.RequestBody;
+
 
 @RestController
 @RequestMapping(value = "/candidate")
@@ -28,7 +28,7 @@ public class CandidateController {
 	
 	@PostMapping(value = "/")
 	public void add(@RequestBody CandidateDto candidateDto) {
-		candidateDto.validateREquiredAttibutes();
+		//candidateDto.validateREquiredAttibutes();
 		candidateServiceI.add(candidateDto);
 	}
 	

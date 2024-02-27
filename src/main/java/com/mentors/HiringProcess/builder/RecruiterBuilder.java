@@ -33,6 +33,7 @@ public class RecruiterBuilder {
 	
 	public RecruiterDto toDto(Recruiter recruiter) {
 		RecruiterDto recruiterdto = new RecruiterDto();
+		recruiterdto.setId(recruiter.getId());
 		recruiterdto.setFirstName(recruiter.getFirstName());
 		recruiterdto.setLastName(recruiter.getLastName());
 		recruiterdto.setEmail(recruiter.getEmail());

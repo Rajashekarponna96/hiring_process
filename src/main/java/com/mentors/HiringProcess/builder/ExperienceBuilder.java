@@ -48,10 +48,12 @@ public class ExperienceBuilder {
 	public List<Experience> toModelList(List<ExperienceDto> dtos) {
 
 		List<Experience> models = new ArrayList<>();
+		if(dtos!=null) {
 
 		for (ExperienceDto dto : dtos) {
 
 			models.add(toModel(dto));
+		}
 		}
 
 		return models;

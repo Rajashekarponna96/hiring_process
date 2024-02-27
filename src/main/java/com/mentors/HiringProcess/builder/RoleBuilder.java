@@ -26,6 +26,7 @@ public class RoleBuilder {
 	
 	public RoleDto toDto(Role role) {
 		RoleDto roledto = new RoleDto();
+		roledto.setId(role.getId());
 		roledto.setName(role.getName());
 		roledto.setDescription(role.getDescription());
 		
