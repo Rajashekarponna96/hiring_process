@@ -10,6 +10,6 @@ public interface TalentPoolServiceI {
 
 	List<TalentPoolDto> findAll();
 
-	void update(TalentPoolDto talentPoolDto);
+	void update(TalentPoolDto talentPoolDto,Long id);
 
 }

@@ -1,6 +1,7 @@
 package com.mentors.HiringProcess.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,9 +39,12 @@ public class TalentPoolServiceImpl implements TalentPoolServiceI {
 	}
 
 	@Override
-	public void update(TalentPoolDto talentPoolDto) {
-	  TalentPool talentPool=talentPoolBuilder.toModel(talentPoolDto);
-	  talentPoolRepository.save(talentPool);
+	public void update(TalentPoolDto talentPoolDto,Long id) {
+		Optional<TalentPool> dbTalentPool=talentPoolRepository.findById(id);
+		if(dbTalentPool.isPresent()) {
+	     TalentPool talentPool=talentPoolRepository.save(talentPoolBuilder.toModel(talentPoolDto));
+		}
+	  
 		
 	}
 
