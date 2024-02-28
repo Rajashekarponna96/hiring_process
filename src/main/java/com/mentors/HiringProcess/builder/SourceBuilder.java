@@ -21,6 +21,7 @@ public class SourceBuilder {
 	
 	public SourceDto toDto(Source source) {
 		SourceDto sourcedto = new SourceDto();
+		sourcedto.setId(source.getId());
 		sourcedto.setName(source.getName());
 		sourcedto.setDescription(source.getDescription());
 		return sourcedto;

@@ -3,11 +3,15 @@ package com.mentors.HiringProcess.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 @Entity
 @Table(name="education")
@@ -27,6 +31,8 @@ public class Education implements Serializable {
 	private String college;
 	
 	private String location;
+	
+	private Candidate candidate;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -84,6 +90,16 @@ public class Education implements Serializable {
 
 	public void setLocation(String location) {
 		this.location = location;
+	}
+	@JsonIgnore
+	@ManyToOne
+    @JoinColumn(name = "candidate_id")
+	public Candidate getCandidate() {
+		return candidate;
+	}
+
+	public void setCandidate(Candidate candidate) {
+		this.candidate = candidate;
 	}
 	
 	

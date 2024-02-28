@@ -50,7 +50,7 @@ public class Job implements Serializable {
 	
 	private List<Candidate> candidates;
 	
-	private List<Recruiter> recruiters;
+	private Recruiter recruiters;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -174,16 +174,16 @@ public class Job implements Serializable {
 	public void setCandidates(List<Candidate> candidates) {
 		this.candidates = candidates;
 	}
-	@JsonIgnore
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name="recruiter_id",referencedColumnName = "id")
-	public List<Recruiter> getRecruiters() {
+	public Recruiter getRecruiters() {
 		return recruiters;
 	}
 
-	public void setRecruiters(List<Recruiter> recruiters) {
+	public void setRecruiters(Recruiter recruiters) {
 		this.recruiters = recruiters;
 	}
+	
 	
 	
 

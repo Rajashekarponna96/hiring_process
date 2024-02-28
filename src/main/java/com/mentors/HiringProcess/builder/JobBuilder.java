@@ -83,13 +83,13 @@ public class JobBuilder {
 	    }
 	    jobdto.setCandidates(candidateDtos);
 	    
-	    List<RecruiterDto> recruiterDtos = new ArrayList<>();
-	    for (Recruiter recruiter : job.getRecruiters()) {
-	    	RecruiterDto recruiterDto = new RecruiterDto();
-	    	recruiterDto.setId(recruiter.getId());
-	    	recruiterDtos.add(recruiterDto);
-	    }
-	    jobdto.setRecruiters(recruiterDtos);
+//	    List<RecruiterDto> recruiterDtos = new ArrayList<>();
+//	    for (Recruiter recruiter : job.getRecruiters()) {
+//	    	RecruiterDto recruiterDto = new RecruiterDto();
+//	    	recruiterDto.setId(recruiter.getId());
+//	    	recruiterDtos.add(recruiterDto);
+//	    }
+//	    jobdto.setRecruiters(recruiterDtos);
 	    
 		return jobdto;
 }
