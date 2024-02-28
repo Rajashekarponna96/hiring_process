@@ -1,6 +1,7 @@
 package com.mentors.HiringProcess.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -29,6 +30,8 @@ public class Recruiter implements Serializable{
 	private String mobile;
 	
 	private UserAccout userAccout;
+	
+	private List<Job> job;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -81,6 +84,18 @@ public class Recruiter implements Serializable{
 	public void setUserAccout(UserAccout userAccout) {
 		this.userAccout = userAccout;
 	}
+
+	public List<Job> getJob() {
+		return job;
+	}
+
+	public void setJob(List<Job> job) {
+		this.job = job;
+	}
+	
+	
+	
+	
 	
 	
 

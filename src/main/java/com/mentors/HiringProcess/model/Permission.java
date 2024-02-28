@@ -2,11 +2,15 @@ package com.mentors.HiringProcess.model;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 @Entity
 @Table(name="permission")
@@ -15,6 +19,7 @@ public class Permission implements Serializable {
 	private Long id;
 	private String name;
 	private String description;
+	private Role role;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,6 +43,16 @@ public class Permission implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	@JsonIgnore
+	@ManyToOne
+    @JoinColumn(name = "role_id")
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
+	
 	
 	
 

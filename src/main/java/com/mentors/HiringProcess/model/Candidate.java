@@ -212,8 +212,7 @@ public class Candidate  implements Serializable {
 		this.skills = skills;
 	}
 	@JsonIgnore
-	@OneToMany
-	@JoinColumn(name="experience_id",referencedColumnName = "id")
+	@OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
 	public List<Experience> getExperiences() {
 		return experiences;
 	}
@@ -222,8 +221,7 @@ public class Candidate  implements Serializable {
 		this.experiences = experiences;
 	}
 	@JsonIgnore
-	@OneToMany
-	@JoinColumn(name="educations_id",referencedColumnName = "id")
+	@OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
 	public List<Education> getEducations() {
 		return educations;
 	}
@@ -242,7 +240,7 @@ public class Candidate  implements Serializable {
 	public void setTalentPool(TalentPool talentPool) {
 		this.talentPool = talentPool;
 	}
-	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="job_id",referencedColumnName = "id")
 	public Job getJob() {

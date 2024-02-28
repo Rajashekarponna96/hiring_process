@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 @Entity
 @Table(name="experience")
@@ -27,6 +29,8 @@ public class Experience implements Serializable{
 	private LocalDate dateOfRelieving;
 	
 	private String location;
+	
+	private Candidate candidate;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -85,6 +89,16 @@ public class Experience implements Serializable{
 	public void setLocation(String location) {
 		this.location = location;
 	}
+	@ManyToOne
+    @JoinColumn(name = "candidate_id")
+	public Candidate getCandidate() {
+		return candidate;
+	}
+	
+	public void setCandidate(Candidate candidate) {
+		this.candidate = candidate;
+	}
+	
 	
 	
 
