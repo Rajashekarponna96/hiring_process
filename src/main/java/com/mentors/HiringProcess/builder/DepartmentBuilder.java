@@ -12,14 +12,15 @@ public class DepartmentBuilder {
 		Department department = new Department();
 		department.setId(departmentDto.getId());
 		department.setName(departmentDto.getName());
-		department.setCode(departmentDto.getCode());
-		
+		department.setCode(departmentDto.getCode());		
 		return department;
 	}
 
 	
 	public DepartmentDto toDto(Department department) {
+		
 		DepartmentDto departmentDto= new DepartmentDto();
+		departmentDto.setId(department.getId());
 		departmentDto.setName(department.getName());
 		departmentDto.setCode(department.getCode());
 		return departmentDto;

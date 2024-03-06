@@ -48,6 +48,7 @@ public class JobBuilder {
 	
 	public JobDto toDto(Job job) {
 		JobDto jobdto = new JobDto();
+		jobdto.setId(job.getId());
 		jobdto.setTitle(job.getTitle());
 		jobdto.setDescription(job.getDescription());
 		jobdto.setDepartment(departmentBuilder.toDto(job.getDepartment()));
