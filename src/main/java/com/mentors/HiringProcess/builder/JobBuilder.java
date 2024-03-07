@@ -26,7 +26,9 @@ public class JobBuilder {
 	@Autowired
 	private  CurrencyTypeBuilder currencyTypeBuilder;
 	
-
+	@Autowired
+    private RecruiterBuilder recruiterBuilder;
+	
 	public Job toModel(JobDto jobDto) {
 
 		Job job = new Job();
@@ -41,7 +43,7 @@ public class JobBuilder {
 		job.setSalaryMaximum(jobDto.getSalaryMaximum());
 		job.setType(jobDto.getType());
 		job.setExperience(jobDto.getExperience());
-		
+		job.setRecruiters(recruiterBuilder.toModel(jobDto.getRecruiters()));
 		return job;
 	}
 
@@ -59,6 +61,7 @@ public class JobBuilder {
 		jobdto.setSalaryMaximum(job.getSalaryMaximum());
 		jobdto.setType(job.getType());
 		jobdto.setExperience(job.getExperience());
+		jobdto.setRecruiters(recruiterBuilder.toDto(job.getRecruiters()));
 		
 		List<LocationDto> locationDtos = new ArrayList<>();
 	    for (Location location : job.getLocations()) {

@@ -41,7 +41,7 @@ private Long id;
 	
 	private List<CandidateDto> candidates;
 	
-	private List<RecruiterDto> recruiters;
+	private RecruiterDto recruiters;
 
 	public Long getId() {
 		return id;
@@ -155,13 +155,14 @@ private Long id;
 		this.candidates = candidates;
 	}
 
-	public List<RecruiterDto> getRecruiters() {
+	public RecruiterDto getRecruiters() {
 		return recruiters;
 	}
 
-	public void setRecruiters(List<RecruiterDto> recruiters) {
+	public void setRecruiters(RecruiterDto recruiters) {
 		this.recruiters = recruiters;
 	}
 
+	
 	
 }

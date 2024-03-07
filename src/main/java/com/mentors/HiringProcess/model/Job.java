@@ -78,7 +78,7 @@ public class Job implements Serializable {
 		this.description = description;
 	}
 	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "department_id", referencedColumnName = "id")
 	public Department getDepartment() {
 		return department;
