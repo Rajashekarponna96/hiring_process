@@ -17,6 +17,7 @@ import com.mentors.HiringProcess.repository.CurrencyTypeRepository;
 public class CurrencyTypeServiceImpl implements CurrencyTypeService{
 	@Autowired
 	 private CurrencyTypeRepository currencyTypeRepository;
+	@Autowired
 	private  CurrencyTypeBuilder currencyTypeBuilder;
 
 	@Override
