@@ -54,7 +54,7 @@ public class CandidateBuilder {
 		candidate.setTalentPool(talentPoolBuilder.toModel(candidateDto.getTalentPool()));
 		candidate.setJob(jobBuilder.toModel(candidateDto.getJob()));
 		candidate.setSkills(candidateDto.getSkills());
-		
+		candidate.setStage(candidateDto.getStage());
 		candidate.setEducations(educationBuilder.toModelList(candidateDto.getEducations()));
 		candidate.setExperiences(experienceBuilder.toModelList(candidateDto.getExperiences()));
 		return candidate;
@@ -81,6 +81,7 @@ public class CandidateBuilder {
 		candidatedto.setSkills(candidate.getSkills());
 		candidatedto.setEducations(educationBuilder.toDtoList(candidate.getEducations()));
 		candidatedto.setExperiences(experienceBuilder.toDtoList(candidate.getExperiences()));
+		candidatedto.setStage(candidate.getStage());
 		
 	   
 		

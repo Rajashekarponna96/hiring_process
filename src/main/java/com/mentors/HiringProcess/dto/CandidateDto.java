@@ -28,7 +28,7 @@ public class CandidateDto {
 	
 	private SourceDto source;
 	
-	private HiringFlowDto stage;
+	private HiringFlowType stage;
 	
 	private LocationDto current;
 	
@@ -112,11 +112,13 @@ public class CandidateDto {
 		this.source = source;
 	}
 
-	public HiringFlowDto getStage() {
+	
+
+	public HiringFlowType getStage() {
 		return stage;
 	}
 
-	public void setStage(HiringFlowDto stage) {
+	public void setStage(HiringFlowType stage) {
 		this.stage = stage;
 	}
 
