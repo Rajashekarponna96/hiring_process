@@ -117,7 +117,7 @@ public class Candidate  implements Serializable {
 		this.mobile = mobile;
 	}
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "source_id", referencedColumnName = "id")
 	public Source getSource() {
 		return source;
@@ -135,7 +135,7 @@ public class Candidate  implements Serializable {
 		this.stage = stage;
 	}
    
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "current_location_id", referencedColumnName = "id")
 	public Location getCurrent() {
 		return current;
@@ -153,7 +153,7 @@ public class Candidate  implements Serializable {
 		this.avialToJoin = avialToJoin;
 	}
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "preferred_location_id", referencedColumnName = "id")
 	public Location getPreferred() {
 		return preferred;
@@ -231,7 +231,7 @@ public class Candidate  implements Serializable {
 	}
 	
 	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "talentpool_id", referencedColumnName = "id")
 	public TalentPool getTalentPool() {
 		return talentPool;
