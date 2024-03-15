@@ -28,6 +28,7 @@ public class JobController {
 	
 	@PostMapping("/")
 	public void addJob(@RequestBody JobDto  jobDto) {
+		jobDto.validateRequiredAttibutes(jobDto);
 		jobServiceI.addJob(jobDto);
 	}
 	

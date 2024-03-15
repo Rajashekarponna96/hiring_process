@@ -227,8 +227,28 @@ public class CandidateDto {
 	}
 
 	
-	public void validateREquiredAttibutes() {
-		
+	public void validateREquiredAttibutes(CandidateDto candidateDto) {
+		if(candidateDto.getFirstName()==null) {
+			throw new RuntimeException("FirstName is Mandatory");
+		}
+		if(candidateDto.getLastName()==null) {
+			throw new RuntimeException("LastName is Mandatory");
+		}
+		if(candidateDto.getMiddleName()==null) {
+			throw new RuntimeException("MiddleName is Mandatory");
+		}
+		if(candidateDto.getMobile()==null) {
+			throw new RuntimeException("Mobile is Mandatory");
+		}
+		if(candidateDto.getAvialToJoin()==null) {
+			throw new RuntimeException("AvialToJoin is Mandatory");
+		}
+		if(candidateDto.getCurrentSalary()==null) {
+			throw new RuntimeException("CurrentSalary is Mandatory");
+		}
+		if(candidateDto.getExpectedSalary()==null) {
+			throw new RuntimeException("ExpectedSalary is Mandatory");
+		}
 	}
 
 }

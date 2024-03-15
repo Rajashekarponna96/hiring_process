@@ -64,6 +64,23 @@ public class RecruiterDto {
 		this.userAccout = userAccout;
 	}
 
+	public void validateRequiredAttibutes(RecruiterDto recruiterDto) {
+		
+		if(recruiterDto.getFirstName()==null) {
+			throw new RuntimeException("FirstName is Mandatory");
+		}
+		if(recruiterDto.getLastName()==null) {
+			throw new RuntimeException("LastName is Mandatory");
+		}
+		if(recruiterDto.getEmail()==null) {
+			throw new RuntimeException("Email is Mandatory");
+		}
+		if(recruiterDto.getMobile()==null) {
+			throw new RuntimeException("Mobile is Mandatory");
+		}
+		
+	}
+
 	
 
 	

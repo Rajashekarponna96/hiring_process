@@ -1,7 +1,5 @@
 package com.mentors.HiringProcess.dto;
 
-import com.mentors.HiringProcess.model.Role;
-
 public class UserAccoutDto {
 	
     private Long id;
@@ -54,8 +52,15 @@ public class UserAccoutDto {
 		this.role = role;
 	}
 
-	
-	
-	
+	public void validateRequiredAttibutes(UserAccoutDto userAccoutDto) {
+		if(userAccoutDto.getUserName()==null) {
+			throw new RuntimeException("UserName is Mandatory");
+		}
+		if(userAccoutDto.getPassword()==null) {
+			throw new RuntimeException("Password is Mandatory");
+		}
+		
+	}
+
 
 }

@@ -25,7 +25,6 @@ public class JobServiceImpl implements JobServiceI {
 
 	@Override
 	public void addJob(JobDto jobDto) {
-		// TODO Auto-generated method stub
 		jobRepository.save(jobBuilder.toModel(jobDto));
 	}
 

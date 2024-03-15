@@ -28,7 +28,7 @@ public class CandidateController {
 	
 	@PostMapping(value = "/")
 	public void add(@RequestBody CandidateDto candidateDto) {
-		//candidateDto.validateREquiredAttibutes();
+		candidateDto.validateREquiredAttibutes(candidateDto);
 		candidateServiceI.add(candidateDto);
 	}
 	

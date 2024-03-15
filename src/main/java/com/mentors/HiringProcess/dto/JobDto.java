@@ -163,6 +163,42 @@ private Long id;
 		this.recruiters = recruiters;
 	}
 
+	public void validateRequiredAttibutes(JobDto jobDto) {
+		if(jobDto.getTitle()==null) {
+			throw new RuntimeException("Job Title is Mandatory");
+		}
+		if(jobDto.getDescription()==null) {
+			throw new RuntimeException("Job Description is Mandatory");
+		}
+		if(jobDto.getDepartment()==null) {
+			throw new RuntimeException("Department is Mandatory");
+		}
+		if (jobDto.getOpenings() <= 0) {
+		    throw new RuntimeException("Openings must be a positive number");
+		}
+		if(jobDto.getTargetHireDate()==null) {
+			throw new RuntimeException("TargetHireDate is Mandatory");
+		}
+		if(jobDto.getCurrney()==null) {
+			throw new RuntimeException("Currency is Mandatory");
+		}
+		if(jobDto.getSalaryMinimum()==null) {
+			throw new RuntimeException("SalaryMinimum is Mandatory");
+		}
+		if(jobDto.getSalaryMaximum()==null) {
+			throw new RuntimeException("SalaryMaximum is Mandatory");
+		}
+		if(jobDto.getType()==null) {
+			throw new RuntimeException("JobType is Mandatory");
+		}
+		if(jobDto.getExperience()==null) {
+			throw new RuntimeException("Experience is Mandatory");
+		}
+		if(jobDto.getRecruiters()==null) {
+			throw new RuntimeException("Recruiter is Mandatory");
+		}
+	}
+
 	
 	
 }
