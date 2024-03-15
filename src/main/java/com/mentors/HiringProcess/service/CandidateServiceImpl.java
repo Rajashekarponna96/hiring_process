@@ -25,7 +25,12 @@ public class CandidateServiceImpl implements CandidateServiceI {
 
 	@Override
 	public void add(CandidateDto candidateDto) {
-		// TODO Auto-generated method stub
+		if(candidateRepository.findByEmail(candidateDto.getEmail()).isPresent()) {
+			throw new RuntimeException("Email is Already Exit");
+		}
+		if(candidateRepository.findByMobile(candidateDto.getMobile()).isPresent()) {
+			throw new RuntimeException("Mobile is Already Exit");
+		}
 		candidateRepository.save(candidateBuilder.toModel(candidateDto));
 	}
 

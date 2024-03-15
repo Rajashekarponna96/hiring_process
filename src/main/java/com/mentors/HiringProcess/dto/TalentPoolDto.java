@@ -47,6 +47,17 @@ public class TalentPoolDto {
 		this.candidates = candidates;
 	}
 
+	public void validateRequiredAttibutes(TalentPoolDto talentPoolDto) {
+		
+		if(talentPoolDto.getName()==null) {
+			throw new RuntimeException("Name is Mandatory");
+		}
+		if(talentPoolDto.getDescription()==null) {
+			throw new RuntimeException("Description is Mandatory");
+		}
+		
+	}
+
 	
 
 	

@@ -27,9 +27,7 @@ public class TalentPoolController {
 
 	@PostMapping("/")
 	public void add(@RequestBody TalentPoolDto talentPoolDto) {
-		/**
-		 * need to add validation for input
-		 */
+		talentPoolDto.validateRequiredAttibutes(talentPoolDto);
 		talentPoolServiceI.add(talentPoolDto);
 
 	}

@@ -6,4 +6,6 @@ import com.mentors.HiringProcess.model.Role;
 
 public interface RoleRepository extends JpaRepository<Role, Long>{
 
+	Role findByName(String string);
+
 }

@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mentors.HiringProcess.dto.LoginDto;
 import com.mentors.HiringProcess.dto.UserAccoutDto;
+import com.mentors.HiringProcess.model.UserAccout;
 import com.mentors.HiringProcess.service.UserAccountServiceI;
 
 
@@ -28,6 +31,7 @@ public class UserAccoutController {
 	
 	@PostMapping(value = "/add")
 	public void addUserAccount(@RequestBody UserAccoutDto userAccoutDto) {
+		userAccoutDto.validateRequiredAttibutes(userAccoutDto);
 		userAccountServiceI.addUser(userAccoutDto);
 	}
 	
@@ -45,6 +49,13 @@ public class UserAccoutController {
 	public void deleteUserAccount(@PathVariable Long id) {
 		userAccountServiceI.deleteUserAccount(id);
 	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public UserAccout doLogin(@RequestBody LoginDto loginDto) {
+		loginDto.validateLoginRequired(loginDto);
+	    return userAccountServiceI.doLogin(loginDto);
+	}
+
 
 
 }
