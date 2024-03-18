@@ -117,7 +117,7 @@ public class Candidate  implements Serializable {
 		this.mobile = mobile;
 	}
 	
-	@OneToOne(cascade = CascadeType.MERGE)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "source_id", referencedColumnName = "id")
 	public Source getSource() {
 		return source;
