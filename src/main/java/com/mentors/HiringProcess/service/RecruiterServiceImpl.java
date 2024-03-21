@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +18,7 @@ import com.mentors.HiringProcess.builder.RecruiterBuilder;
 import com.mentors.HiringProcess.dto.RecruiterDto;
 import com.mentors.HiringProcess.model.Recruiter;
 import com.mentors.HiringProcess.repository.RecruiterRepository;
+import com.mentors.HiringProcess.specification.RecruiterSpecifications;
 
 
 @Service
@@ -74,5 +76,17 @@ public class RecruiterServiceImpl implements RecruiterServiceI {
 		public Page<Recruiter> getUsersByCode(String code, Pageable pageable) {
 			return recruiterRepository.findUsersByCode(code, pageable);
 		}
+		
+		@Override
+	    public Page<RecruiterDto> getAllRecruiters(Pageable pageable, String firstName) {
+	        Specification<Recruiter> spec = Specification.where(null); // Start with an empty specification
+
+	        if (firstName != null && !firstName.isEmpty()) {
+	            spec = spec.and(RecruiterSpecifications.hasFirstName(firstName));
+	        }
+
+	        Page<Recruiter> recruiterPage = recruiterRepository.findAll(spec, pageable);
+	        return recruiterPage.map(recruiterBuilder::toDto);
+	    }
 
 }

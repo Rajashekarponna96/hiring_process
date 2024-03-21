@@ -22,8 +22,6 @@ import com.mentors.HiringProcess.dto.RecruiterDto;
 import com.mentors.HiringProcess.model.Recruiter;
 import com.mentors.HiringProcess.service.RecruiterServiceI;
 
-
-
 @RestController
 @RequestMapping(value = "/recruiter")
 @CrossOrigin
@@ -31,40 +29,43 @@ public class RecruiterController {
 
 	@Autowired
 	private RecruiterServiceI recruiterServiceI;
-	
+
 	@PostMapping(value = "/")
 	public void add(@RequestBody RecruiterDto recruiterDto) {
 		recruiterDto.validateRequiredAttibutes(recruiterDto);
 		recruiterServiceI.add(recruiterDto);
 	}
-	
+
 	@GetMapping(value = "/all")
 	public List<RecruiterDto> findAll() {
 		return recruiterServiceI.findAll();
 	}
-	
+
 	@PutMapping(value = "/{id}")
 	public void update(@PathVariable Long id, @RequestBody RecruiterDto recruiterDto) {
-		 recruiterServiceI.update(id, recruiterDto);
+		recruiterServiceI.update(id, recruiterDto);
 	}
-	
 
 	@DeleteMapping(value = "/{id}")
 	public void delete(@PathVariable Long id) {
-		 recruiterServiceI.delete(id);
+		recruiterServiceI.delete(id);
 	}
-	
-	
-	
-	 @GetMapping("/search")
-	    public ResponseEntity<Page<Recruiter>> searchRecruiters(@RequestParam String code,
-	                                                             @RequestParam int page,
-	                                                             @RequestParam int size) {
-		    int adjustedPage = page < 0 ? 0 : page;
-	        Pageable pageable = PageRequest.of(adjustedPage, size);
-	        Page<Recruiter> recruiters = recruiterServiceI.getUsersByCode(code, pageable);
-	        return ResponseEntity.ok(recruiters);
-	    }
-	
-	
+
+	@GetMapping("/search")
+	public ResponseEntity<Page<Recruiter>> searchRecruiters(@RequestParam String code, @RequestParam int page,
+			@RequestParam int size) {
+		int adjustedPage = page < 0 ? 0 : page;
+		Pageable pageable = PageRequest.of(adjustedPage, size);
+		Page<Recruiter> recruiters = recruiterServiceI.getUsersByCode(code, pageable);
+		return ResponseEntity.ok(recruiters);
+	}
+
+	@GetMapping("/searchr")
+	public Page<RecruiterDto> getAllRecruiters(@RequestParam int page, @RequestParam int size,
+			@RequestParam(required = false) String firstName) {
+		Pageable pageable = PageRequest.of(page, size);
+		return recruiterServiceI.getAllRecruiters(pageable, firstName);
+	}
+	 
+
 }
