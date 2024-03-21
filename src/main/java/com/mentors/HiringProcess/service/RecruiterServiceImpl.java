@@ -3,8 +3,13 @@ package com.mentors.HiringProcess.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +17,7 @@ import com.mentors.HiringProcess.builder.RecruiterBuilder;
 import com.mentors.HiringProcess.dto.RecruiterDto;
 import com.mentors.HiringProcess.model.Recruiter;
 import com.mentors.HiringProcess.repository.RecruiterRepository;
+
 
 @Service
 @Transactional
@@ -61,5 +67,12 @@ public class RecruiterServiceImpl implements RecruiterServiceI {
 		// TODO Auto-generated method stub
 		recruiterRepository.deleteById(id);
 	}
+	
+
+
+		@Override
+		public Page<Recruiter> getUsersByCode(String code, Pageable pageable) {
+			return recruiterRepository.findUsersByCode(code, pageable);
+		}
 
 }
