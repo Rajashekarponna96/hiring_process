@@ -19,5 +19,8 @@ public interface RecruiterServiceI {
 	void delete(Long id);
 
 	Page<Recruiter> getUsersByCode(String code, Pageable pageable);
+	
+	Page<RecruiterDto> getAllRecruiters(Pageable pageable, String firstName);
+
 
 }
