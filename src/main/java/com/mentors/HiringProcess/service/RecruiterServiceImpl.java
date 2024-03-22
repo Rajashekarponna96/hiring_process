@@ -3,13 +3,9 @@ package com.mentors.HiringProcess.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,23 +66,19 @@ public class RecruiterServiceImpl implements RecruiterServiceI {
 		recruiterRepository.deleteById(id);
 	}
 	
-
-
-		@Override
-		public Page<Recruiter> getUsersByCode(String code, Pageable pageable) {
-			return recruiterRepository.findUsersByCode(code, pageable);
-		}
 		
 		@Override
-	    public Page<RecruiterDto> getAllRecruiters(Pageable pageable, String firstName) {
+	    public Page<RecruiterDto> getAllRecruiters(Pageable pageable, String code) {
 	        Specification<Recruiter> spec = Specification.where(null); // Start with an empty specification
 
-	        if (firstName != null && !firstName.isEmpty()) {
-	            spec = spec.and(RecruiterSpecifications.hasFirstName(firstName));
+	        if (code != null && !code.isEmpty()) {
+	            spec = spec.and(RecruiterSpecifications.hasFields(code));
 	        }
 
 	        Page<Recruiter> recruiterPage = recruiterRepository.findAll(spec, pageable);
 	        return recruiterPage.map(recruiterBuilder::toDto);
 	    }
+
+
 
 }

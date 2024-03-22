@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mentors.HiringProcess.dto.RecruiterDto;
-import com.mentors.HiringProcess.model.Recruiter;
 import com.mentors.HiringProcess.service.RecruiterServiceI;
 
 @RestController
@@ -51,21 +49,12 @@ public class RecruiterController {
 		recruiterServiceI.delete(id);
 	}
 
-	@GetMapping("/search")
-	public ResponseEntity<Page<Recruiter>> searchRecruiters(@RequestParam String code, @RequestParam int page,
-			@RequestParam int size) {
-		int adjustedPage = page < 0 ? 0 : page;
-		Pageable pageable = PageRequest.of(adjustedPage, size);
-		Page<Recruiter> recruiters = recruiterServiceI.getUsersByCode(code, pageable);
-		return ResponseEntity.ok(recruiters);
-	}
-
-	@GetMapping("/searchr")
+	
+	@GetMapping("/searchpage")
 	public Page<RecruiterDto> getAllRecruiters(@RequestParam int page, @RequestParam int size,
-			@RequestParam(required = false) String firstName) {
-		Pageable pageable = PageRequest.of(page, size);
-		return recruiterServiceI.getAllRecruiters(pageable, firstName);
+	        @RequestParam String code) {
+	    Pageable pageable = PageRequest.of(page, size);
+	    return recruiterServiceI.getAllRecruiters(pageable,code);
 	}
-	 
 
 }
