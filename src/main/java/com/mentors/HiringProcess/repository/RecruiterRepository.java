@@ -26,7 +26,7 @@ public interface RecruiterRepository extends JpaRepository<Recruiter, Long>{
 		Page<Recruiter> findUsersByCode(String code, Pageable pageable);
 	
 	
-	 default Page<RecruiterDto> findAllDto(Specification<Recruiter> spec, Pageable pageable, RecruiterBuilder recruiterBuilder) {
+	 default Page<RecruiterDto> findAlzlDto(Specification<Recruiter> spec, Pageable pageable, RecruiterBuilder recruiterBuilder) {
 	        return findAll(spec, pageable).map(recruiterBuilder::toDto);
 	    }
 	   Page<Recruiter> findAll(Specification<Recruiter> spec, Pageable pageable); // Custom method for fetching entities based on specifications and pageable
