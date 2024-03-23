@@ -165,8 +165,7 @@ public class Job implements Serializable {
 		this.experience = experience;
 	}
 	@JsonIgnore
-	@OneToMany
-	@JoinColumn(name="candidate_id",referencedColumnName = "id")
+	@OneToMany(mappedBy = "job")
 	public List<Candidate> getCandidates() {
 		return candidates;
 	}

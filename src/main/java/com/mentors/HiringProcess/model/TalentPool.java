@@ -54,7 +54,6 @@ public class TalentPool implements Serializable {
 	}
 	@JsonIgnore
 	@OneToMany
-	@JoinColumn(name="candidate_id",referencedColumnName = "id")
 	public List<Candidate> getCandidates() {
 		return candidates;
 	}
