@@ -1,5 +1,8 @@
 package com.mentors.HiringProcess.builder;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -55,8 +58,9 @@ public class CandidateBuilder {
 		candidate.setJob(jobBuilder.toModel(candidateDto.getJob()));
 		candidate.setSkills(candidateDto.getSkills());
 		candidate.setStage(candidateDto.getStage());
-		candidate.setEducations(educationBuilder.toModelList(candidateDto.getEducations()));
-		candidate.setExperiences(experienceBuilder.toModelList(candidateDto.getExperiences()));
+		
+		candidate.setEducations(educationBuilder.toModelList(candidateDto.getEducations()).stream().peek(e->e.setCandidate(candidate)).collect(Collectors.toList()));
+		candidate.setExperiences(experienceBuilder.toModelList(candidateDto.getExperiences()).stream().peek(e->e.setCandidate(candidate)).collect(Collectors.toList()));
 		return candidate;
 	}
 	
