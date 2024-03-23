@@ -62,6 +62,7 @@ public class CandidateBuilder {
 	
 	public CandidateDto toDto(Candidate candidate) {
 		CandidateDto candidatedto = new CandidateDto();
+		candidatedto.setId(candidate.getId());
 		candidatedto.setFirstName(candidate.getFirstName());
 		candidatedto.setLastName(candidate.getLastName());
 		candidatedto.setMiddleName(candidate.getMiddleName());

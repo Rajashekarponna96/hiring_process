@@ -232,7 +232,7 @@ public class Candidate  implements Serializable {
 	
 	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "talentpool_id", referencedColumnName = "id")
+	@JoinColumn(name = "talentpool_id")
 	public TalentPool getTalentPool() {
 		return talentPool;
 	}
@@ -241,8 +241,8 @@ public class Candidate  implements Serializable {
 		this.talentPool = talentPool;
 	}
 	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name="job_id",referencedColumnName = "id")
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name="job_id")
 	public Job getJob() {
 		return job;
 	}
