@@ -27,6 +27,7 @@ public class ExperienceBuilder {
 
 	public ExperienceDto toDto(Experience experience) {
 		ExperienceDto ExperienceDto = new ExperienceDto();
+		ExperienceDto.setId(experience.getId());
 		ExperienceDto.setCompany(experience.getCompany());
 		ExperienceDto.setJobTitle(experience.getJobTitle());
 		ExperienceDto.setCurrentlyWokring(experience.isCurrentlyWokring());
