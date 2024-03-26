@@ -27,6 +27,7 @@ public class EducationBuilder {
 
 	public EducationDto toDto(Education education) {
 		EducationDto educationDto = new EducationDto();
+		educationDto.setId(education.getId());
 		educationDto.setCourse(education.getCourse());
 		educationDto.setBranch(education.getBranch());
 		educationDto.setStartOfCourse(education.getStartOfCourse());
