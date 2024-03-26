@@ -7,15 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.mentors.HiringProcess.dto.CandidateDto;
+import com.mentors.HiringProcess.dto.ClientDto;
 import com.mentors.HiringProcess.dto.HiringFlowDto;
 import com.mentors.HiringProcess.dto.JobDto;
 import com.mentors.HiringProcess.dto.LocationDto;
-import com.mentors.HiringProcess.dto.RecruiterDto;
 import com.mentors.HiringProcess.model.Candidate;
+import com.mentors.HiringProcess.model.Client;
 import com.mentors.HiringProcess.model.HiringFlow;
 import com.mentors.HiringProcess.model.Job;
 import com.mentors.HiringProcess.model.Location;
-import com.mentors.HiringProcess.model.Recruiter;
 @Component
 public class JobBuilder {
 
@@ -28,6 +28,8 @@ public class JobBuilder {
 	
 	@Autowired
     private RecruiterBuilder recruiterBuilder;
+	
+	private ClientBuilder clientBuilder;
 	
 	public Job toModel(JobDto jobDto) {
 
@@ -44,6 +46,7 @@ public class JobBuilder {
 		job.setType(jobDto.getType());
 		job.setExperience(jobDto.getExperience());
 		job.setRecruiters(recruiterBuilder.toModel(jobDto.getRecruiters()));
+		job.setClients(clientBuilder.toModel(jobDto.getClients()));
 		return job;
 	}
 
@@ -62,6 +65,7 @@ public class JobBuilder {
 		jobdto.setType(job.getType());
 		jobdto.setExperience(job.getExperience());
 		jobdto.setRecruiters(recruiterBuilder.toDto(job.getRecruiters()));
+		jobdto.setClients(clientBuilder.toDto(job.getClients()));
 		
 		List<LocationDto> locationDtos = new ArrayList<>();
 	    for (Location location : job.getLocations()) {
@@ -86,6 +90,7 @@ public class JobBuilder {
 	        candidateDtos.add(candidateDto);
 	    }
 	    jobdto.setCandidates(candidateDtos);
+	    
 	    
 //	    List<RecruiterDto> recruiterDtos = new ArrayList<>();
 //	    for (Recruiter recruiter : job.getRecruiters()) {

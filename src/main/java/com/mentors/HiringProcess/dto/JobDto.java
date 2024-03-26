@@ -42,6 +42,8 @@ private Long id;
 	private List<CandidateDto> candidates;
 	
 	private RecruiterDto recruiters;
+	
+	private ClientDto clients;
 
 	public Long getId() {
 		return id;
@@ -161,6 +163,17 @@ private Long id;
 
 	public void setRecruiters(RecruiterDto recruiters) {
 		this.recruiters = recruiters;
+	}
+	
+
+	
+
+	public ClientDto getClients() {
+		return clients;
+	}
+
+	public void setClients(ClientDto clients) {
+		this.clients = clients;
 	}
 
 	public void validateRequiredAttibutes(JobDto jobDto) {

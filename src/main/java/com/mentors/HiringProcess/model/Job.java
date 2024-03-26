@@ -51,6 +51,8 @@ public class Job implements Serializable {
 	private List<Candidate> candidates;
 	
 	private Recruiter recruiters;
+	
+	private Client clients;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -137,8 +139,7 @@ public class Job implements Serializable {
 		this.type = type;
 	}
 	@JsonIgnore
-	@OneToMany
-	@JoinColumn(name="location_id",referencedColumnName = "id")
+	@OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
 	public List<Location> getLocations() {
 		return locations;
 	}
@@ -147,8 +148,7 @@ public class Job implements Serializable {
 		this.locations = locations;
 	}
 	@JsonIgnore
-	@OneToMany
-	@JoinColumn(name="hiringflow_id",referencedColumnName = "id")
+	@OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
 	public List<HiringFlow> getFlows() {
 		return flows;
 	}
@@ -182,6 +182,17 @@ public class Job implements Serializable {
 	public void setRecruiters(Recruiter recruiters) {
 		this.recruiters = recruiters;
 	}
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "client_id")
+	public Client getClients() {
+		return clients;
+	}
+
+	public void setClients(Client clients) {
+		this.clients = clients;
+	}
+	
 	
 	
 	
