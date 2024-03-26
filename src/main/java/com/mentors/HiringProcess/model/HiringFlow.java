@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
@@ -25,6 +26,8 @@ public class HiringFlow  implements Serializable{
 	private String description;
 	
 	private Flow source;
+	
+	private Job job;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -62,5 +65,15 @@ public class HiringFlow  implements Serializable{
 		this.source = source;
 	}
 	
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name="job_id")
+	public Job getJob() {
+		return job;
+	}
+
+	public void setJob(Job job) {
+		this.job = job;
+	}
 	
 }

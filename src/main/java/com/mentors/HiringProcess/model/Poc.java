@@ -5,7 +5,6 @@ import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,17 +13,19 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 @Entity
-@Table(name="location")
-public class Location implements Serializable {
+@Table(name="poc")
+public class Poc implements Serializable{
 	
 	private Long id;
 	
 	private String name;
 	
-	private String code;
+	private String mobile;
 	
-	private Job job;
+	private String email;
 	
+	private Client client;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getId() {
@@ -34,7 +35,7 @@ public class Location implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -42,24 +43,36 @@ public class Location implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	public String getCode() {
-		return code;
+
+	public String getMobile() {
+		return mobile;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
-	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+    
 	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name="job_id")
-	public Job getJob() {
-		return job;
+    @JoinColumn(name = "client_id")
+	public Client getClient() {
+		return client;
 	}
 
-	public void setJob(Job job) {
-		this.job = job;
+	public void setClient(Client client) {
+		this.client = client;
 	}
+
+	
+	
+	
 
 }
