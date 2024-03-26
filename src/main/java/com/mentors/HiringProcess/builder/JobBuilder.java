@@ -29,6 +29,7 @@ public class JobBuilder {
 	@Autowired
     private RecruiterBuilder recruiterBuilder;
 	
+	@Autowired
 	private ClientBuilder clientBuilder;
 	
 	public Job toModel(JobDto jobDto) {
