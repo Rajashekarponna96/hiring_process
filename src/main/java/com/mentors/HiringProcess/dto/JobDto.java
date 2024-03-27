@@ -44,6 +44,8 @@ private Long id;
 	private RecruiterDto recruiters;
 	
 	private ClientDto clients;
+	
+	private String expectedNoticePeriod;
 
 	public Long getId() {
 		return id;
@@ -175,6 +177,16 @@ private Long id;
 	public void setClients(ClientDto clients) {
 		this.clients = clients;
 	}
+	
+	
+
+	public String getExpectedNoticePeriod() {
+		return expectedNoticePeriod;
+	}
+
+	public void setExpectedNoticePeriod(String expectedNoticePeriod) {
+		this.expectedNoticePeriod = expectedNoticePeriod;
+	}
 
 	public void validateRequiredAttibutes(JobDto jobDto) {
 		if(jobDto.getTitle()==null) {
@@ -195,9 +207,9 @@ private Long id;
 		if(jobDto.getCurrney()==null) {
 			throw new RuntimeException("Currency is Mandatory");
 		}
-		if(jobDto.getSalaryMinimum()==null) {
-			throw new RuntimeException("SalaryMinimum is Mandatory");
-		}
+//		if(jobDto.getSalaryMinimum()==null) {
+//			throw new RuntimeException("SalaryMinimum is Mandatory");
+//		}
 		if(jobDto.getSalaryMaximum()==null) {
 			throw new RuntimeException("SalaryMaximum is Mandatory");
 		}
@@ -210,7 +222,11 @@ private Long id;
 		if(jobDto.getRecruiters()==null) {
 			throw new RuntimeException("Recruiter is Mandatory");
 		}
+		if(jobDto.getExpectedNoticePeriod()==null) {
+			throw new RuntimeException("ExpectedNoticePeriod is Mandatory");
+		}
 	}
+	
 
 	
 	

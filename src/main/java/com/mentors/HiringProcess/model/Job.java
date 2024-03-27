@@ -36,7 +36,7 @@ public class Job implements Serializable {
 	
 	private CurrencyType currney;
 	
-	private Double salaryMinimum;
+//	private Double salaryMinimum;
 
 	private Double salaryMaximum;
 	
@@ -53,6 +53,8 @@ public class Job implements Serializable {
 	private Recruiter recruiters;
 	
 	private Client clients;
+	
+	private String expectedNoticePeriod;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -115,14 +117,14 @@ public class Job implements Serializable {
 		this.currney = currney;
 	}
 	
-	public Double getSalaryMinimum() {
-		return salaryMinimum;
-	}
-
-	public void setSalaryMinimum(Double salaryMinimum) {
-		this.salaryMinimum = salaryMinimum;
-	}
-	
+//	public Double getSalaryMinimum() {
+//		return salaryMinimum;
+//	}
+//
+//	public void setSalaryMinimum(Double salaryMinimum) {
+//		this.salaryMinimum = salaryMinimum;
+//	}
+//	
 	public Double getSalaryMaximum() {
 		return salaryMaximum;
 	}
@@ -192,6 +194,16 @@ public class Job implements Serializable {
 	public void setClients(Client clients) {
 		this.clients = clients;
 	}
+
+	public String getExpectedNoticePeriod() {
+		return expectedNoticePeriod;
+	}
+
+	public void setExpectedNoticePeriod(String expectedNoticePeriod) {
+		this.expectedNoticePeriod = expectedNoticePeriod;
+	}
+	
+	
 	
 	
 	
