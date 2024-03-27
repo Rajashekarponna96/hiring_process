@@ -10,6 +10,8 @@ public interface ClientServiceI {
 
 	List<ClientDto> allClients();
 
+	List<String> allClientNames();
+
 	void updateClient(Long id, ClientDto clientDto);
 
 	void deleteClient(Long id);

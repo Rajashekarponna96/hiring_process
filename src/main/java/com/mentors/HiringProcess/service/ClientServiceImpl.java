@@ -53,5 +53,29 @@ public class ClientServiceImpl implements ClientServiceI{
 		clientRepository.deleteById(id);
 		
 	}
+	
+//	 @Override
+//	    public List<String> allClientNames() {
+//	        List<String> clientNames = new ArrayList<>();
+//	        List<Client> clients = clientRepository.findAll();
+//	        if (clients != null) {
+//	            clients.forEach(client -> {
+//	                clientNames.add(client.getCompanyName()); // Assuming getName() method exists in your Client class
+//	            });
+//	        }
+//	        return clientNames;
+//	    }
+	@Override
+	public List<String> allClientNames() {
+	    List<String> clientNames = new ArrayList<>();
+	    List<Client> clients = clientRepository.findAll();
+	    if (clients != null) {
+	        clients.forEach(client -> {
+	            clientNames.add(client.getCompanyName()); // Assuming getCompanyName() method exists in your Client class
+	        });
+	    }
+	    return clientNames;
+	}
+
 
 }

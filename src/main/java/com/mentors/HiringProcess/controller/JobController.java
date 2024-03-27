@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mentors.HiringProcess.dto.JobDto;
+import com.mentors.HiringProcess.dto.JobSummaryDto;
 import com.mentors.HiringProcess.service.JobServiceI;
 
 
@@ -48,4 +49,9 @@ public class JobController {
 	public void deleteJob(@PathVariable Long id) {
 		jobServiceI.deleteJob(id);
 	}
+	
+	@GetMapping("/summaries")
+    public List<JobSummaryDto> getAllJobSummaries() {
+        return jobServiceI.getAllJobSummaries();
+    }
 }
