@@ -42,12 +42,13 @@ public class JobBuilder {
 		job.setOpenings(jobDto.getOpenings());
 		job.setTargetHireDate(jobDto.getTargetHireDate());
 		job.setCurrney(currencyTypeBuilder.toModel(jobDto.getCurrney()));
-		job.setSalaryMinimum(jobDto.getSalaryMinimum());
+//		job.setSalaryMinimum(jobDto.getSalaryMinimum());
 		job.setSalaryMaximum(jobDto.getSalaryMaximum());
 		job.setType(jobDto.getType());
 		job.setExperience(jobDto.getExperience());
 		job.setRecruiters(recruiterBuilder.toModel(jobDto.getRecruiters()));
 		job.setClients(clientBuilder.toModel(jobDto.getClients()));
+		job.setExpectedNoticePeriod(jobDto.getExpectedNoticePeriod());
 		return job;
 	}
 
@@ -61,12 +62,13 @@ public class JobBuilder {
 		jobdto.setOpenings(job.getOpenings());
 		jobdto.setTargetHireDate(job.getTargetHireDate());
 		jobdto.setCurrney(currencyTypeBuilder.toDto(job.getCurrney()));
-		jobdto.setSalaryMinimum(job.getSalaryMinimum());
+//		jobdto.setSalaryMinimum(job.getSalaryMinimum());
 		jobdto.setSalaryMaximum(job.getSalaryMaximum());
 		jobdto.setType(job.getType());
 		jobdto.setExperience(job.getExperience());
 		jobdto.setRecruiters(recruiterBuilder.toDto(job.getRecruiters()));
 		jobdto.setClients(clientBuilder.toDto(job.getClients()));
+		jobdto.setExpectedNoticePeriod(job.getExpectedNoticePeriod());
 		
 		List<LocationDto> locationDtos = new ArrayList<>();
 	    for (Location location : job.getLocations()) {
