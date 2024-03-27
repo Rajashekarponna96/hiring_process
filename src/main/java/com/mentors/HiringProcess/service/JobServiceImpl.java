@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.mentors.HiringProcess.builder.JobBuilder;
 import com.mentors.HiringProcess.dto.JobDto;
+import com.mentors.HiringProcess.dto.JobSummaryDto;
 import com.mentors.HiringProcess.model.Job;
 import com.mentors.HiringProcess.repository.JobRepository;
 
@@ -40,6 +41,18 @@ public class JobServiceImpl implements JobServiceI {
 		}
 		return jobsList;
 	}
+	
+	 @Override
+	    public List<JobSummaryDto> getAllJobSummaries() {
+	        List<JobSummaryDto> jobSummaries = new ArrayList<>();
+	        List<Job> jobs = jobRepository.findAll();
+	        if (jobs != null) {
+	            jobs.forEach(job -> {
+	                jobSummaries.add(new JobSummaryDto(job.getTitle(), job.getOpenings()));
+	            });
+	        }
+	        return jobSummaries;
+	    }
 
 	@Override
 	public void updateJob(Long id, JobDto jobDto) {

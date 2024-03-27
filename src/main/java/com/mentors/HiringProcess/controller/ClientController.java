@@ -36,6 +36,12 @@ public class ClientController {
 	}
 	
 	
+	@GetMapping("/allclientnames")
+	public List<String> allClientNames() {
+	    return clientServiceI.allClientNames();
+	}
+
+	
 	@PutMapping("/{id}")
 	public void updateClient(@PathVariable Long id,  @RequestBody ClientDto  clientDto) {
 		clientServiceI.updateClient(id,clientDto);
