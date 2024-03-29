@@ -16,6 +16,8 @@ public class EducationDto {
 	
 	private String college;
 	
+	private String university;
+	
 	private String location;
 
 	public Long getId() {
@@ -64,6 +66,16 @@ public class EducationDto {
 
 	public void setCollege(String college) {
 		this.college = college;
+	}
+	
+	
+
+	public String getUniversity() {
+		return university;
+	}
+
+	public void setUniversity(String university) {
+		this.university = university;
 	}
 
 	public String getLocation() {

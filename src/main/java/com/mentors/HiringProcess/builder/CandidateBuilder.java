@@ -45,6 +45,7 @@ public class CandidateBuilder {
 		candidate.setMiddleName(candidateDto.getMiddleName());
 		candidate.setEmail(candidateDto.getEmail());
 		candidate.setMobile(candidateDto.getMobile());
+		candidate.setAlterMobile(candidateDto.getAlterMobile());
 		candidate.setSource(sourceBuilder.toModel(candidateDto.getSource()));
 		candidate.setCurrent(locationBuilder.toModel(candidateDto.getCurrent()));
 		candidate.setAvialToJoin(candidateDto.getAvialToJoin());
@@ -72,6 +73,7 @@ public class CandidateBuilder {
 		candidatedto.setMiddleName(candidate.getMiddleName());
 		candidatedto.setEmail(candidate.getEmail());
 		candidatedto.setMobile(candidate.getMobile());
+		candidatedto.setAlterMobile(candidate.getAlterMobile());
 		candidatedto.setSource(sourceBuilder.toDto(candidate.getSource()));
 		candidatedto.setCurrent(locationBuilder.toDto(candidate.getCurrent()));
 		candidatedto.setAvialToJoin(candidate.getAvialToJoin());

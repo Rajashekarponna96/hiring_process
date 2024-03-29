@@ -26,13 +26,15 @@ public class CandidateDto {
 	
 	private String mobile;
 	
+	private String alterMobile;
+	
 	private SourceDto source;
 	
 	private HiringFlowType stage;
 	
 	private LocationDto current;
 	
-	private Long avialToJoin;
+	private String avialToJoin;
 	
 	private LocationDto preferred;
 	
@@ -103,6 +105,14 @@ public class CandidateDto {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
+	
+	public String getAlterMobile() {
+		return alterMobile;
+	}
+
+	public void setAlterMobile(String alterMobile) {
+		this.alterMobile = alterMobile;
+	}
 
 	public SourceDto getSource() {
 		return source;
@@ -130,11 +140,13 @@ public class CandidateDto {
 		this.current = current;
 	}
 
-	public Long getAvialToJoin() {
+	
+
+	public String getAvialToJoin() {
 		return avialToJoin;
 	}
 
-	public void setAvialToJoin(Long avialToJoin) {
+	public void setAvialToJoin(String avialToJoin) {
 		this.avialToJoin = avialToJoin;
 	}
 

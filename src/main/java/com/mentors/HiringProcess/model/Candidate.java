@@ -37,13 +37,15 @@ public class Candidate  implements Serializable {
 	
 	private String mobile;
 	
+	private String alterMobile;
+	
 	private Source source;
 	
 	private HiringFlowType stage;
 	
 	private Location current;
 	
-	private Long avialToJoin;
+	private String avialToJoin;
 	
 	private Location preferred;
 	
@@ -117,6 +119,15 @@ public class Candidate  implements Serializable {
 		this.mobile = mobile;
 	}
 	
+	
+	public String getAlterMobile() {
+		return alterMobile;
+	}
+
+	public void setAlterMobile(String alterMobile) {
+		this.alterMobile = alterMobile;
+	}
+
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "source_id", referencedColumnName = "id")
 	public Source getSource() {
@@ -145,14 +156,15 @@ public class Candidate  implements Serializable {
 		this.current = current;
 	}
     
-	public Long getAvialToJoin() {
+	
+	public String getAvialToJoin() {
 		return avialToJoin;
 	}
 
-	public void setAvialToJoin(Long avialToJoin) {
+	public void setAvialToJoin(String avialToJoin) {
 		this.avialToJoin = avialToJoin;
 	}
-	
+
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "preferred_location_id", referencedColumnName = "id")
 	public Location getPreferred() {

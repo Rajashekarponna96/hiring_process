@@ -30,6 +30,8 @@ public class Education implements Serializable {
 	
 	private String college;
 	
+	private String university;
+	
 	private String location;
 	
 	private Candidate candidate;
@@ -84,6 +86,16 @@ public class Education implements Serializable {
 		this.college = college;
 	}
 	
+	
+	
+	public String getUniversity() {
+		return university;
+	}
+
+	public void setUniversity(String university) {
+		this.university = university;
+	}
+
 	public String getLocation() {
 		return location;
 	}

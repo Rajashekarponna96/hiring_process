@@ -20,6 +20,7 @@ public class EducationBuilder {
 		education.setStartOfCourse(educationDto.getStartOfCourse());
 		education.setEndOfCourse(educationDto.getEndOfCourse());
 		education.setCollege(educationDto.getCollege());
+		education.setUniversity(educationDto.getUniversity());
 		education.setLocation(educationDto.getLocation());
 
 		return education;
@@ -33,6 +34,7 @@ public class EducationBuilder {
 		educationDto.setStartOfCourse(education.getStartOfCourse());
 		educationDto.setEndOfCourse(education.getEndOfCourse());
 		educationDto.setCollege(education.getCollege());
+		educationDto.setUniversity(education.getUniversity());
 		educationDto.setLocation(education.getLocation());
 
 		return educationDto;
