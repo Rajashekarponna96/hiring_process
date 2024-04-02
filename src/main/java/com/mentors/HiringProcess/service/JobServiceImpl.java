@@ -3,14 +3,17 @@ package com.mentors.HiringProcess.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mentors.HiringProcess.builder.JobBuilder;
+import com.mentors.HiringProcess.dto.ClientDto;
 import com.mentors.HiringProcess.dto.JobDto;
 import com.mentors.HiringProcess.dto.JobSummaryDto;
+import com.mentors.HiringProcess.model.Client;
 import com.mentors.HiringProcess.model.Job;
 import com.mentors.HiringProcess.repository.JobRepository;
 
@@ -69,4 +72,37 @@ public class JobServiceImpl implements JobServiceI {
 		jobRepository.deleteById(id);
 	}
 
+	
+	@Override
+    public List<JobDto> allJobsWithClients() {
+        List<Job> jobs = jobRepository.findAll();
+        return jobs.stream()
+                   .map(this::mapJobToJobDtoWithClient)
+                   .collect(Collectors.toList());
+    }
+
+    private JobDto mapJobToJobDtoWithClient(Job job) {
+        JobDto jobDto = new JobDto();
+        jobDto=  jobBuilder.toDto(job);
+        // Map job attributes
+//        jobDto.setId(job.getId());
+//        jobDto.setTitle(job.getTitle());
+//        jobDto.setDescription(job.getDescription());
+//        jobDto.setOpenings(job.getOpenings());
+//        
+        // Map other job attributes...
+
+        // Fetch client for the job
+        Client client = job.getClients(); // Assuming there's a method to get the client associated with the job
+        if (client != null) {
+            ClientDto clientDto = new ClientDto();
+            clientDto.setId(client.getId());
+            clientDto.setCompanyName(client.getCompanyName());
+            // Map other client attributes...
+
+            jobDto.setClients(clientDto);
+        }
+
+        return jobDto;
+    }
 }

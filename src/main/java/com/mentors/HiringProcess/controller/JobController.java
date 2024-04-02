@@ -54,4 +54,10 @@ public class JobController {
     public List<JobSummaryDto> getAllJobSummaries() {
         return jobServiceI.getAllJobSummaries();
     }
+
+	
+	 @GetMapping("/with-clients")
+	    public List<JobDto> getAllJobsWithClients() {
+	        return jobServiceI.allJobsWithClients();
+	    }
 }
