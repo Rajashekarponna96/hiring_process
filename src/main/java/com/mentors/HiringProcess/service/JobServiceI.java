@@ -16,5 +16,7 @@ public interface JobServiceI {
 	void deleteJob(Long id);
 	
 	 List<JobSummaryDto> getAllJobSummaries();
+	 
+	  List<JobDto> allJobsWithClients();
 
 }
