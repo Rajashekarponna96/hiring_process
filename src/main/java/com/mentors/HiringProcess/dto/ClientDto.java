@@ -58,8 +58,19 @@ public class ClientDto {
 		this.jobs = jobs;
 	}
 
-	
-	
+	public void validateRequiredAttibutes(ClientDto clientDto) {
+		
+		if(clientDto.getCompanyName()==null) {
+			throw new RuntimeException("CompanyName is Mandatory");
+		}
+		if(clientDto.getLocation()==null) {
+			throw new RuntimeException("Location is Mandatory");
+		}
+		if (pocs == null || pocs.isEmpty()) {
+            throw new RuntimeException("At least one Point of Contact is required");
+        }
+		
+	}
 	
 
 }
