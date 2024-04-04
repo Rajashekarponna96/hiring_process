@@ -72,5 +72,17 @@ public class CandidateServiceImpl implements CandidateServiceI {
 			return null;
 		}
 	}
+	
+	//Filter Api for canidate
+	 public List<CandidateDto> getCandidatesByCriteria(String firstName, String lastName, String email) {
+		      List<CandidateDto> candidateDtoList = new ArrayList<>();
+		      List<Candidate> candidatelist = candidateRepository.findByCriteria(firstName, lastName, email);
+		      for (Candidate candidate : candidatelist) {
+		    	  CandidateDto candidateDto = candidateBuilder.toDto(candidate);
+		    	  candidateDtoList.add(candidateDto);
+				
+			}
+	        return candidateDtoList;
+	    }
 
 }
