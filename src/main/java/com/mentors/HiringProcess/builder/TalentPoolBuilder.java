@@ -13,7 +13,11 @@ public class TalentPoolBuilder {
 	public TalentPool toModel(TalentPoolDto talentPoolDto) {
 
 		TalentPool talentPool = new TalentPool();
-		talentPool.setId(talentPoolDto.getId());
+		if(talentPoolDto!=null) {
+			
+				talentPool.setId(talentPoolDto.getId());
+						
+		}
 		talentPool.setName(talentPoolDto.getName());
 		talentPool.setDescription(talentPoolDto.getDescription());
 
@@ -22,7 +26,10 @@ public class TalentPoolBuilder {
 
 	public TalentPoolDto toDto(TalentPool talentPool) {
 		TalentPoolDto talentPoolDto = new TalentPoolDto();
-		talentPoolDto.setId(talentPool.getId());
+		
+	    Long id = talentPool.getId();	
+		talentPoolDto.setId(id);
+		
 		talentPoolDto.setName(talentPool.getName());
 		talentPoolDto.setDescription(talentPool.getDescription());
 		return talentPoolDto;

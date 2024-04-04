@@ -26,7 +26,7 @@ public class ClientController {
 	
 	@PostMapping("/")
 	public void addClient(@RequestBody ClientDto  clientDto) {
-		//clientDto.validateRequiredAttibutes(clientDto);
+		clientDto.validateRequiredAttibutes(clientDto);
 		clientServiceI.addClient(clientDto);
 	}
 	

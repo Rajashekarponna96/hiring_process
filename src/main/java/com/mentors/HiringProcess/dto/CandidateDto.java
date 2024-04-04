@@ -252,8 +252,14 @@ public class CandidateDto {
 		if(candidateDto.getMobile()==null) {
 			throw new RuntimeException("Mobile is Mandatory");
 		}
+		if(candidateDto.getAlterMobile()==null) {
+			throw new RuntimeException("AlternateMobile is Mandatory");
+		}
+		if(candidateDto.getStage()==null) {
+			throw new RuntimeException("HiringStage is Mandatory");
+		}
 		if(candidateDto.getAvialToJoin()==null) {
-			throw new RuntimeException("AvialToJoin is Mandatory");
+			throw new RuntimeException("NoticePeriod is Mandatory");
 		}
 		if(candidateDto.getCurrentSalary()==null) {
 			throw new RuntimeException("CurrentSalary is Mandatory");
@@ -261,6 +267,39 @@ public class CandidateDto {
 		if(candidateDto.getExpectedSalary()==null) {
 			throw new RuntimeException("ExpectedSalary is Mandatory");
 		}
+		if(candidateDto.getGender()==null) {
+			throw new RuntimeException("Gender is Mandatory");
+		}
+		if(candidateDto.getDateOfBirth()==null) {
+			throw new RuntimeException("DateOfBirth is Mandatory");
+		}
+		if(candidateDto.getTalentPool()==null) {
+			throw new RuntimeException("TalentPool is Mandatory");
+		}
+		if(candidateDto.getJob()==null) {
+			throw new RuntimeException("Job is Mandatory");
+		}
+		if(candidateDto.getSource()==null) {
+			throw new RuntimeException("Source is Mandatory");
+		}
+		if(candidateDto.getCurrent()==null) {
+			throw new RuntimeException("Current Location is Mandatory");
+		}
+		if(candidateDto.getPreferred()==null) {
+			throw new RuntimeException("Preffered Location is Mandatory");
+		}
+		if(candidateDto.getCurrency()==null) {
+			throw new RuntimeException("Currency is Mandatory");
+		}
+		if(skills== null || skills.isEmpty()) {
+			throw new RuntimeException("Skills is Mandatory");
+		}
+		if (educations == null || educations.isEmpty()) {
+            throw new RuntimeException("At least one Education is required");
+        }
+		if (experiences == null || experiences.isEmpty()) {
+            throw new RuntimeException("At least one Experience is required");
+        }
 	}
 
 }
