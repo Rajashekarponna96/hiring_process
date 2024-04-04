@@ -30,7 +30,7 @@ public class RecruiterController {
 
 	@PostMapping(value = "/")
 	public void add(@RequestBody RecruiterDto recruiterDto) {
-		recruiterDto.validateRequiredAttibutes(recruiterDto);
+	//	recruiterDto.validateRequiredAttibutes(recruiterDto);
 		recruiterServiceI.add(recruiterDto);
 	}
 
