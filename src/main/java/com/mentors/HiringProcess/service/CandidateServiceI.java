@@ -15,5 +15,7 @@ public interface CandidateServiceI {
 	void delete(Long id);
 
 	CandidateDto findOne(Long id);
+	
+	 List<CandidateDto> getCandidatesByCriteria(String firstName, String lastName, String email);
 
 }
