@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.mentors.HiringProcess.builder.RecruiterBuilder;
 import com.mentors.HiringProcess.dto.RecruiterDto;
+import com.mentors.HiringProcess.exceptions.RecruiterValidationException;
 import com.mentors.HiringProcess.model.Recruiter;
 import com.mentors.HiringProcess.repository.RecruiterRepository;
 import com.mentors.HiringProcess.specification.RecruiterSpecifications;
@@ -27,16 +28,67 @@ public class RecruiterServiceImpl implements RecruiterServiceI {
 	@Autowired
 	private RecruiterBuilder recruiterBuilder;
 
+//	@Override
+//	public void add(RecruiterDto recruiterDto) {
+//		if(recruiterRepository.findByEmail(recruiterDto.getEmail()).isPresent()) {
+//			throw new RuntimeException("Email is Already Exit");
+//		}
+//		if(recruiterRepository.findByMobile(recruiterDto.getMobile()).isPresent()) {
+//			throw new RuntimeException("Mobile is Already Exit");
+//		}
+//		recruiterRepository.save(recruiterBuilder.toModel(recruiterDto));
+//	}
 	@Override
 	public void add(RecruiterDto recruiterDto) {
-		if(recruiterRepository.findByEmail(recruiterDto.getEmail()).isPresent()) {
-			throw new RuntimeException("Email is Already Exit");
+		// Validate required attributes
+		validateRequiredAttributes(recruiterDto);
+
+		// Check for existing email and mobile
+		if (recruiterRepository.findByEmail(recruiterDto.getEmail()).isPresent()) {
+			throw new RuntimeException("Email is Already Exist");
 		}
-		if(recruiterRepository.findByMobile(recruiterDto.getMobile()).isPresent()) {
-			throw new RuntimeException("Mobile is Already Exit");
+		if (recruiterRepository.findByMobile(recruiterDto.getMobile()).isPresent()) {
+			throw new RuntimeException("Mobile is Already Exist");
 		}
+
+		// Save the recruiter
 		recruiterRepository.save(recruiterBuilder.toModel(recruiterDto));
 	}
+
+	public void validateRequiredAttributes(RecruiterDto recruiterDto) {
+//		if (recruiterDto == null) {
+//			throw new RecruiterValidationException("RecruiterDto cannot be null");
+//		}
+
+		if (recruiterDto.getFirstName() == null && recruiterDto.getLastName() == null && recruiterDto.getEmail() == null
+				&& recruiterDto.getMobile() == null) {
+			throw new RecruiterValidationException("can't be empty");
+		}
+
+		if (recruiterDto.getFirstName() != null && recruiterDto.getFirstName().isEmpty()) {
+			throw new RecruiterValidationException("FirstName cannot be empty");
+		}
+
+		if (recruiterDto.getLastName() != null && recruiterDto.getLastName().isEmpty()) {
+			throw new RecruiterValidationException("LastName cannot be empty");
+		}
+
+		if (recruiterDto.getEmail() != null && recruiterDto.getEmail().isEmpty()) {
+			throw new RecruiterValidationException("Email cannot be empty");
+		}
+
+
+		if (recruiterDto.getMobile() != null) {
+			String mobile = recruiterDto.getMobile();
+			if (mobile.isEmpty()) {
+				throw new RecruiterValidationException("Mobile cannot be empty");
+			}
+			if (!mobile.matches("\\d{10}")) {
+				throw new RecruiterValidationException("Mobile must be 10 digits");
+			}
+		}
+	}
+
 
 	@Override
 	public List<RecruiterDto> findAll() {
@@ -51,14 +103,37 @@ public class RecruiterServiceImpl implements RecruiterServiceI {
 		return listDtos;
 	}
 
+//	@Override
+//	public void update(Long id, RecruiterDto recruiterDto) {
+//		// TODO Auto-generated method stub
+//		Optional<Recruiter> dbRecruiter = recruiterRepository.findById(id);
+//		if (dbRecruiter.isPresent()) {
+//			recruiterRepository.save(recruiterBuilder.toModel(recruiterDto));
+//		}
+//	}
 	@Override
 	public void update(Long id, RecruiterDto recruiterDto) {
-		// TODO Auto-generated method stub
-		Optional<Recruiter> dbRecruiter = recruiterRepository.findById(id);
-		if (dbRecruiter.isPresent()) {
-			recruiterRepository.save(recruiterBuilder.toModel(recruiterDto));
-		}
+	    // Validate required attributes
+	    validateRequiredAttributes(recruiterDto);
+
+	    // Check if the recruiter with the given id exists in the database
+	    Optional<Recruiter> dbRecruiter = recruiterRepository.findById(id);
+	    if (dbRecruiter.isPresent()) {
+	        // Update the existing recruiter with the new details
+	        Recruiter existingRecruiter = dbRecruiter.get();
+	        existingRecruiter.setFirstName(recruiterDto.getFirstName());
+	        existingRecruiter.setLastName(recruiterDto.getLastName());
+	        existingRecruiter.setEmail(recruiterDto.getEmail());
+	        existingRecruiter.setMobile(recruiterDto.getMobile());
+
+	        // Save the updated recruiter
+	        recruiterRepository.save(existingRecruiter);
+	    } else {
+	        // If recruiter with the given id does not exist, throw an exception
+	        throw new RuntimeException("Recruiter with id " + id + " not found");
+	    }
 	}
+
 
 	@Override
 	public void delete(Long id) {
