@@ -49,6 +49,9 @@ public class JobBuilder {
 		job.setRecruiters(recruiterBuilder.toModel(jobDto.getRecruiters()));
 		job.setClients(clientBuilder.toModel(jobDto.getClients()));
 		job.setExpectedNoticePeriod(jobDto.getExpectedNoticePeriod());
+		job.setPrimarySkills(jobDto.getPrimarySkills());
+		job.setSecondarySkills(jobDto.getSecondarySkills());
+		job.setGoodToHave(jobDto.getGoodToHave());
 		return job;
 	}
 
@@ -69,6 +72,9 @@ public class JobBuilder {
 		jobdto.setRecruiters(recruiterBuilder.toDto(job.getRecruiters()));
 		jobdto.setClients(clientBuilder.toDto(job.getClients()));
 		jobdto.setExpectedNoticePeriod(job.getExpectedNoticePeriod());
+		jobdto.setPrimarySkills(job.getPrimarySkills());
+		jobdto.setSecondarySkills(job.getSecondarySkills());
+		jobdto.setGoodToHave(job.getGoodToHave());
 		
 		List<LocationDto> locationDtos = new ArrayList<>();
 	    for (Location location : job.getLocations()) {

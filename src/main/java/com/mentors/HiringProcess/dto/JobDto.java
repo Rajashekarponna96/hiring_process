@@ -46,6 +46,12 @@ private Long id;
 	private ClientDto clients;
 	
 	private String expectedNoticePeriod;
+	
+    private String primarySkills;
+	
+	private String secondarySkills;
+	
+	private String goodToHave;
 
 	public Long getId() {
 		return id;
@@ -186,6 +192,32 @@ private Long id;
 
 	public void setExpectedNoticePeriod(String expectedNoticePeriod) {
 		this.expectedNoticePeriod = expectedNoticePeriod;
+	}
+	
+	
+
+	public String getPrimarySkills() {
+		return primarySkills;
+	}
+
+	public void setPrimarySkills(String primarySkills) {
+		this.primarySkills = primarySkills;
+	}
+
+	public String getSecondarySkills() {
+		return secondarySkills;
+	}
+
+	public void setSecondarySkills(String secondarySkills) {
+		this.secondarySkills = secondarySkills;
+	}
+
+	public String getGoodToHave() {
+		return goodToHave;
+	}
+
+	public void setGoodToHave(String goodToHave) {
+		this.goodToHave = goodToHave;
 	}
 
 	public void validateRequiredAttibutes(JobDto jobDto) {
