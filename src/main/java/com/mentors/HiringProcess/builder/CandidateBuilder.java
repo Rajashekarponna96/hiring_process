@@ -42,7 +42,7 @@ public class CandidateBuilder {
 		candidate.setId(candidateDto.getId());
 		candidate.setFirstName(candidateDto.getFirstName());
 		candidate.setLastName(candidateDto.getLastName());
-		candidate.setMiddleName(candidateDto.getMiddleName());
+//		candidate.setMiddleName(candidateDto.getMiddleName());
 		candidate.setEmail(candidateDto.getEmail());
 		candidate.setMobile(candidateDto.getMobile());
 		candidate.setAlterMobile(candidateDto.getAlterMobile());
@@ -70,7 +70,7 @@ public class CandidateBuilder {
 		candidatedto.setId(candidate.getId());
 		candidatedto.setFirstName(candidate.getFirstName());
 		candidatedto.setLastName(candidate.getLastName());
-		candidatedto.setMiddleName(candidate.getMiddleName());
+//		
 		candidatedto.setEmail(candidate.getEmail());
 		candidatedto.setMobile(candidate.getMobile());
 		candidatedto.setAlterMobile(candidate.getAlterMobile());

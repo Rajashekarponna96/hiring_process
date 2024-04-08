@@ -20,7 +20,7 @@ public class CandidateDto {
 	
 	private String lastName;
 	
-	private String middleName;
+//	private String middleName;
 	
 	private String email;
 	
@@ -82,13 +82,13 @@ public class CandidateDto {
 		this.lastName = lastName;
 	}
 
-	public String getMiddleName() {
-		return middleName;
-	}
-
-	public void setMiddleName(String middleName) {
-		this.middleName = middleName;
-	}
+//	public String getMiddleName() {
+//		return middleName;
+//	}
+//
+//	public void setMiddleName(String middleName) {
+//		this.middleName = middleName;
+//	}
 
 	public String getEmail() {
 		return email;
@@ -246,9 +246,9 @@ public class CandidateDto {
 		if(candidateDto.getLastName()==null) {
 			throw new RuntimeException("LastName is Mandatory");
 		}
-		if(candidateDto.getMiddleName()==null) {
-			throw new RuntimeException("MiddleName is Mandatory");
-		}
+//		if(candidateDto.getMiddleName()==null) {
+//			throw new RuntimeException("MiddleName is Mandatory");
+//		}
 		if(candidateDto.getMobile()==null) {
 			throw new RuntimeException("Mobile is Mandatory");
 		}
