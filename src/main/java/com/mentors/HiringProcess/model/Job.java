@@ -55,6 +55,12 @@ public class Job implements Serializable {
 	private Client clients;
 	
 	private String expectedNoticePeriod;
+	
+	private String primarySkills;
+	
+	private String secondarySkills;
+	
+	private String goodToHave;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -141,7 +147,7 @@ public class Job implements Serializable {
 		this.type = type;
 	}
 	@JsonIgnore
-	@OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "job", cascade = CascadeType.MERGE)
 	public List<Location> getLocations() {
 		return locations;
 	}
@@ -202,10 +208,30 @@ public class Job implements Serializable {
 	public void setExpectedNoticePeriod(String expectedNoticePeriod) {
 		this.expectedNoticePeriod = expectedNoticePeriod;
 	}
-	
-	
-	
-	
+
+	public String getPrimarySkills() {
+		return primarySkills;
+	}
+
+	public void setPrimarySkills(String primarySkills) {
+		this.primarySkills = primarySkills;
+	}
+
+	public String getSecondarySkills() {
+		return secondarySkills;
+	}
+
+	public void setSecondarySkills(String secondarySkills) {
+		this.secondarySkills = secondarySkills;
+	}
+
+	public String getGoodToHave() {
+		return goodToHave;
+	}
+
+	public void setGoodToHave(String goodToHave) {
+		this.goodToHave = goodToHave;
+	}
 	
 	
 
