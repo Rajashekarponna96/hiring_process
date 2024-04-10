@@ -42,7 +42,7 @@ public class Job implements Serializable {
 	
 	private JobType type;
 	
-	private List<Location> locations;
+	private String locations;
 	
 	private List<HiringFlow> flows;
 	
@@ -146,15 +146,16 @@ public class Job implements Serializable {
 	public void setType(JobType type) {
 		this.type = type;
 	}
-	@JsonIgnore
-	@OneToMany(mappedBy = "job", cascade = CascadeType.MERGE)
-	public List<Location> getLocations() {
+	
+	
+	public String getLocations() {
 		return locations;
 	}
 
-	public void setLocations(List<Location> locations) {
+	public void setLocations(String locations) {
 		this.locations = locations;
 	}
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
 	public List<HiringFlow> getFlows() {
