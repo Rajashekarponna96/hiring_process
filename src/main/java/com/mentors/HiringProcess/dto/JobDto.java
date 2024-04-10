@@ -33,7 +33,7 @@ private Long id;
 	
 	private JobType type;
 	
-	private List<LocationDto> locations;
+	private String locations;
 	
 	private List<HiringFlowDto> flows;
 	
@@ -133,11 +133,11 @@ private Long id;
 		this.type = type;
 	}
 
-	public List<LocationDto> getLocations() {
+	public String getLocations() {
 		return locations;
 	}
 
-	public void setLocations(List<LocationDto> locations) {
+	public void setLocations(String locations) {
 		this.locations = locations;
 	}
 

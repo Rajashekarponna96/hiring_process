@@ -44,6 +44,7 @@ public class JobBuilder {
 		job.setCurrney(currencyTypeBuilder.toModel(jobDto.getCurrney()));
 //		job.setSalaryMinimum(jobDto.getSalaryMinimum());
 		job.setSalaryMaximum(jobDto.getSalaryMaximum());
+		job.setLocations(jobDto.getLocations());
 		job.setType(jobDto.getType());
 		job.setExperience(jobDto.getExperience());
 		job.setRecruiters(recruiterBuilder.toModel(jobDto.getRecruiters()));
@@ -67,6 +68,7 @@ public class JobBuilder {
 		jobdto.setCurrney(currencyTypeBuilder.toDto(job.getCurrney()));
 //		jobdto.setSalaryMinimum(job.getSalaryMinimum());
 		jobdto.setSalaryMaximum(job.getSalaryMaximum());
+		jobdto.setLocations(job.getLocations());
 		jobdto.setType(job.getType());
 		jobdto.setExperience(job.getExperience());
 		jobdto.setRecruiters(recruiterBuilder.toDto(job.getRecruiters()));
@@ -76,13 +78,13 @@ public class JobBuilder {
 		jobdto.setSecondarySkills(job.getSecondarySkills());
 		jobdto.setGoodToHave(job.getGoodToHave());
 		
-		List<LocationDto> locationDtos = new ArrayList<>();
-	    for (Location location : job.getLocations()) {
-	    	LocationDto locationDto = new LocationDto();
-	    	locationDto.setId(location.getId());
-	    	locationDtos.add(locationDto);
-	    }
-	    jobdto.setLocations(locationDtos);
+//		List<LocationDto> locationDtos = new ArrayList<>();
+//	    for (Location location : job.getLocations()) {
+//	    	LocationDto locationDto = new LocationDto();
+//	    	locationDto.setId(location.getId());
+//	    	locationDtos.add(locationDto);
+//	    }
+//	    jobdto.setLocations(locationDtos);
 	    
 	    List<HiringFlowDto> hiringFlowDtos = new ArrayList<>();
 	    for (HiringFlow hiringFlow : job.getFlows()) {

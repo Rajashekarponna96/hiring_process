@@ -7,6 +7,8 @@ public class LocationDto {
 	private String name;
 	
 	private String code;
+	
+	private JobDto jobdto;
 
 	public Long getId() {
 		return id;
