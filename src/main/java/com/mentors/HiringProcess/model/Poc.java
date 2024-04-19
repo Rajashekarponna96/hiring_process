@@ -25,6 +25,8 @@ public class Poc implements Serializable{
 	private String email;
 	
 	private Client client;
+	
+	private Vendor vendor;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -70,6 +72,18 @@ public class Poc implements Serializable{
 	public void setClient(Client client) {
 		this.client = client;
 	}
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "vendor_id")
+	public Vendor getVendor() {
+		return vendor;
+	}
+
+	public void setVendor(Vendor vendor) {
+		this.vendor = vendor;
+	}
+	
+	
 
 	
 	
