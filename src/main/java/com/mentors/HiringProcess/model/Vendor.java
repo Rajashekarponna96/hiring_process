@@ -10,6 +10,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -21,9 +23,13 @@ public class Vendor  implements Serializable{
 	
 	private String vendorName;
 	
-	private List<Poc> pocs;
-	
 	private String location;
+	
+    private String email;
+	
+	private String mobile;
+	
+	private UserAccout userAccout;
 	
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO )
@@ -42,22 +48,39 @@ public class Vendor  implements Serializable{
 	public void setVendorName(String vendorName) {
 		this.vendorName = vendorName;
 	}
-	@JsonIgnore
-	@OneToMany(mappedBy = "vendor", cascade = CascadeType.ALL)
-	public List<Poc> getPocs() {
-		return pocs;
-	}
-
-	public void setPocs(List<Poc> pocs) {
-		this.pocs = pocs;
-	}
-
+	
 	public String getLocation() {
 		return location;
 	}
 
 	public void setLocation(String location) {
 		this.location = location;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "useraccount_id", referencedColumnName = "id")
+	public UserAccout getUserAccout() {
+		return userAccout;
+	}
+
+	public void setUserAccout(UserAccout userAccout) {
+		this.userAccout = userAccout;
 	}
 	
 	
