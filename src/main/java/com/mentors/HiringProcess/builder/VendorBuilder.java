@@ -12,7 +12,7 @@ import com.mentors.HiringProcess.model.Vendor;
 public class VendorBuilder {
 	
 	@Autowired
-	private PocBuilder pocBuilder;
+	private UserAccoutBuilder userAccoutBuilder;
 	
 	public Vendor toModel(VendorDto vendorDto) {
 		
@@ -21,8 +21,9 @@ public class VendorBuilder {
 		vendor.setId(vendorDto.getId());
 		vendor.setVendorName(vendorDto.getVendorName());
 		vendor.setLocation(vendorDto.getLocation());
-		vendor.setPocs(pocBuilder.toModelList(vendorDto.getPocs()).stream().peek(e->e.setVendor(vendor)).collect(Collectors.toList()));
-		
+		vendor.setEmail(vendorDto.getEmail());
+		vendor.setMobile(vendorDto.getMobile());
+		vendor.setUserAccout(userAccoutBuilder.toModel(vendorDto.getUserAccout()));
 		return vendor ;
 	}
 	
@@ -31,7 +32,9 @@ public class VendorBuilder {
 		vendorDto.setId(vendor.getId());
 		vendorDto.setVendorName(vendor.getVendorName());
 		vendorDto.setLocation(vendor.getLocation());
-		vendorDto.setPocs(pocBuilder.toDtoList(vendor.getPocs()));
+		vendorDto.setEmail(vendor.getEmail());
+		vendorDto.setMobile(vendor.getMobile());
+	    vendorDto.setUserAccout(userAccoutBuilder.toDto(vendor.getUserAccout()));
 		return vendorDto;
 	}
 

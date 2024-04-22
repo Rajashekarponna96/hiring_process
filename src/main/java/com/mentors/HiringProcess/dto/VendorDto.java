@@ -1,18 +1,20 @@
 package com.mentors.HiringProcess.dto;
 
-import java.util.List;
 
-import com.mentors.HiringProcess.model.Poc;
 
 public class VendorDto {
 	
-private long id;
+    private long id;
 	
 	private String vendorName;
 	
-	private List<PocDto> pocs;
+	private String location;	
 	
-	private String location;
+    private String email;
+	
+	private String mobile;
+	
+	private UserAccoutDto userAccout;
 
 	public long getId() {
 		return id;
@@ -30,15 +32,6 @@ private long id;
 		this.vendorName = vendorName;
 	}
 
-	
-
-	public List<PocDto> getPocs() {
-		return pocs;
-	}
-
-	public void setPocs(List<PocDto> pocs) {
-		this.pocs = pocs;
-	}
 
 	public String getLocation() {
 		return location;
@@ -48,6 +41,33 @@ private long id;
 		this.location = location;
 	}
 	
+	
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+
+	public UserAccoutDto getUserAccout() {
+		return userAccout;
+	}
+
+	public void setUserAccout(UserAccoutDto userAccout) {
+		this.userAccout = userAccout;
+	}
+
 	public void validateRequiredAttibutes(VendorDto vendorDto) {
 		if(vendorDto.getVendorName()!=null && vendorDto.getVendorName().isEmpty()) {
 			throw  new RuntimeException("Vendor name is  Mandatory");
@@ -55,9 +75,6 @@ private long id;
 		if(vendorDto.getLocation()!=null && vendorDto.getLocation().isEmpty()) {
 			throw new RuntimeException("Location is Mandatory");
 		}
-		if (pocs != null && pocs.isEmpty()) {
-            throw new RuntimeException("At least one Point of Contact is required");
-        }
 	}
 
 }
