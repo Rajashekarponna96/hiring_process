@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mentors.HiringProcess.dto.ClientDto;
 import com.mentors.HiringProcess.dto.VendorDto;
 import com.mentors.HiringProcess.service.VendorService;
 

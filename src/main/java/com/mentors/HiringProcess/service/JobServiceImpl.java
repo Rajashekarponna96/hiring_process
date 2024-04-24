@@ -6,6 +6,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +19,8 @@ import com.mentors.HiringProcess.dto.JobSummaryDto;
 import com.mentors.HiringProcess.model.Client;
 import com.mentors.HiringProcess.model.Job;
 import com.mentors.HiringProcess.repository.JobRepository;
+import com.mentors.HiringProcess.specification.ClientSprecifications;
+import com.mentors.HiringProcess.specification.JobSpecifications;
 
 @Service
 @Transactional
@@ -105,4 +110,18 @@ public class JobServiceImpl implements JobServiceI {
 
         return jobDto;
     }
+
+	@Override
+	public Page<JobDto> getAllJobs(Pageable pageable, String code) {
+		Specification<Job> spec = Specification.where(null); // Start with an empty specification
+
+        if (code != null && !code.isEmpty()) {
+            spec = spec.and(JobSpecifications.hasFields(code));
+        }
+
+        Page<Job> recruiterPage = jobRepository.findAll(spec, pageable);
+        return recruiterPage.map(jobBuilder::toDto);
+		
+	}
+		
 }

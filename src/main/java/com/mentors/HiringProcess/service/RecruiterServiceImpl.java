@@ -142,8 +142,8 @@ public class RecruiterServiceImpl implements RecruiterServiceI {
 	}
 	
 		
-		@Override
-	    public Page<RecruiterDto> getAllRecruiters(Pageable pageable, String code) {
+	@Override
+	public Page<RecruiterDto> getAllRecruiters(Pageable pageable, String code) {
 	        Specification<Recruiter> spec = Specification.where(null); // Start with an empty specification
 
 	        if (code != null && !code.isEmpty()) {

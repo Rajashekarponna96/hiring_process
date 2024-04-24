@@ -4,13 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mentors.HiringProcess.builder.ClientBuilder;
 import com.mentors.HiringProcess.dto.ClientDto;
 import com.mentors.HiringProcess.model.Client;
+import com.mentors.HiringProcess.model.Recruiter;
 import com.mentors.HiringProcess.repository.ClientRepository;
+import com.mentors.HiringProcess.specification.ClientSprecifications;
+import com.mentors.HiringProcess.specification.RecruiterSpecifications;
 @Service
 @Transactional
 public class ClientServiceImpl implements ClientServiceI{
@@ -76,6 +82,19 @@ public class ClientServiceImpl implements ClientServiceI{
 	    }
 	    return clientNames;
 	}
+
+	@Override
+	public Page<ClientDto> getAllClients(Pageable pageable, String code) {
+		Specification<Client> spec = Specification.where(null); // Start with an empty specification
+
+        if (code != null && !code.isEmpty()) {
+            spec = spec.and(ClientSprecifications.hasFields(code));
+        }
+
+        Page<Client> recruiterPage = clientRepository.findAll(spec, pageable);
+        return recruiterPage.map(clientBuilder::toDto);
+    }
+	
 
 
 }

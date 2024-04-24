@@ -2,7 +2,11 @@ package com.mentors.HiringProcess.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.mentors.HiringProcess.dto.CandidateDto;
+import com.mentors.HiringProcess.dto.RecruiterDto;
 
 public interface CandidateServiceI {
 
@@ -17,5 +21,7 @@ public interface CandidateServiceI {
 	CandidateDto findOne(Long id);
 	
 	 List<CandidateDto> getCandidatesByCriteria(String firstName, String lastName, String email);
+	 
+	 Page<CandidateDto> getAllCandidates(Pageable pageable, String code);
 
 }
