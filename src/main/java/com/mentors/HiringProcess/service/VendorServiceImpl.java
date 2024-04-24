@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mentors.HiringProcess.builder.VendorBuilder;
-import com.mentors.HiringProcess.dto.ClientDto;
 import com.mentors.HiringProcess.dto.VendorDto;
-import com.mentors.HiringProcess.model.Client;
 import com.mentors.HiringProcess.model.Vendor;
 import com.mentors.HiringProcess.repository.VendorRepository;
 @Service

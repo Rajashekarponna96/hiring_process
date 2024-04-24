@@ -3,11 +3,15 @@ package com.mentors.HiringProcess.repository;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.mentors.HiringProcess.dto.CandidateDto;
 import com.mentors.HiringProcess.model.Candidate;
+import com.mentors.HiringProcess.model.Recruiter;
 
 public interface CandidateRepository extends JpaRepository<Candidate,Long>{
 
@@ -20,6 +24,9 @@ public interface CandidateRepository extends JpaRepository<Candidate,Long>{
 	           "and (:lastName is null or c.lastName = :lastName) " +
 	           "and (:email is null or c.email = :email)")
 	List<Candidate> findByCriteria(String firstName, String lastName, String email);
+	
+	
+	Page<Candidate> findAll(Specification<Candidate> spec, Pageable pageable); // Custom method for fetching entities based on specifications and pageable
 
 
 
