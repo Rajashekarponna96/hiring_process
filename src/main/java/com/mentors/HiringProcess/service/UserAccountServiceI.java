@@ -17,6 +17,8 @@ public interface UserAccountServiceI {
 	void deleteUserAccount(Long id);
 
 	UserAccout doLogin(LoginDto loginDto);
+	
+	UserAccoutDto login(LoginDto loginDto);
 
 	
 
