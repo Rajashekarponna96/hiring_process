@@ -59,7 +59,10 @@ public class CandidateBuilder {
 		candidate.setJob(jobBuilder.toModel(candidateDto.getJob()));
 		candidate.setSkills(candidateDto.getSkills());
 		candidate.setStage(candidateDto.getStage());
-		
+		candidate.setCreatedBy(candidateDto.getCreatedBy());
+		candidate.setModifiedBy(candidateDto.getModifiedBy());
+		candidate.setCreatedTimestamp(candidateDto.getCreatedTimestamp());
+		candidate.setModifiedTimestamp(candidateDto.getModifiedTimestamp());
 		candidate.setEducations(educationBuilder.toModelList(candidateDto.getEducations()).stream().peek(e->e.setCandidate(candidate)).collect(Collectors.toList()));
 		candidate.setExperiences(experienceBuilder.toModelList(candidateDto.getExperiences()).stream().peek(e->e.setCandidate(candidate)).collect(Collectors.toList()));
 		return candidate;
@@ -89,9 +92,10 @@ public class CandidateBuilder {
 		candidatedto.setEducations(educationBuilder.toDtoList(candidate.getEducations()));
 		candidatedto.setExperiences(experienceBuilder.toDtoList(candidate.getExperiences()));
 		candidatedto.setStage(candidate.getStage());
-		
-	   
-		
-       return candidatedto;
+		candidatedto.setCreatedBy(candidate.getCreatedBy());
+		candidatedto.setModifiedBy(candidate.getModifiedBy());
+		candidatedto.setCreatedTimestamp(candidate.getCreatedTimestamp());
+		candidatedto.setModifiedTimestamp(candidate.getModifiedTimestamp());
+        return candidatedto;
 	}
 }

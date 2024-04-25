@@ -2,6 +2,7 @@ package com.mentors.HiringProcess.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -68,6 +69,21 @@ public class Candidate  implements Serializable {
 	private TalentPool talentPool;
 	
 	private Job job;
+	
+	private String createdBy;
+	
+    private String modifiedBy;
+    
+    private LocalDateTime createdTimestamp;
+    
+    private LocalDateTime modifiedTimestamp;
+    
+    
+//    public Candidate() {
+//        this.createdTimestamp = LocalDateTime.now();
+//        this.modifiedTimestamp = LocalDateTime.now();
+//    }
+
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -262,11 +278,46 @@ public class Candidate  implements Serializable {
 	public void setJob(Job job) {
 		this.job = job;
 	}
-	
-	
-	
-	
-		
+
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+
+	public String getModifiedBy() {
+		return modifiedBy;
+	}
+
+
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+
+
+	public LocalDateTime getCreatedTimestamp() {
+		return createdTimestamp;
+	}
+
+
+	public void setCreatedTimestamp(LocalDateTime createdTimestamp) {
+		this.createdTimestamp = createdTimestamp;
+	}
+
+
+	public LocalDateTime getModifiedTimestamp() {
+		return modifiedTimestamp;
+	}
+
+
+	public void setModifiedTimestamp(LocalDateTime modifiedTimestamp) {
+		this.modifiedTimestamp = modifiedTimestamp;
+	}
 	
 
 }
