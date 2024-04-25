@@ -1,6 +1,7 @@
 package com.mentors.HiringProcess.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.mentors.HiringProcess.model.CurrencyType;
@@ -57,6 +58,14 @@ public class CandidateDto {
 	private TalentPoolDto talentPool;
 	
 	private JobDto job;
+	
+	private String createdBy;
+	
+    private String modifiedBy;
+    
+    private LocalDateTime createdTimestamp;
+    
+    private LocalDateTime modifiedTimestamp;
 
 	public Long getId() {
 		return id;
@@ -237,8 +246,40 @@ public class CandidateDto {
 	public void setJob(JobDto job) {
 		this.job = job;
 	}
-
 	
+	
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public String getModifiedBy() {
+		return modifiedBy;
+	}
+
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+
+	public LocalDateTime getCreatedTimestamp() {
+		return createdTimestamp;
+	}
+
+	public void setCreatedTimestamp(LocalDateTime createdTimestamp) {
+		this.createdTimestamp = createdTimestamp;
+	}
+
+	public LocalDateTime getModifiedTimestamp() {
+		return modifiedTimestamp;
+	}
+
+	public void setModifiedTimestamp(LocalDateTime modifiedTimestamp) {
+		this.modifiedTimestamp = modifiedTimestamp;
+	}
+
 	public void validateREquiredAttibutes(CandidateDto candidateDto) {
 		if(candidateDto.getFirstName()==null) {
 			throw new RuntimeException("FirstName is Mandatory");

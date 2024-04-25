@@ -1,5 +1,6 @@
 package com.mentors.HiringProcess.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +32,7 @@ public class CandidateServiceImpl implements CandidateServiceI {
 		if(candidateRepository.findByMobile(candidateDto.getMobile()).isPresent()) {
 			throw new RuntimeException("Mobile is Already Exit");
 		}
+		candidateDto.setCreatedTimestamp(LocalDateTime.now());
 		candidateRepository.save(candidateBuilder.toModel(candidateDto));
 	}
 
@@ -39,6 +41,7 @@ public class CandidateServiceImpl implements CandidateServiceI {
 		// TODO Auto-generated method stub
 		Optional<Candidate> opCandidate = candidateRepository.findById(id);
 		if (opCandidate.isPresent()) {
+			candidateDto.setModifiedTimestamp(LocalDateTime.now());
 			candidateRepository.save(candidateBuilder.toModel(candidateDto));
 		}
 	}
