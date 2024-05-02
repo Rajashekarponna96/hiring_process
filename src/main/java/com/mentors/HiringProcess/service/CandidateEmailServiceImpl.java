@@ -60,7 +60,15 @@ public class CandidateEmailServiceImpl implements CandidateEmailServiceI{
 		Optional<CandidateEmail> dbCandidateEmail = candidateEmailRepository.findById(id);
 		if(dbCandidateEmail.isPresent()) {
 			
-			candidateEmailRepository.save(candidateEmailBuilder.toModel(candidateEmailDto));
+			//candidateEmailRepository.save(candidateEmailBuilder.toModel(candidateEmailDto));
+			String sanitizedSubject = Jsoup.clean(candidateEmailDto.getBody(), Whitelist.none());
+			String sanitizedSubject1 = Jsoup.clean(candidateEmailDto.getTitle(), Whitelist.none());
+			String sanitizedSubject2 = Jsoup.clean(candidateEmailDto.getSubject(), Whitelist.none());
+			CandidateEmail email=new CandidateEmail();
+			email.setBody(sanitizedSubject);
+			email.setTitle(sanitizedSubject1);
+			email.setSubject(sanitizedSubject2);
+			candidateEmailRepository.save(email);	
 		}
 	}
 
