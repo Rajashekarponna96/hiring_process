@@ -123,5 +123,12 @@ public class JobServiceImpl implements JobServiceI {
         return recruiterPage.map(jobBuilder::toDto);
 		
 	}
+
+	@Override
+	public Page<JobDto> getAllJobsWithPagination(Pageable pageable) {
+		Page<Job> jobPage =jobRepository.findAll(pageable);
+		return jobPage.map(jobBuilder::toDto);
+		
+	}
 		
 }

@@ -23,5 +23,9 @@ public interface JobServiceI {
 	  List<JobDto> allJobsWithClients();
 	  
 	  Page<JobDto> getAllJobs(Pageable pageable, String code);
+	  
+	  Page<JobDto> getAllJobsWithPagination(Pageable pageable);
+	  
+	  
 
 }

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mentors.HiringProcess.dto.CandidateDto;
 import com.mentors.HiringProcess.dto.RecruiterDto;
+import com.mentors.HiringProcess.dto.VendorDto;
 import com.mentors.HiringProcess.service.CandidateServiceI;
 
 
@@ -82,6 +83,15 @@ public class CandidateController {
 	    Pageable pageable = PageRequest.of(page, size);
 	    return candidateServiceI.getAllCandidates(pageable,code);
 	}
+	
+	
+	//candidate list with pagination
+		@GetMapping("/candidatelistwithpagination")
+		public Page<CandidateDto> getAllCandidatesWithPagination(@RequestParam int page, @RequestParam int size) {
+		    Pageable pageable = PageRequest.of(page, size);
+		    return candidateServiceI.getAllCandidatesWithPagination(pageable);
+		}
+
 
 
 }

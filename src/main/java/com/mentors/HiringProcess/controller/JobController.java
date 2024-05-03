@@ -75,4 +75,11 @@ public class JobController {
 		}
 	 
 	 
+	 @GetMapping("/joblistwithpagination")
+     public Page<JobDto> getAllJobsWithPagination(@RequestParam int page, @RequestParam int size) {
+		    Pageable pageable = PageRequest.of(page, size);
+		    return jobServiceI.getAllJobsWithPagination(pageable);
+		}
+	 
+	 
 }

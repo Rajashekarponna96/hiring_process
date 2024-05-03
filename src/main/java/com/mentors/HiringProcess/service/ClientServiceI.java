@@ -20,5 +20,7 @@ public interface ClientServiceI {
 	void deleteClient(Long id);
 	
 	Page<ClientDto> getAllClients(Pageable pageable, String code);
+	
+	Page<ClientDto> getAllClientsWithPagination(Pageable pageable);
 
 }

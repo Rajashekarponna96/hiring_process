@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.mentors.HiringProcess.dto.CandidateDto;
 import com.mentors.HiringProcess.dto.RecruiterDto;
+import com.mentors.HiringProcess.dto.VendorDto;
 
 public interface CandidateServiceI {
 
@@ -23,5 +24,7 @@ public interface CandidateServiceI {
 	 List<CandidateDto> getCandidatesByCriteria(String firstName, String lastName, String email);
 	 
 	 Page<CandidateDto> getAllCandidates(Pageable pageable, String code);
+	 
+	 Page<CandidateDto> getAllCandidatesWithPagination(Pageable pageable);
 
 }
