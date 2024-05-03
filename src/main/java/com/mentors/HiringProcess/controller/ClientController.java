@@ -64,6 +64,14 @@ public class ClientController {
 	    Pageable pageable = PageRequest.of(page, size);
 	    return clientServiceI.getAllClients(pageable,code);
 	}
+	
+	@GetMapping("/clientlistwithpagination")
+	public Page<ClientDto> getAllClientsWithPagination(@RequestParam int page, @RequestParam int size) {
+	    Pageable pageable = PageRequest.of(page, size);
+	    return clientServiceI.getAllClientsWithPagination(pageable);
+	}
+	
+	
 
 
 }

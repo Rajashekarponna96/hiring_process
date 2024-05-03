@@ -51,6 +51,12 @@ public class TalentPoolController {
 		    Pageable pageable = PageRequest.of(page, size);
 		    return talentPoolServiceI.getAllTalentPool(pageable,code);
 		}
+	
+	@GetMapping("/talentpoollistwithpagination")
+    public Page<TalentPoolDto> getAllTalentPoolWithPagination(@RequestParam int page, @RequestParam int size) {
+		    Pageable pageable = PageRequest.of(page, size);
+		    return talentPoolServiceI.getAllTalentPoolWithPagination(pageable);
+		}
 	 
 
 }

@@ -17,6 +17,7 @@ import com.mentors.HiringProcess.dto.CandidateDto;
 import com.mentors.HiringProcess.model.Candidate;
 import com.mentors.HiringProcess.model.EmailTemplate;
 import com.mentors.HiringProcess.model.Recruiter;
+import com.mentors.HiringProcess.model.Vendor;
 import com.mentors.HiringProcess.repository.CandidateRepository;
 import com.mentors.HiringProcess.repository.EmailTemplateRepository;
 import com.mentors.HiringProcess.specification.CandidateSpecifications;
@@ -115,6 +116,12 @@ public class CandidateServiceImpl implements CandidateServiceI {
         Page<Candidate> candidatePage = candidateRepository.findAll(spec, pageable);
         return candidatePage.map(candidateBuilder::toDto);
     }
+
+	@Override
+	public Page<CandidateDto> getAllCandidatesWithPagination(Pageable pageable) {
+		Page<Candidate> recruiterPage = candidateRepository.findAll(pageable);
+        return recruiterPage.map(candidateBuilder::toDto);
+	}
 
 	
 

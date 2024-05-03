@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.mentors.HiringProcess.builder.ClientBuilder;
 import com.mentors.HiringProcess.dto.ClientDto;
+import com.mentors.HiringProcess.model.Candidate;
 import com.mentors.HiringProcess.model.Client;
 import com.mentors.HiringProcess.model.Recruiter;
 import com.mentors.HiringProcess.repository.ClientRepository;
@@ -94,6 +95,12 @@ public class ClientServiceImpl implements ClientServiceI{
         Page<Client> recruiterPage = clientRepository.findAll(spec, pageable);
         return recruiterPage.map(clientBuilder::toDto);
     }
+
+	@Override
+	public Page<ClientDto> getAllClientsWithPagination(Pageable pageable) {
+		Page<Client> clientPage = clientRepository.findAll(pageable);
+        return clientPage .map(clientBuilder::toDto);
+	}
 	
 
 

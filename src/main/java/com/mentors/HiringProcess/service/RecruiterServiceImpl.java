@@ -154,6 +154,13 @@ public class RecruiterServiceImpl implements RecruiterServiceI {
 	        return recruiterPage.map(recruiterBuilder::toDto);
 	    }
 
+	@Override
+	public Page<RecruiterDto> getAllRecruitersWithPagination(Pageable pageable) {
+		Page<Recruiter> recruiterPage = recruiterRepository.findAll(pageable);
+        return recruiterPage.map(recruiterBuilder::toDto);
+		
+	}
+
 
 
 }

@@ -56,5 +56,12 @@ public class RecruiterController {
 	    Pageable pageable = PageRequest.of(page, size);
 	    return recruiterServiceI.getAllRecruiters(pageable,code);
 	}
+	
+
+	@GetMapping("/recruiterlistwithpagination")
+	public Page<RecruiterDto> getAllRecruitersWithPagination(@RequestParam int page, @RequestParam int size) {
+	    Pageable pageable = PageRequest.of(page, size);
+	    return recruiterServiceI.getAllRecruitersWithPagination(pageable);
+	}
 
 }

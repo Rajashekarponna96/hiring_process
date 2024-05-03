@@ -17,5 +17,7 @@ public interface TalentPoolServiceI {
 	void update(TalentPoolDto talentPoolDto,Long id);
 	
 	 Page<TalentPoolDto> getAllTalentPool(Pageable pageable, String code);
+	 
+	 Page<TalentPoolDto> getAllTalentPoolWithPagination(Pageable pageable);
 
 }

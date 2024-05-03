@@ -67,4 +67,13 @@ public class TalentPoolServiceImpl implements TalentPoolServiceI {
 		
 	}
 
+	@Override
+	public Page<TalentPoolDto> getAllTalentPoolWithPagination(Pageable pageable) {
+
+        Page<TalentPool> recruiterPage = talentPoolRepository.findAll(pageable);
+        return recruiterPage.map(talentPoolBuilder::toDto);
+		
+		
+	}
+
 }
