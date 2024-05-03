@@ -2,6 +2,7 @@ package com.mentors.HiringProcess.model;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,8 +10,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="candidate_email")
-public class CandidateEmail implements Serializable{
+@Table(name="email_template")
+public class EmailTemplate implements Serializable{
 	
 	 private Long id;
 	 
@@ -38,7 +39,8 @@ public class CandidateEmail implements Serializable{
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
-
+	
+    @Column(columnDefinition = "TEXT")
 	public String getBody() {
 		return body;
 	}

@@ -2,16 +2,16 @@ package com.mentors.HiringProcess.builder;
 
 import org.springframework.stereotype.Component;
 
-import com.mentors.HiringProcess.dto.CandidateEmailDto;
-import com.mentors.HiringProcess.model.CandidateEmail;
+import com.mentors.HiringProcess.dto.EmailTemplateDto;
+import com.mentors.HiringProcess.model.EmailTemplate;
 
 
 @Component
-public class CandidateEmailBuilder {
+public class EmailTemplateBuilder {
 	
-	public CandidateEmail toModel(CandidateEmailDto candidateEmailDto) {
+	public EmailTemplate toModel(EmailTemplateDto candidateEmailDto) {
 
-		CandidateEmail candidateEmail = new CandidateEmail();
+		EmailTemplate candidateEmail = new EmailTemplate();
 		candidateEmail.setId(candidateEmailDto.getId());
 		candidateEmail.setSubject(candidateEmailDto.getSubject());
 		candidateEmail.setBody(candidateEmailDto.getBody());
@@ -20,8 +20,8 @@ public class CandidateEmailBuilder {
 	}
 
 	
-	public CandidateEmailDto toDto(CandidateEmail candidateEmail) {
-		CandidateEmailDto candidateEmailDto = new CandidateEmailDto();
+	public EmailTemplateDto toDto(EmailTemplate candidateEmail) {
+		EmailTemplateDto candidateEmailDto = new EmailTemplateDto();
 		candidateEmailDto.setId(candidateEmail.getId());
 		candidateEmailDto.setSubject(candidateEmail.getSubject());
 		candidateEmailDto.setBody(candidateEmail.getBody());

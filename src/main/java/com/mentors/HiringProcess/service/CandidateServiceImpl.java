@@ -15,8 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.mentors.HiringProcess.builder.CandidateBuilder;
 import com.mentors.HiringProcess.dto.CandidateDto;
 import com.mentors.HiringProcess.model.Candidate;
+import com.mentors.HiringProcess.model.EmailTemplate;
 import com.mentors.HiringProcess.model.Recruiter;
 import com.mentors.HiringProcess.repository.CandidateRepository;
+import com.mentors.HiringProcess.repository.EmailTemplateRepository;
 import com.mentors.HiringProcess.specification.CandidateSpecifications;
 import com.mentors.HiringProcess.specification.RecruiterSpecifications;
 
@@ -29,7 +31,13 @@ public class CandidateServiceImpl implements CandidateServiceI {
 
 	@Autowired
 	private CandidateBuilder candidateBuilder;
+	
+	@Autowired
+	private EmailService emailService;
 
+	@Autowired
+    private EmailTemplateRepository  emailTemplateRepository;
+	
 	@Override
 	public void add(CandidateDto candidateDto) {
 		if(candidateRepository.findByEmail(candidateDto.getEmail()).isPresent()) {
@@ -40,6 +48,8 @@ public class CandidateServiceImpl implements CandidateServiceI {
 		}
 		candidateDto.setCreatedTimestamp(LocalDateTime.now());
 		candidateRepository.save(candidateBuilder.toModel(candidateDto));
+		EmailTemplate emailTemplate  = emailTemplateRepository.findByTitle(candidateDto.getStage().toString());
+		emailService.sendSimpleMessage(candidateDto.getEmail(), emailTemplate.getSubject(), emailTemplate.getBody(),null, null, null);
 	}
 
 	@Override

@@ -39,10 +39,10 @@ public class EmailService {
             helper.setSubject(subject);
 
             // Set text content
-            helper.setText(text, true); 
+         //   helper.setText(text, true); 
             
             //set  html content
-            helper.setText(htmlContent, true);// true indicates HTML content
+            helper.setText(text, true);// true indicates HTML content
             
             // Add CC recipients
             if (cc != null && !cc.isEmpty()) {
