@@ -19,5 +19,10 @@ public interface VendorService {
 	void deleteVendor(Long id);
 	
 	Page<VendorDto> getAllClients(Pageable pageable, String code);
+	
+	Page<VendorDto> getAllLientsWithPagination(Pageable pageable);
+	
+
+	
 
 }
