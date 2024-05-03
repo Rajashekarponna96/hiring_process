@@ -58,5 +58,12 @@ public class VendorController {
 	    Pageable pageable = PageRequest.of(page, size);
 	    return vendorService.getAllClients(pageable,code);
 	}
+	
+	//Vendor list with pagination
+	@GetMapping("/vendorlistwithpagination")
+	public Page<VendorDto> getAllLientsWithPagination(@RequestParam int page, @RequestParam int size) {
+	    Pageable pageable = PageRequest.of(page, size);
+	    return vendorService.getAllLientsWithPagination(pageable);
+	}
 
 }

@@ -70,6 +70,14 @@ public class VendorServiceImpl  implements VendorService{
         Page<Vendor> recruiterPage = vendorRepository.findAll(spec, pageable);
         return recruiterPage.map(vendorBuilder::toDto);
 	}
+
+	@Override
+	public Page<VendorDto> getAllLientsWithPagination(Pageable pageable) {
+		Page<Vendor> recruiterPage = vendorRepository.findAll(pageable);
+        return recruiterPage.map(vendorBuilder::toDto);
+		
+		
+	}
 	
 	
 
