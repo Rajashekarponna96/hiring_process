@@ -1,6 +1,6 @@
 package com.mentors.HiringProcess.dto;
 
-public class CandidateEmailDto {
+public class EmailTemplateDto {
 	
 	 private Long id;
 	 
@@ -10,9 +10,18 @@ public class CandidateEmailDto {
 	 
 	 private String title;
 
+
 	public Long getId() {
 		return id;
 	}
+
+	public EmailTemplateDto() {
+	super();
+	this.id = id;
+	this.subject = subject;
+	this.body = body;
+	this.title = title;
+}
 
 	public void setId(Long id) {
 		this.id = id;
@@ -42,7 +51,7 @@ public class CandidateEmailDto {
 		this.title = title;
 	}
 
-	public void validateRequiredAttibutes(CandidateEmailDto candidateEmailDto) {
+	public void validateRequiredAttibutes(EmailTemplateDto candidateEmailDto) {
 		if(candidateEmailDto.getSubject()==null) {
 			throw new RuntimeException("Subject is Mandatory");
 		}
