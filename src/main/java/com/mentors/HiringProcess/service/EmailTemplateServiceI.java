@@ -2,6 +2,10 @@ package com.mentors.HiringProcess.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import com.mentors.HiringProcess.dto.CandidateDto;
 import com.mentors.HiringProcess.dto.EmailTemplateDto;
 
 public interface EmailTemplateServiceI {
@@ -15,6 +19,8 @@ public interface EmailTemplateServiceI {
 	void delete(Long id);
 
 	EmailTemplateDto getSubjectAndBodyByTitle(String title);
+	
+	Page<EmailTemplateDto> getAllEmailsWithPagination(Pageable pageable);
 
 	
 
