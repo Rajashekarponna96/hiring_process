@@ -8,6 +8,8 @@ import java.util.Optional;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -91,6 +93,12 @@ public class EmailTemplateServiceImpl implements EmailTemplateServiceI{
         } else {
             return null;
         }
+	}
+
+	@Override
+	public Page<EmailTemplateDto> getAllEmailsWithPagination(Pageable pageable) {
+		Page<EmailTemplate> emailPage = candidateEmailRepository.findAll(pageable);
+        return emailPage.map(candidateEmailBuilder::toDto);
 	}
 
 	
