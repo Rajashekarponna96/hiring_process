@@ -22,6 +22,8 @@ public interface EmailTemplateServiceI {
 	
 	Page<EmailTemplateDto> getAllEmailsWithPagination(Pageable pageable);
 
+	Page<EmailTemplateDto> getAllTemplates(Pageable pageable, String code);
+
 	
 
 }
