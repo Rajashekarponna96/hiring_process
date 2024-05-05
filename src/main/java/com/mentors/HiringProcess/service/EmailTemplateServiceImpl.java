@@ -10,6 +10,7 @@ import org.jsoup.safety.Whitelist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +20,10 @@ import com.mentors.HiringProcess.dto.LocationDto;
 import com.mentors.HiringProcess.model.Candidate;
 import com.mentors.HiringProcess.model.EmailTemplate;
 import com.mentors.HiringProcess.model.Location;
+import com.mentors.HiringProcess.model.Vendor;
 import com.mentors.HiringProcess.repository.EmailTemplateRepository;
+import com.mentors.HiringProcess.specification.EmailTemplateSpecifications;
+import com.mentors.HiringProcess.specification.VendorSpecifications;
 
 @Service
 @Transactional
@@ -99,6 +103,18 @@ public class EmailTemplateServiceImpl implements EmailTemplateServiceI{
 	public Page<EmailTemplateDto> getAllEmailsWithPagination(Pageable pageable) {
 		Page<EmailTemplate> emailPage = candidateEmailRepository.findAll(pageable);
         return emailPage.map(candidateEmailBuilder::toDto);
+	}
+
+	@Override
+	public Page<EmailTemplateDto> getAllTemplates(Pageable pageable, String code) {
+		Specification<EmailTemplate> spec = Specification.where(null); // Start with an empty specification
+
+        if (code != null && !code.isEmpty()) {
+            spec = spec.and(EmailTemplateSpecifications.hasFields(code));
+        }
+
+        Page<EmailTemplate> recruiterPage = candidateEmailRepository.findAll(spec, pageable);
+        return recruiterPage.map(candidateEmailBuilder::toDto);
 	}
 
 	

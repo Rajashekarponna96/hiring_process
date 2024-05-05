@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mentors.HiringProcess.dto.CandidateDto;
 import com.mentors.HiringProcess.dto.EmailTemplateDto;
+import com.mentors.HiringProcess.dto.VendorDto;
 import com.mentors.HiringProcess.service.EmailTemplateServiceI;
 
 @RestController
@@ -59,6 +60,13 @@ public class EmailTemplateController {
 		} else {
 			return ResponseEntity.notFound().build();
 		}
+	}
+	
+	@GetMapping("/searchpage")
+	public Page<EmailTemplateDto> getAllLients(@RequestParam int page, @RequestParam int size,
+	        @RequestParam String code) {
+	    Pageable pageable = PageRequest.of(page, size);
+	    return candidateEmailServiceI.getAllTemplates(pageable,code);
 	}
 
 	// Email list with pagination
