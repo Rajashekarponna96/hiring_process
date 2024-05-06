@@ -1,6 +1,8 @@
 package com.mentors.HiringProcess.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mentors.HiringProcess.builder.CandidateBuilder;
+import com.mentors.HiringProcess.builder.EmailTemplateBuilder;
 import com.mentors.HiringProcess.dto.CandidateDto;
+import com.mentors.HiringProcess.dto.EmailTemplateDto;
 import com.mentors.HiringProcess.model.Candidate;
 import com.mentors.HiringProcess.model.EmailTemplate;
 import com.mentors.HiringProcess.model.Recruiter;
@@ -39,6 +43,12 @@ public class CandidateServiceImpl implements CandidateServiceI {
 	@Autowired
     private EmailTemplateRepository  emailTemplateRepository;
 	
+	@Autowired
+	private EmailTemplateBuilder emailTemplateBuilder;
+	
+	@Autowired
+	private EmailTemplateServiceImpl emailTemplateServiceImpl;
+	
 	@Override
 	public void add(CandidateDto candidateDto) {
 		if(candidateRepository.findByEmail(candidateDto.getEmail()).isPresent()) {
@@ -49,8 +59,14 @@ public class CandidateServiceImpl implements CandidateServiceI {
 		}
 		candidateDto.setCreatedTimestamp(LocalDateTime.now());
 		candidateRepository.save(candidateBuilder.toModel(candidateDto));
+		
+		String candidateName = candidateDto.getFirstName();
+		String uploadDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		EmailTemplate emailTemplate  = emailTemplateRepository.findByTitle(candidateDto.getStage().toString());
-		emailService.sendSimpleMessage(candidateDto.getEmail(), emailTemplate.getSubject(), emailTemplate.getBody(),null, null, null);
+		String body=emailTemplate.getBody();
+		String updatedBody = body.replace("[CandidateName]", candidateName)
+                 .replace("[UploadDate]", uploadDate);
+		emailService.sendSimpleMessage(candidateDto.getEmail(), emailTemplate.getSubject(),updatedBody,null, null, null);
 	}
 
 	@Override

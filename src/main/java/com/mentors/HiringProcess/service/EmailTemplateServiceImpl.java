@@ -1,6 +1,8 @@
 package com.mentors.HiringProcess.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -15,12 +17,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mentors.HiringProcess.builder.EmailTemplateBuilder;
+import com.mentors.HiringProcess.dto.CandidateDto;
 import com.mentors.HiringProcess.dto.EmailTemplateDto;
 import com.mentors.HiringProcess.dto.LocationDto;
 import com.mentors.HiringProcess.model.Candidate;
 import com.mentors.HiringProcess.model.EmailTemplate;
 import com.mentors.HiringProcess.model.Location;
 import com.mentors.HiringProcess.model.Vendor;
+import com.mentors.HiringProcess.repository.CandidateRepository;
 import com.mentors.HiringProcess.repository.EmailTemplateRepository;
 import com.mentors.HiringProcess.specification.EmailTemplateSpecifications;
 import com.mentors.HiringProcess.specification.VendorSpecifications;
@@ -34,20 +38,41 @@ public class EmailTemplateServiceImpl implements EmailTemplateServiceI{
 	
 	@Autowired
 	private EmailTemplateBuilder candidateEmailBuilder;
-
+	
+	@Autowired
+	private CandidateRepository candidateRepository;
+	
 	@Override
-	public void addCandidateEmail(EmailTemplateDto candidateEmailDto) {
-		//CandidateEmail candidateEmail = candidateEmailBuilder.toModel(candidateEmailDto);
-		String sanitizedSubject = Jsoup.clean(candidateEmailDto.getBody(), Whitelist.none());
-		String sanitizedSubject1 = Jsoup.clean(candidateEmailDto.getTitle(), Whitelist.none());
-		String sanitizedSubject2 = Jsoup.clean(candidateEmailDto.getSubject(), Whitelist.none());
-		EmailTemplate email=new EmailTemplate();
-		email.setBody(sanitizedSubject);
-		email.setTitle(sanitizedSubject1);
-		email.setSubject(sanitizedSubject2);
-		candidateEmailRepository.save(email);	
+	public void addCandidateEmail(EmailTemplateDto candidateEmailDto,Long candidateId) {
+		String sanitizedBody = Jsoup.clean(candidateEmailDto.getBody(), Whitelist.none());
+        String sanitizedTitle = Jsoup.clean(candidateEmailDto.getTitle(), Whitelist.none());
+        String sanitizedSubject = Jsoup.clean(candidateEmailDto.getSubject(), Whitelist.none());
+
+      
+        Optional<Candidate> candidateOptional = candidateRepository.findById(candidateId);
+        if (candidateOptional.isPresent()) {
+            Candidate candidate = candidateOptional.get();
+            String candidateName = candidate.getFirstName(); 
+            String uploadDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            String updatedBody = sanitizedBody.replace("[CandidateName]", candidateName)
+                                              .replace("[UploadDate]", uploadDate);
+            String updatedTitle = sanitizedTitle.replace("[CandidateName]", candidateName)
+                                                .replace("[UploadDate]", uploadDate);
+            String updatedSubject = sanitizedSubject.replace("[CandidateName]", candidateName)
+                                                    .replace("[UploadDate]", uploadDate);
+
+            EmailTemplate emailTemplate = new EmailTemplate();
+            emailTemplate.setBody(updatedBody);
+            emailTemplate.setTitle(updatedTitle);
+            emailTemplate.setSubject(updatedSubject);
+            candidateEmailRepository.save(emailTemplate);
+        } else {
+            
+        }
 		
 	}
+	
+	
 
 	@Override
 	public List<EmailTemplateDto> findAll() {
@@ -115,6 +140,21 @@ public class EmailTemplateServiceImpl implements EmailTemplateServiceI{
 
         Page<EmailTemplate> recruiterPage = candidateEmailRepository.findAll(spec, pageable);
         return recruiterPage.map(candidateEmailBuilder::toDto);
+	}
+
+
+
+	@Override
+	public void addCandidateEmails(EmailTemplateDto candidateEmailDto) {
+		String sanitizedSubject = Jsoup.clean(candidateEmailDto.getBody(), Whitelist.none());
+		String sanitizedSubject1 = Jsoup.clean(candidateEmailDto.getTitle(), Whitelist.none());
+		String sanitizedSubject2 = Jsoup.clean(candidateEmailDto.getSubject(), Whitelist.none());
+		EmailTemplate email=new EmailTemplate();
+		email.setBody(sanitizedSubject);
+		email.setTitle(sanitizedSubject1);
+		email.setSubject(sanitizedSubject2);
+		candidateEmailRepository.save(email);	
+		
 	}
 
 	
