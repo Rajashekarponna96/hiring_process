@@ -30,11 +30,17 @@ public class EmailTemplateController {
 
 	@Autowired
 	private EmailTemplateServiceI candidateEmailServiceI;
-
+	
 	@PostMapping("/")
 	public void addCandidateEmail(@RequestBody EmailTemplateDto candidateEmailDto) {
 		candidateEmailDto.validateRequiredAttibutes(candidateEmailDto);
-		candidateEmailServiceI.addCandidateEmail(candidateEmailDto);
+		candidateEmailServiceI.addCandidateEmails(candidateEmailDto);
+	}
+
+	@PostMapping("/{candidateId}")
+	public void addCandidateEmail(@RequestBody EmailTemplateDto candidateEmailDto,@PathVariable Long candidateId) {
+		candidateEmailDto.validateRequiredAttibutes(candidateEmailDto);
+		candidateEmailServiceI.addCandidateEmail(candidateEmailDto,candidateId);
 	}
 
 	@GetMapping(value = "/all")
