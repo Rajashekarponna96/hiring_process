@@ -33,6 +33,9 @@ public class CandidateBuilder {
 	private EducationBuilder educationBuilder;
 	
 	
+	@Autowired
+	private VendorBuilder vendorBuilder;
+	
 	
    
 	public Candidate toModel(CandidateDto candidateDto) {
@@ -65,6 +68,7 @@ public class CandidateBuilder {
 		candidate.setModifiedTimestamp(candidateDto.getModifiedTimestamp());
 		candidate.setEducations(educationBuilder.toModelList(candidateDto.getEducations()).stream().peek(e->e.setCandidate(candidate)).collect(Collectors.toList()));
 		candidate.setExperiences(experienceBuilder.toModelList(candidateDto.getExperiences()).stream().peek(e->e.setCandidate(candidate)).collect(Collectors.toList()));
+		candidate.setVendor(vendorBuilder.toModel(candidateDto.getVendor()));
 		return candidate;
 	}
 	
@@ -87,6 +91,7 @@ public class CandidateBuilder {
 		candidatedto.setGender(candidate.getGender());
 		candidatedto.setDateOfBirth(candidate.getDateOfBirth());
 		candidatedto.setTalentPool(talentPoolBuilder.toDto(candidate.getTalentPool()));
+		candidatedto.setVendor(vendorBuilder.toDto(candidate.getVendor()));
 		candidatedto.setJob(jobBuilder.toDto(candidate.getJob()));
 		candidatedto.setSkills(candidate.getSkills());
 		candidatedto.setEducations(educationBuilder.toDtoList(candidate.getEducations()));

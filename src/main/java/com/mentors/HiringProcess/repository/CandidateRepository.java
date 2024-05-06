@@ -9,9 +9,9 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.mentors.HiringProcess.dto.CandidateDto;
+import com.mentors.HiringProcess.dto.VendorDto;
 import com.mentors.HiringProcess.model.Candidate;
-import com.mentors.HiringProcess.model.Recruiter;
+import com.mentors.HiringProcess.model.Vendor;
 
 public interface CandidateRepository extends JpaRepository<Candidate,Long>{
 
@@ -27,7 +27,12 @@ public interface CandidateRepository extends JpaRepository<Candidate,Long>{
 	
 	
 	Page<Candidate> findAll(Specification<Candidate> spec, Pageable pageable); // Custom method for fetching entities based on specifications and pageable
-
+	
+	
+	//List<Candidate> findByVendor(Vendor vendor);
+	  List<Candidate> findByVendor(VendorDto vendor);
+	  
+	  List<Candidate> findByVendor(Vendor vendor);
 
 
 }

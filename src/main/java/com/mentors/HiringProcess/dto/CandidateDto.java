@@ -57,6 +57,8 @@ public class CandidateDto {
 	
 	private TalentPoolDto talentPool;
 	
+	private VendorDto vendor;
+	
 	private JobDto job;
 	
 	private String createdBy;
@@ -278,6 +280,18 @@ public class CandidateDto {
 
 	public void setModifiedTimestamp(LocalDateTime modifiedTimestamp) {
 		this.modifiedTimestamp = modifiedTimestamp;
+	}
+	
+	
+
+	 
+
+	public VendorDto getVendor() {
+		return vendor;
+	}
+
+	public void setVendor(VendorDto vendor) {
+		this.vendor = vendor;
 	}
 
 	public void validateREquiredAttibutes(CandidateDto candidateDto) {

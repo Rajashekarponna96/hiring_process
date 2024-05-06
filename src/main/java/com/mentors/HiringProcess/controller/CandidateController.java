@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mentors.HiringProcess.dto.CandidateDto;
-import com.mentors.HiringProcess.dto.RecruiterDto;
+import com.mentors.HiringProcess.dto.VendorDto;
 import com.mentors.HiringProcess.service.CandidateServiceI;
+import com.mentors.HiringProcess.service.VendorServiceImpl;
 
 
 
@@ -31,9 +34,12 @@ public class CandidateController {
 	@Autowired
 	private CandidateServiceI candidateServiceI;
 	
+	@Autowired
+	private VendorServiceImpl vendorServiceI;
+	
 	@PostMapping(value = "/")
 	public void add(@RequestBody CandidateDto candidateDto) {
-		candidateDto.validateREquiredAttibutes(candidateDto);
+		//candidateDto.validateREquiredAttibutes(candidateDto);
 		candidateServiceI.add(candidateDto);
 	}
 	
@@ -75,13 +81,5 @@ public class CandidateController {
         return candidateServiceI.getCandidatesByCriteria(firstName, lastName, email);
     }
 	
-	//Globel Search
-	@GetMapping("/searchpage")
-	public Page<CandidateDto> getAllRecruiters(@RequestParam int page, @RequestParam int size,
-	        @RequestParam String code) {
-	    Pageable pageable = PageRequest.of(page, size);
-	    return candidateServiceI.getAllCandidates(pageable,code);
-	}
-
-
+	 
 }

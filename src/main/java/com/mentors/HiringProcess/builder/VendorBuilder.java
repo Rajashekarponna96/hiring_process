@@ -16,6 +16,10 @@ public class VendorBuilder {
 	
 	public Vendor toModel(VendorDto vendorDto) {
 		
+//		 if (vendorDto == null) {
+//	            return null; // or throw an exception, depending on your requirements
+//	        }
+		
 		Vendor vendor = new Vendor();
 		
 		vendor.setId(vendorDto.getId());
