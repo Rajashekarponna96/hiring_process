@@ -44,9 +44,9 @@ public class EmailTemplateServiceImpl implements EmailTemplateServiceI{
 	
 	@Override
 	public void addCandidateEmail(EmailTemplateDto candidateEmailDto,Long candidateId) {
-		String sanitizedBody = Jsoup.clean(candidateEmailDto.getBody(), Whitelist.none());
-        String sanitizedTitle = Jsoup.clean(candidateEmailDto.getTitle(), Whitelist.none());
-        String sanitizedSubject = Jsoup.clean(candidateEmailDto.getSubject(), Whitelist.none());
+		String sanitizedBody = candidateEmailDto.getBody();
+        String sanitizedTitle = candidateEmailDto.getTitle();
+        String sanitizedSubject = candidateEmailDto.getSubject();
 
       
         Optional<Candidate> candidateOptional = candidateRepository.findById(candidateId);
@@ -85,7 +85,7 @@ public class EmailTemplateServiceImpl implements EmailTemplateServiceI{
 		}
 		return candidateEmailDtos;
 	}
-
+	
 	@Override
 	public void update(Long id, EmailTemplateDto candidateEmailDto) {
 		Optional<EmailTemplate> dbCandidateEmailOptional = candidateEmailRepository.findById(id);
@@ -126,8 +126,15 @@ public class EmailTemplateServiceImpl implements EmailTemplateServiceI{
 
 	@Override
 	public Page<EmailTemplateDto> getAllEmailsWithPagination(Pageable pageable) {
-		Page<EmailTemplate> emailPage = candidateEmailRepository.findAll(pageable);
-        return emailPage.map(candidateEmailBuilder::toDto);
+	    Page<EmailTemplate> emailPage = candidateEmailRepository.findAll(pageable);
+	    return emailPage.map(emailTemplate -> {
+	        EmailTemplateDto dto = candidateEmailBuilder.toDto(emailTemplate);
+	        String htmlContent = dto.getBody(); // Assuming getBody() gets the HTML content
+	        String plainTextContent = Jsoup.clean(htmlContent, Whitelist.none());
+	        // Set the plain text content back to the dto
+	        dto.setBody(plainTextContent);
+	        return dto;
+	    });
 	}
 
 	@Override
@@ -146,15 +153,9 @@ public class EmailTemplateServiceImpl implements EmailTemplateServiceI{
 
 	@Override
 	public void addCandidateEmails(EmailTemplateDto candidateEmailDto) {
-		String sanitizedSubject = Jsoup.clean(candidateEmailDto.getBody(), Whitelist.none());
-		String sanitizedSubject1 = Jsoup.clean(candidateEmailDto.getTitle(), Whitelist.none());
-		String sanitizedSubject2 = Jsoup.clean(candidateEmailDto.getSubject(), Whitelist.none());
-		EmailTemplate email=new EmailTemplate();
-		email.setBody(sanitizedSubject);
-		email.setTitle(sanitizedSubject1);
-		email.setSubject(sanitizedSubject2);
-		candidateEmailRepository.save(email);	
 		
+		EmailTemplate candidateEmail = candidateEmailBuilder.toModel(candidateEmailDto);
+		candidateEmailRepository.save(candidateEmail);
 	}
 
 	
