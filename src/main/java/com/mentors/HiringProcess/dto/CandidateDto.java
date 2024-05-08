@@ -59,6 +59,8 @@ public class CandidateDto {
 	
 	private JobDto job;
 	
+	private VendorDto vendor;
+	
 	private String createdBy;
 	
     private String modifiedBy;
@@ -248,6 +250,15 @@ public class CandidateDto {
 	}
 	
 	
+	
+	public VendorDto getVendor() {
+		return vendor;
+	}
+
+	public void setVendor(VendorDto vendor) {
+		this.vendor = vendor;
+	}
+
 	public String getCreatedBy() {
 		return createdBy;
 	}

@@ -53,6 +53,8 @@ public class CandidateController {
 	public CandidateDto findOne(@PathVariable Long id) {
 		
 		return candidateServiceI.findOne(id);
+		
+		
 	}
 	
 	@DeleteMapping(value = "/{id}")
