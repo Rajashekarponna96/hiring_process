@@ -26,5 +26,8 @@ public interface CandidateServiceI {
 	 Page<CandidateDto> getAllCandidates(Pageable pageable, String code);
 	 
 	 Page<CandidateDto> getAllCandidatesWithPagination(Pageable pageable);
+	 
+	 List<CandidateDto> getCandidatesByVendorId(Long vendorId);
+
 
 }

@@ -3,6 +3,7 @@ package com.mentors.HiringProcess.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,24 +12,33 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mentors.HiringProcess.builder.CandidateBuilder;
 import com.mentors.HiringProcess.builder.VendorBuilder;
+import com.mentors.HiringProcess.dto.CandidateDto;
 import com.mentors.HiringProcess.dto.VendorDto;
-import com.mentors.HiringProcess.model.Client;
+import com.mentors.HiringProcess.model.Candidate;
 import com.mentors.HiringProcess.model.Vendor;
+import com.mentors.HiringProcess.repository.CandidateRepository;
 import com.mentors.HiringProcess.repository.VendorRepository;
-import com.mentors.HiringProcess.specification.ClientSprecifications;
 import com.mentors.HiringProcess.specification.VendorSpecifications;
+
 @Service
 @Transactional
-public class VendorServiceImpl  implements VendorService{
+public class VendorServiceImpl implements VendorService {
 	@Autowired
 	VendorRepository vendorRepository;
 	@Autowired
 	VendorBuilder vendorBuilder;
 
+	@Autowired
+	CandidateBuilder candidateBuilder;
+
+	@Autowired
+	CandidateRepository candidateRepository;
+
 	@Override
 	public void addVendor(VendorDto vendorDto) {
-		
+
 		vendorRepository.save(vendorBuilder.toModel(vendorDto));
 	}
 
@@ -50,33 +60,87 @@ public class VendorServiceImpl  implements VendorService{
 		if (dbVendor.isPresent()) {
 			vendorRepository.save(vendorBuilder.toModel(vendorDto));
 		}
-		
+
 	}
 
 	@Override
 	public void deleteVendor(Long id) {
 		vendorRepository.deleteById(id);
-		
+
 	}
 
 	@Override
 	public Page<VendorDto> getAllClients(Pageable pageable, String code) {
 		Specification<Vendor> spec = Specification.where(null); // Start with an empty specification
 
-        if (code != null && !code.isEmpty()) {
-            spec = spec.and(VendorSpecifications.hasFields(code));
-        }
+		if (code != null && !code.isEmpty()) {
+			spec = spec.and(VendorSpecifications.hasFields(code));
+		}
 
-        Page<Vendor> recruiterPage = vendorRepository.findAll(spec, pageable);
-        return recruiterPage.map(vendorBuilder::toDto);
+		Page<Vendor> recruiterPage = vendorRepository.findAll(spec, pageable);
+		return recruiterPage.map(vendorBuilder::toDto);
 	}
 
 	@Override
 	public Page<VendorDto> getAllLientsWithPagination(Pageable pageable) {
 		Page<Vendor> recruiterPage = vendorRepository.findAll(pageable);
-        return recruiterPage.map(vendorBuilder::toDto);
+		return recruiterPage.map(vendorBuilder::toDto);
+
+	}
+
+	@Override
+	public VendorDto getVendorByUserAccountId(Long userAccountId) {
+		Vendor vendor = vendorRepository.findByUserAccoutId(userAccountId);
+		if (vendor != null) {
+			return vendorBuilder.toDto(vendor);
+		} else {
+			return null; // or throw an exception if needed
+		}
+	}
+
+	@Override
+	public List<VendorDto> getVendorsByUserAccountId(Long userAccountId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<CandidateDto> getCandidatesByVendor(Long vendorId) {
+		// Retrieve the Vendor entity based on the vendorId
+		Vendor vendor = vendorRepository.findById(vendorId)
+				.orElseThrow(() -> new RuntimeException("Vendor not found with ID: " + vendorId));
+
+		// Retrieve candidates associated with the vendor
+		List<Candidate> candidates = candidateRepository.findByVendor(vendor);
+
+		// Convert the list of Candidate entities to a list of CandidateDto objects
+		return candidates.stream().map(candidateBuilder::toDto).collect(Collectors.toList());
+	}
+
+	@Override
+	public Optional<VendorDto> findById(Long vendorId) {
+		Optional<Vendor> vendorOptional = vendorRepository.findById(vendorId);
+		return vendorOptional.map(vendorBuilder::toDto);
+	}
+
+	@Override
+	public Page<CandidateDto> getAllLientsWithPagination(Pageable pageable, Long vendorId) {
+		
+		return null;
 		
 		
+	}
+
+	@Override
+	public Page<CandidateDto> getCandidatesByVendor(Long vendorId, Pageable pageable) {
+Page<Candidate> candidatesPage = candidateRepository.findByVendorId(vendorId, pageable);
+        
+        // Convert Page<Candidate> to Page<CandidateDto>
+       
+            return candidatesPage.map(candidateBuilder::toDto);
+       
+
+       
 	}
 	
 	

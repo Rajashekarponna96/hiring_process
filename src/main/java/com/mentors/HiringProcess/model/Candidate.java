@@ -18,83 +18,92 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="candidate")
-public class Candidate  implements Serializable {
-	
-	
+@Table(name = "candidate")
+public class Candidate implements Serializable {
+
 	private Long id;
 
 	private String firstName;
-	
+
 	private String lastName;
-	
+
 	private String middleName;
-	
+
 	private String email;
-	
+
 	private String mobile;
-	
+
 	private String alterMobile;
-	
+
 	private Source source;
-	
+
 	private HiringFlowType stage;
-	
+
 	private Location current;
-	
+
 	private String avialToJoin;
-	
+
 	private Location preferred;
-	
+
 	private Double currentSalary;
-	
+
 	private Double expectedSalary;
-	
-	private CurrencyType  currency;
-	
+
+	private CurrencyType currency;
+
 	private Gender gender;
-	
+
 	private LocalDate dateOfBirth;
-	
+
 	private List<String> skills;
-	
+
 	private List<Experience> experiences;
-	
+
 	private List<Education> educations;
-	
+
 	private TalentPool talentPool;
-	
+
 	private Job job;
-	
+
+	private Vendor vendor;
+
 	private String createdBy;
-	
-    private String modifiedBy;
-    
-    private LocalDateTime createdTimestamp;
-    
-    private LocalDateTime modifiedTimestamp;
-    
-    
+
+	private String modifiedBy;
+
+	private LocalDateTime createdTimestamp;
+
+	private LocalDateTime modifiedTimestamp;
+
 //    public Candidate() {
 //        this.createdTimestamp = LocalDateTime.now();
 //        this.modifiedTimestamp = LocalDateTime.now();
 //    }
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getId() {
 		return id;
 	}
 
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "vendor_id")
+	public Vendor getVendor() {
+		return vendor;
+	}
+
+	public void setVendor(Vendor vendor) {
+		this.vendor = vendor;
+	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-    
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -102,7 +111,7 @@ public class Candidate  implements Serializable {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	
+
 	public String getLastName() {
 		return lastName;
 	}
@@ -110,7 +119,7 @@ public class Candidate  implements Serializable {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-     
+
 	public String getMiddleName() {
 		return middleName;
 	}
@@ -118,7 +127,7 @@ public class Candidate  implements Serializable {
 	public void setMiddleName(String middleName) {
 		this.middleName = middleName;
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}
@@ -126,7 +135,7 @@ public class Candidate  implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public String getMobile() {
 		return mobile;
 	}
@@ -134,8 +143,7 @@ public class Candidate  implements Serializable {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
-	
-	
+
 	public String getAlterMobile() {
 		return alterMobile;
 	}
@@ -153,6 +161,7 @@ public class Candidate  implements Serializable {
 	public void setSource(Source source) {
 		this.source = source;
 	}
+
 	@Enumerated
 	public HiringFlowType getStage() {
 		return stage;
@@ -161,7 +170,7 @@ public class Candidate  implements Serializable {
 	public void setStage(HiringFlowType stage) {
 		this.stage = stage;
 	}
-   
+
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "current_location_id", referencedColumnName = "id")
 	public Location getCurrent() {
@@ -171,8 +180,7 @@ public class Candidate  implements Serializable {
 	public void setCurrent(Location current) {
 		this.current = current;
 	}
-    
-	
+
 	public String getAvialToJoin() {
 		return avialToJoin;
 	}
@@ -190,7 +198,7 @@ public class Candidate  implements Serializable {
 	public void setPreferred(Location preferred) {
 		this.preferred = preferred;
 	}
-	
+
 	public Double getCurrentSalary() {
 		return currentSalary;
 	}
@@ -198,7 +206,7 @@ public class Candidate  implements Serializable {
 	public void setCurrentSalary(Double currentSalary) {
 		this.currentSalary = currentSalary;
 	}
-	
+
 	public Double getExpectedSalary() {
 		return expectedSalary;
 	}
@@ -206,8 +214,9 @@ public class Candidate  implements Serializable {
 	public void setExpectedSalary(Double expectedSalary) {
 		this.expectedSalary = expectedSalary;
 	}
+
 	@ManyToOne
-	@JoinColumn(name="currencytype_id",referencedColumnName = "id")
+	@JoinColumn(name = "currencytype_id", referencedColumnName = "id")
 	public CurrencyType getCurrency() {
 		return currency;
 	}
@@ -215,6 +224,7 @@ public class Candidate  implements Serializable {
 	public void setCurrency(CurrencyType currency) {
 		this.currency = currency;
 	}
+
 	@Enumerated
 	public Gender getGender() {
 		return gender;
@@ -223,7 +233,7 @@ public class Candidate  implements Serializable {
 	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
-	
+
 	public LocalDate getDateOfBirth() {
 		return dateOfBirth;
 	}
@@ -231,6 +241,7 @@ public class Candidate  implements Serializable {
 	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
+
 	@Convert(converter = StringListConverter.class)
 	public List<String> getSkills() {
 		return skills;
@@ -239,6 +250,7 @@ public class Candidate  implements Serializable {
 	public void setSkills(List<String> skills) {
 		this.skills = skills;
 	}
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
 	public List<Experience> getExperiences() {
@@ -248,6 +260,7 @@ public class Candidate  implements Serializable {
 	public void setExperiences(List<Experience> experiences) {
 		this.experiences = experiences;
 	}
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
 	public List<Education> getEducations() {
@@ -257,7 +270,7 @@ public class Candidate  implements Serializable {
 	public void setEducations(List<Education> educations) {
 		this.educations = educations;
 	}
-	
+
 	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "talentpool_id")
@@ -268,9 +281,10 @@ public class Candidate  implements Serializable {
 	public void setTalentPool(TalentPool talentPool) {
 		this.talentPool = talentPool;
 	}
+
 	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name="job_id")
+	@JoinColumn(name = "job_id")
 	public Job getJob() {
 		return job;
 	}
@@ -279,45 +293,36 @@ public class Candidate  implements Serializable {
 		this.job = job;
 	}
 
-
 	public String getCreatedBy() {
 		return createdBy;
 	}
-
 
 	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
 	}
 
-
 	public String getModifiedBy() {
 		return modifiedBy;
 	}
-
 
 	public void setModifiedBy(String modifiedBy) {
 		this.modifiedBy = modifiedBy;
 	}
 
-
 	public LocalDateTime getCreatedTimestamp() {
 		return createdTimestamp;
 	}
-
 
 	public void setCreatedTimestamp(LocalDateTime createdTimestamp) {
 		this.createdTimestamp = createdTimestamp;
 	}
 
-
 	public LocalDateTime getModifiedTimestamp() {
 		return modifiedTimestamp;
 	}
 
-
 	public void setModifiedTimestamp(LocalDateTime modifiedTimestamp) {
 		this.modifiedTimestamp = modifiedTimestamp;
 	}
-	
 
 }
