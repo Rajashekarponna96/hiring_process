@@ -16,12 +16,13 @@ import com.mentors.HiringProcess.builder.CandidateBuilder;
 import com.mentors.HiringProcess.dto.CandidateDto;
 import com.mentors.HiringProcess.model.Candidate;
 import com.mentors.HiringProcess.model.EmailTemplate;
-import com.mentors.HiringProcess.model.Recruiter;
-import com.mentors.HiringProcess.model.Vendor;
+import com.mentors.HiringProcess.model.HiringFlowActivity;
+import com.mentors.HiringProcess.model.HiringFlowType;
+import com.mentors.HiringProcess.model.UserAccout;
 import com.mentors.HiringProcess.repository.CandidateRepository;
 import com.mentors.HiringProcess.repository.EmailTemplateRepository;
+import com.mentors.HiringProcess.repository.HiringFlowActivityRepository;
 import com.mentors.HiringProcess.specification.CandidateSpecifications;
-import com.mentors.HiringProcess.specification.RecruiterSpecifications;
 
 @Service
 @Transactional
@@ -39,6 +40,11 @@ public class CandidateServiceImpl implements CandidateServiceI {
 	@Autowired
     private EmailTemplateRepository  emailTemplateRepository;
 	
+	@Autowired
+	private HiringFlowActivityRepository hiringFlowActivityRepository;
+	
+	
+	
 	@Override
 	public void add(CandidateDto candidateDto) {
 		if(candidateRepository.findByEmail(candidateDto.getEmail()).isPresent()) {
@@ -48,9 +54,25 @@ public class CandidateServiceImpl implements CandidateServiceI {
 			throw new RuntimeException("Mobile is Already Exit");
 		}
 		candidateDto.setCreatedTimestamp(LocalDateTime.now());
+	    Candidate candidate = candidateBuilder.toModel(candidateDto);
 		candidateRepository.save(candidateBuilder.toModel(candidateDto));
 		EmailTemplate emailTemplate  = emailTemplateRepository.findByTitle(candidateDto.getStage().toString());
 		emailService.sendSimpleMessage(candidateDto.getEmail(), emailTemplate.getSubject(), emailTemplate.getBody(),null, null, null);
+		
+	                createdHiringFlowDetails(candidate.getStage(),candidate.getCreatedBy());
+		 
+	}
+	
+	public HiringFlowActivity  createdHiringFlowDetails(HiringFlowType hiringFlowType,UserAccout userAccount) {
+		HiringFlowActivity  hiringFlowActivity1=new HiringFlowActivity();
+		
+		hiringFlowActivity1.setCreatedDate(LocalDateTime.now());
+		hiringFlowActivity1.setUserAccount(userAccount);
+		hiringFlowActivity1.setHiringFlowType(hiringFlowType);
+		hiringFlowActivityRepository.save(hiringFlowActivity1);
+		
+		
+		return null;
 	}
 
 	@Override
@@ -60,6 +82,9 @@ public class CandidateServiceImpl implements CandidateServiceI {
 		if (opCandidate.isPresent()) {
 			candidateDto.setModifiedTimestamp(LocalDateTime.now());
 			candidateRepository.save(candidateBuilder.toModel(candidateDto));
+			Candidate candidate = candidateBuilder.toModel(candidateDto);
+			
+			 createdHiringFlowDetails(candidate.getStage(),candidate.getModifiedBy());
 		}
 	}
 

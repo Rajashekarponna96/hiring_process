@@ -1,5 +1,6 @@
 package com.mentors.HiringProcess.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -15,7 +16,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 @Entity
 @Table(name="role")
-public class Role {
+public class Role implements Serializable {
 	
 	
 	private Long id;
