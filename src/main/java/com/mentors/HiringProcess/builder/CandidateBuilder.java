@@ -24,7 +24,8 @@ public class CandidateBuilder {
 
 	@Autowired
 	private JobBuilder jobBuilder;
-
+  @Autowired
+	private UserAccoutBuilder userAccoutBuilder;
 	@Autowired
 	private ExperienceBuilder experienceBuilder;
 
@@ -58,9 +59,9 @@ public class CandidateBuilder {
 		candidate.setJob(jobBuilder.toModel(candidateDto.getJob()));
 		candidate.setSkills(candidateDto.getSkills());
 		candidate.setStage(candidateDto.getStage());
-		candidate.setCreatedBy(candidateDto.getCreatedBy());
-		candidate.setModifiedBy(candidateDto.getModifiedBy());
-		candidate.setCreatedTimestamp(candidateDto.getCreatedTimestamp());
+		candidate.setCreatedBy(userAccoutBuilder.toModel(candidateDto.getCreatedBy()));
+		//candidate.setModifiedBy(userAccoutBuilder.toModel(candidateDto.getModifiedBy()));
+		//candidate.setCreatedTimestamp(candidateDto.getCreatedTimestamp());
 		candidate.setModifiedTimestamp(candidateDto.getModifiedTimestamp());
 		candidate.setEducations(educationBuilder.toModelList(candidateDto.getEducations()).stream()
 				.peek(e -> e.setCandidate(candidate)).collect(Collectors.toList()));
@@ -93,8 +94,8 @@ public class CandidateBuilder {
 		candidatedto.setEducations(educationBuilder.toDtoList(candidate.getEducations()));
 		candidatedto.setExperiences(experienceBuilder.toDtoList(candidate.getExperiences()));
 		candidatedto.setStage(candidate.getStage());
-		candidatedto.setCreatedBy(candidate.getCreatedBy());
-		candidatedto.setModifiedBy(candidate.getModifiedBy());
+		//candidatedto.setCreatedBy(userAccoutBuilder.toDto(candidate.getCreatedBy()));
+		//candidatedto.setModifiedBy(userAccoutBuilder.toDto(candidate.getModifiedBy()));
 		candidatedto.setCreatedTimestamp(candidate.getCreatedTimestamp());
 		candidatedto.setModifiedTimestamp(candidate.getModifiedTimestamp());
 		candidatedto.setVendor(vendorBuilder.toDto(candidate.getVendor()));

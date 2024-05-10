@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mentors.HiringProcess.converter.StringListConverter;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
@@ -68,15 +69,24 @@ public class Candidate implements Serializable {
 
 	private Job job;
 
+	
+	private UserAccout createdBy;
+	
+    private UserAccout modifiedBy;
+    
+    private LocalDateTime createdTimestamp;
+    
+    private LocalDateTime modifiedTimestamp;
+    
+    private List<HiringFlowActivity> HiringFlowActivity;
+    
+    
+
+
 	private Vendor vendor;
 
-	private String createdBy;
 
-	private String modifiedBy;
 
-	private LocalDateTime createdTimestamp;
-
-	private LocalDateTime modifiedTimestamp;
 
 //    public Candidate() {
 //        this.createdTimestamp = LocalDateTime.now();
@@ -293,21 +303,26 @@ public class Candidate implements Serializable {
 		this.job = job;
 	}
 
-	public String getCreatedBy() {
+
+	@Column(columnDefinition = "TEXT")
+	public UserAccout getCreatedBy() {
 		return createdBy;
 	}
 
-	public void setCreatedBy(String createdBy) {
+	public void setCreatedBy(UserAccout createdBy) {
 		this.createdBy = createdBy;
 	}
-
-	public String getModifiedBy() {
+	
+	@Column(columnDefinition = "TEXT")
+	public UserAccout getModifiedBy() {
 		return modifiedBy;
 	}
 
-	public void setModifiedBy(String modifiedBy) {
-		this.modifiedBy = modifiedBy;
-	}
+
+	
+	
+
+
 
 	public LocalDateTime getCreatedTimestamp() {
 		return createdTimestamp;
@@ -324,5 +339,20 @@ public class Candidate implements Serializable {
 	public void setModifiedTimestamp(LocalDateTime modifiedTimestamp) {
 		this.modifiedTimestamp = modifiedTimestamp;
 	}
+
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
+	public List<HiringFlowActivity> getHiringFlowActivity() {
+		return HiringFlowActivity;
+	}
+
+	public void setHiringFlowActivity(List<HiringFlowActivity> hiringFlowActivity) {
+		HiringFlowActivity = hiringFlowActivity;
+	}
+	
+	
+	
+
 
 }

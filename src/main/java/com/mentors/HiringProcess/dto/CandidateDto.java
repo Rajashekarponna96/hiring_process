@@ -8,11 +8,13 @@ import com.mentors.HiringProcess.model.CurrencyType;
 import com.mentors.HiringProcess.model.Education;
 import com.mentors.HiringProcess.model.Experience;
 import com.mentors.HiringProcess.model.Gender;
+import com.mentors.HiringProcess.model.HiringFlowActivity;
 import com.mentors.HiringProcess.model.HiringFlowType;
 import com.mentors.HiringProcess.model.Job;
 import com.mentors.HiringProcess.model.Location;
 import com.mentors.HiringProcess.model.Source;
 import com.mentors.HiringProcess.model.TalentPool;
+import com.mentors.HiringProcess.model.UserAccout;
 
 public class CandidateDto {
 	private Long id;
@@ -59,15 +61,19 @@ public class CandidateDto {
 	
 	private JobDto job;
 	
+
+	private UserAccoutDto createdBy;
+
 	private VendorDto vendor;
 	
-	private String createdBy;
 	
-    private String modifiedBy;
+	private UserAccoutDto modifiedBy;
     
     private LocalDateTime createdTimestamp;
     
     private LocalDateTime modifiedTimestamp;
+    
+    private List<HiringFlowActivityDto> HiringFlowActivity;
 
 	public Long getId() {
 		return id;
@@ -249,6 +255,11 @@ public class CandidateDto {
 		this.job = job;
 	}
 	
+
+
+	public UserAccoutDto getCreatedBy() {
+   		return createdBy;
+	}
 	
 	
 	public VendorDto getVendor() {
@@ -259,20 +270,28 @@ public class CandidateDto {
 		this.vendor = vendor;
 	}
 
-	public String getCreatedBy() {
-		return createdBy;
-	}
 
-	public void setCreatedBy(String createdBy) {
+
+
+
+	public void setCreatedBy(UserAccoutDto createdBy) {
 		this.createdBy = createdBy;
 	}
 
-	public String getModifiedBy() {
+	public UserAccoutDto getModifiedBy() {
 		return modifiedBy;
 	}
 
-	public void setModifiedBy(String modifiedBy) {
+	public void setModifiedBy(UserAccoutDto modifiedBy) {
 		this.modifiedBy = modifiedBy;
+	}
+
+	public List<HiringFlowActivityDto> getHiringFlowActivity() {
+		return HiringFlowActivity;
+	}
+
+	public void setHiringFlowActivity(List<HiringFlowActivityDto> hiringFlowActivity) {
+		HiringFlowActivity = hiringFlowActivity;
 	}
 
 	public LocalDateTime getCreatedTimestamp() {
