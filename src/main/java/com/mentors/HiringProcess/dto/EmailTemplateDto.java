@@ -10,7 +10,7 @@ public class EmailTemplateDto {
 	 
 	 private String title;
 
-
+	 
 	public Long getId() {
 		return id;
 	}
@@ -50,6 +50,8 @@ public class EmailTemplateDto {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
+	
 
 	public void validateRequiredAttibutes(EmailTemplateDto candidateEmailDto) {
 		if(candidateEmailDto.getSubject()==null) {

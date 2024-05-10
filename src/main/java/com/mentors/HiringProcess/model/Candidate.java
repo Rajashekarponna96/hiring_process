@@ -80,6 +80,8 @@ public class Candidate  implements Serializable {
     private LocalDateTime modifiedTimestamp;
     
     private List<HiringFlowActivity> HiringFlowActivity;
+  
+    private Vendor vendor;
     
     
 //    public Candidate() {
@@ -329,6 +331,17 @@ public class Candidate  implements Serializable {
 
 	public void setHiringFlowActivity(List<HiringFlowActivity> hiringFlowActivity) {
 		HiringFlowActivity = hiringFlowActivity;
+	}
+  
+  @JsonIgnore
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "vendor_id")
+	public Vendor getVendor() {
+		return vendor;
+	}
+
+	public void setVendor(Vendor vendor) {
+		this.vendor = vendor;
 	}
 	
 	

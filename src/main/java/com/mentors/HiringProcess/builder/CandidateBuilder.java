@@ -1,6 +1,5 @@
 package com.mentors.HiringProcess.builder;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.mentors.HiringProcess.dto.CandidateDto;
 import com.mentors.HiringProcess.model.Candidate;
+
 @Component
 public class CandidateBuilder {
 	@Autowired
@@ -15,33 +15,30 @@ public class CandidateBuilder {
 
 	@Autowired
 	private LocationBuilder locationBuilder;
-	
+
 	@Autowired
-	private  CurrencyTypeBuilder currencyTypeBuilder;
+	private CurrencyTypeBuilder currencyTypeBuilder;
 
 	@Autowired
 	private TalentPoolBuilder talentPoolBuilder;
-	
+
 	@Autowired
 	private JobBuilder jobBuilder;
-	
-	@Autowired
+  @Autowired
 	private UserAccoutBuilder userAccoutBuilder;
-	
-	
 	@Autowired
 	private ExperienceBuilder experienceBuilder;
-	
+
 	@Autowired
 	private EducationBuilder educationBuilder;
-	
-	
-	
-   
+
+	@Autowired
+	private VendorBuilder vendorBuilder;
+
 	public Candidate toModel(CandidateDto candidateDto) {
 
 		Candidate candidate = new Candidate();
-		SourceBuilder sourceBuilder=new SourceBuilder();
+		SourceBuilder sourceBuilder = new SourceBuilder();
 		candidate.setId(candidateDto.getId());
 		candidate.setFirstName(candidateDto.getFirstName());
 		candidate.setLastName(candidateDto.getLastName());
@@ -66,17 +63,19 @@ public class CandidateBuilder {
 		candidate.setModifiedBy(userAccoutBuilder.toModel(candidateDto.getModifiedBy()));
 		candidate.setCreatedTimestamp(candidateDto.getCreatedTimestamp());
 		candidate.setModifiedTimestamp(candidateDto.getModifiedTimestamp());
-		candidate.setEducations(educationBuilder.toModelList(candidateDto.getEducations()).stream().peek(e->e.setCandidate(candidate)).collect(Collectors.toList()));
-		candidate.setExperiences(experienceBuilder.toModelList(candidateDto.getExperiences()).stream().peek(e->e.setCandidate(candidate)).collect(Collectors.toList()));
+		candidate.setEducations(educationBuilder.toModelList(candidateDto.getEducations()).stream()
+				.peek(e -> e.setCandidate(candidate)).collect(Collectors.toList()));
+		candidate.setExperiences(experienceBuilder.toModelList(candidateDto.getExperiences()).stream()
+				.peek(e -> e.setCandidate(candidate)).collect(Collectors.toList()));
+		candidate.setVendor(vendorBuilder.toModel(candidateDto.getVendor()));
 		return candidate;
 	}
-	
+
 	public CandidateDto toDto(Candidate candidate) {
 		CandidateDto candidatedto = new CandidateDto();
 		candidatedto.setId(candidate.getId());
 		candidatedto.setFirstName(candidate.getFirstName());
 		candidatedto.setLastName(candidate.getLastName());
-//		
 		candidatedto.setEmail(candidate.getEmail());
 		candidatedto.setMobile(candidate.getMobile());
 		candidatedto.setAlterMobile(candidate.getAlterMobile());
@@ -99,6 +98,8 @@ public class CandidateBuilder {
 		candidatedto.setModifiedBy(userAccoutBuilder.toDto(candidate.getModifiedBy()));
 		candidatedto.setCreatedTimestamp(candidate.getCreatedTimestamp());
 		candidatedto.setModifiedTimestamp(candidate.getModifiedTimestamp());
-        return candidatedto;
+		candidatedto.setVendor(vendorBuilder.toDto(candidate.getVendor()));
+
+		return candidatedto;
 	}
 }
