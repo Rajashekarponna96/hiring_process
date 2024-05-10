@@ -10,7 +10,7 @@ import com.mentors.HiringProcess.dto.EmailTemplateDto;
 
 public interface EmailTemplateServiceI {
 
-	void addCandidateEmail(EmailTemplateDto candidateEmailDto);
+	void addCandidateEmail(EmailTemplateDto candidateEmailDto, Long candidateId);
 
 	List<EmailTemplateDto> findAll();
 
@@ -21,6 +21,10 @@ public interface EmailTemplateServiceI {
 	EmailTemplateDto getSubjectAndBodyByTitle(String title);
 	
 	Page<EmailTemplateDto> getAllEmailsWithPagination(Pageable pageable);
+
+	Page<EmailTemplateDto> getAllTemplates(Pageable pageable, String code);
+
+	void addCandidateEmails(EmailTemplateDto candidateEmailDto);
 
 	
 

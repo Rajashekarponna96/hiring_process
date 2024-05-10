@@ -61,7 +61,11 @@ public class CandidateDto {
 	
 	private JobDto job;
 	
+
 	private UserAccoutDto createdBy;
+
+	private VendorDto vendor;
+	
 	
 	private UserAccoutDto modifiedBy;
     
@@ -252,9 +256,23 @@ public class CandidateDto {
 	}
 	
 
+
 	public UserAccoutDto getCreatedBy() {
-		return createdBy;
+   		return createdBy;
 	}
+	
+	
+	public VendorDto getVendor() {
+		return vendor;
+	}
+
+	public void setVendor(VendorDto vendor) {
+		this.vendor = vendor;
+	}
+
+
+
+
 
 	public void setCreatedBy(UserAccoutDto createdBy) {
 		this.createdBy = createdBy;
