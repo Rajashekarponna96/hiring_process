@@ -12,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 @Entity
 @Table(name="user_account")
@@ -25,6 +26,8 @@ public class UserAccout implements Serializable {
 	private String password;
 	
 	private  boolean active;
+	
+	private Candidate candidate;
 	
 	
 	private Role role;
@@ -79,6 +82,17 @@ public class UserAccout implements Serializable {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="candidate_id",referencedColumnName = "id")
+	public Candidate getCandidate() {
+		return candidate;
+	}
+
+
+	public void setCandidate(Candidate candidate) {
+		this.candidate = candidate;
 	}
 	
 	

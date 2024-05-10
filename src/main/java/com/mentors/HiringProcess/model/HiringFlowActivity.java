@@ -6,12 +6,14 @@ import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 @Entity
 @Table(name = "hiring_flow_activity")
@@ -36,7 +38,8 @@ public class HiringFlowActivity  implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	@JsonIgnore
+    @ManyToOne(cascade = CascadeType.MERGE)
 	public UserAccout getUserAccount() {
 		return userAccount;
 	}
@@ -61,7 +64,7 @@ public class HiringFlowActivity  implements Serializable{
 		this.hiringFlowType = hiringFlowType;
 	}
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name ="candidate_id")
 	public Candidate getCandidate() {
 		return candidate;

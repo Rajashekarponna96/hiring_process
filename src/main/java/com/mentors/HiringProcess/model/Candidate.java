@@ -71,7 +71,7 @@ public class Candidate  implements Serializable {
 	
 	private Job job;
 	
-	private UserAccout createdBy;
+	//private UserAccout createdBy;
 	
     private UserAccout modifiedBy;
     
@@ -282,16 +282,18 @@ public class Candidate  implements Serializable {
 		this.job = job;
 	}
 
-	@Column(columnDefinition = "TEXT")
-	public UserAccout getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(UserAccout createdBy) {
-		this.createdBy = createdBy;
-	}
+//	@JsonIgnore
+//	@ManyToOne(cascade = CascadeType.ALL)
+//	public UserAccout getCreatedBy() {
+//		return createdBy;
+//	}
+//
+//	public void setCreatedBy(UserAccout createdBy) {
+//		this.createdBy = createdBy;
+//	}
 	
-	@Column(columnDefinition = "TEXT")
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.MERGE)
 	public UserAccout getModifiedBy() {
 		return modifiedBy;
 	}
