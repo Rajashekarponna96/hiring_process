@@ -88,23 +88,12 @@ public class EmailTemplateServiceImpl implements EmailTemplateServiceI{
 	
 	@Override
 	public void update(Long id, EmailTemplateDto candidateEmailDto) {
-		Optional<EmailTemplate> dbCandidateEmailOptional = candidateEmailRepository.findById(id);
-		if (dbCandidateEmailOptional.isPresent()) {
-            EmailTemplate dbCandidateEmail = dbCandidateEmailOptional.get();
-            
-            // Update fields with the new values
-            String sanitizedBody = Jsoup.clean(candidateEmailDto.getBody(), Whitelist.none());
-            dbCandidateEmail.setBody(sanitizedBody);
+		Optional<EmailTemplate> dbCandidateEmail = candidateEmailRepository.findById(id);
+		if(dbCandidateEmail.isPresent()) {
 
-            String sanitizedTitle = Jsoup.clean(candidateEmailDto.getTitle(), Whitelist.none());
-            dbCandidateEmail.setTitle(sanitizedTitle);
-
-            String sanitizedSubject = Jsoup.clean(candidateEmailDto.getSubject(), Whitelist.none());
-            dbCandidateEmail.setSubject(sanitizedSubject);
-
-            // Save the updated entity
-            candidateEmailRepository.save(dbCandidateEmail);
+			candidateEmailRepository.save(candidateEmailBuilder.toModel(candidateEmailDto));
 		}
+		
 	}
 
 	@Override

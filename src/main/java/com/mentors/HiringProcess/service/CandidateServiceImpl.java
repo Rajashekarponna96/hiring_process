@@ -83,10 +83,15 @@ public class CandidateServiceImpl implements CandidateServiceI {
 	    hiringFlowActivities.add(createdHiringFlowDetails(candidate.getStage(),candidate.getModifiedBy(),candidate));
 	    
 	    candidate.setHiringFlowActivity(hiringFlowActivities);
-	    
+	  	
 		candidateRepository.saveAndFlush(candidate);
+		String candidateName = candidateDto.getFirstName();
+		String uploadDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 		EmailTemplate emailTemplate  = emailTemplateRepository.findByTitle(candidateDto.getStage().toString());
-		emailService.sendSimpleMessage(candidateDto.getEmail(), emailTemplate.getSubject(), emailTemplate.getBody(),null, null, null);
+		String body=emailTemplate.getBody();
+		String updatedBody = body.replace("[CandidateName]", candidateName)
+                 .replace("[UploadDate]", uploadDate);
+		emailService.sendSimpleMessage(candidateDto.getEmail(), emailTemplate.getSubject(),updatedBody,null, null, null);
 		
 		
 	                
