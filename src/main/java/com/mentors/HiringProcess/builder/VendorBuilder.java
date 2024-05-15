@@ -13,9 +13,6 @@ public class VendorBuilder {
 	private UserAccoutBuilder userAccoutBuilder;
 
 	public Vendor toModel(VendorDto vendorDto) {
-		if (vendorDto == null) {
-			return null; // or throw an exception, depending on your requirements
-		}
 
 		Vendor vendor = new Vendor();
 
