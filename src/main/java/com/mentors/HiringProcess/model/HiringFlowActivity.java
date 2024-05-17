@@ -15,22 +15,23 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+
 @Entity
 @Table(name = "hiring_flow_activity")
-public class HiringFlowActivity  implements Serializable{
-	
+public class HiringFlowActivity implements Serializable {
+
 	private Long id;
-	
+
 	private UserAccout userAccount;
-	
+
 	private LocalDateTime createdDate;
-	
+
 	private HiringFlowType hiringFlowType;
-	
+
 	private Candidate candidate;
-	
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getId() {
 		return id;
 	}
@@ -38,8 +39,9 @@ public class HiringFlowActivity  implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	@JsonIgnore
-    @ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	public UserAccout getUserAccount() {
 		return userAccount;
 	}
@@ -63,9 +65,10 @@ public class HiringFlowActivity  implements Serializable{
 	public void setHiringFlowType(HiringFlowType hiringFlowType) {
 		this.hiringFlowType = hiringFlowType;
 	}
-    @JsonIgnore
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name ="candidate_id")
+
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "candidate_id")
 	public Candidate getCandidate() {
 		return candidate;
 	}
@@ -73,9 +76,5 @@ public class HiringFlowActivity  implements Serializable{
 	public void setCandidate(Candidate candidate) {
 		this.candidate = candidate;
 	}
-	
-	
-	
-	
 
 }
