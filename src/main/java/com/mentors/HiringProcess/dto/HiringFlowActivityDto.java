@@ -2,20 +2,18 @@ package com.mentors.HiringProcess.dto;
 
 import java.time.LocalDateTime;
 
-import com.mentors.HiringProcess.model.Candidate;
 import com.mentors.HiringProcess.model.HiringFlowType;
-import com.mentors.HiringProcess.model.UserAccout;
 
 public class HiringFlowActivityDto {
-	
-    private Long id;
-	
-	private UserAccout userAccount;
-	
+
+	private Long id;
+
+	private UserAccoutDto userAccount;
+
 	private LocalDateTime createdDate;
-	
+
 	private HiringFlowType hiringFlowType;
-	
+
 	private CandidateDto candidate;
 
 	public Long getId() {
@@ -26,11 +24,11 @@ public class HiringFlowActivityDto {
 		this.id = id;
 	}
 
-	public UserAccout getUserAccount() {
+	public UserAccoutDto getUserAccount() {
 		return userAccount;
 	}
 
-	public void setUserAccount(UserAccout userAccount) {
+	public void setUserAccount(UserAccoutDto userAccount) {
 		this.userAccount = userAccount;
 	}
 
@@ -57,9 +55,5 @@ public class HiringFlowActivityDto {
 	public void setCandidate(CandidateDto candidate) {
 		this.candidate = candidate;
 	}
-	
-	
-	
-	
 
 }
