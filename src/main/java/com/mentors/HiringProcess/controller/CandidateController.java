@@ -93,6 +93,13 @@ public class CandidateController {
 		    Pageable pageable = PageRequest.of(page, size);
 		    return candidateServiceI.getAllCandidatesWithPagination(pageable);
 		}
+		
+		@GetMapping("/inactivecandidatelistwithpagination")
+		public Page<CandidateDto> getAllInCandidatesWithPagination(@RequestParam int page, @RequestParam int size) {
+		    Pageable pageable = PageRequest.of(page, size);
+		    return candidateServiceI.getAllInCandidatesWithPagination(pageable);
+		}
+
 
 
 

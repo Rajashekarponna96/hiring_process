@@ -68,6 +68,7 @@ public class CandidateBuilder {
 		candidate.setExperiences(experienceBuilder.toModelList(candidateDto.getExperiences()).stream()
 				.peek(e -> e.setCandidate(candidate)).collect(Collectors.toList()));
 		candidate.setVendor(vendorBuilder.toModel(candidateDto.getVendor()));
+		candidate.setStatus(candidateDto.isStatus());
 		return candidate;
 	}
 
@@ -99,6 +100,7 @@ public class CandidateBuilder {
 		candidatedto.setCreatedTimestamp(candidate.getCreatedTimestamp());
 		candidatedto.setModifiedTimestamp(candidate.getModifiedTimestamp());
 		candidatedto.setVendor(vendorBuilder.toDto(candidate.getVendor()));
+		candidatedto.setStatus(candidate.isStatus());
 
 		return candidatedto;
 	}

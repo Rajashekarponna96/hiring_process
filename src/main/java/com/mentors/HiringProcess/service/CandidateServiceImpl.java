@@ -77,6 +77,7 @@ public class CandidateServiceImpl implements CandidateServiceI {
 		if(candidateRepository.findByMobile(candidateDto.getMobile()).isPresent()) {
 			throw new RuntimeException("Mobile is Already Exit");
 		}
+		candidateDto.setStatus(true);
 		candidateDto.setCreatedTimestamp(LocalDateTime.now());
 	    Candidate candidate = candidateBuilder.toModel(candidateDto);
 	    List<HiringFlowActivity> hiringFlowActivities =new ArrayList<>();
@@ -123,6 +124,12 @@ public class CandidateServiceImpl implements CandidateServiceI {
 			
 			//candidate.setCreatedBy(userAccoutRepository.findById(candidate.getCreatedBy().getId()).get());
 			candidate.setModifiedBy(userAccoutRepository.findById(candidate.getModifiedBy().getId()).get());
+			HiringFlowType  candidageStage =candidateDto.getStage();
+			//String stage="Reject";
+			if (candidageStage.name().equals("Reject")) {
+		        candidateDto.setStatus(false);
+		        
+		    }
 			 candidate =candidateRepository.save(candidateBuilder.toModel(candidateDto));
 			
 			
@@ -193,7 +200,8 @@ public class CandidateServiceImpl implements CandidateServiceI {
 
 	@Override
 	public Page<CandidateDto> getAllCandidatesWithPagination(Pageable pageable) {
-		Page<Candidate> recruiterPage = candidateRepository.findAll(pageable);
+		//Page<Candidate> recruiterPage = candidateRepository.findAll(pageable);
+		Page<Candidate> recruiterPage = candidateRepository.findAllActiveCandidates(pageable);
 		return recruiterPage.map(candidateBuilder::toDto);
 	}
 	
@@ -209,6 +217,12 @@ public class CandidateServiceImpl implements CandidateServiceI {
 
 		// Convert the list of Candidate entities to a list of CandidateDto objects
 		return candidates.stream().map(candidateBuilder::toDto).collect(Collectors.toList());
+	}
+
+	@Override
+	public Page<CandidateDto> getAllInCandidatesWithPagination(Pageable pageable) {
+		Page<Candidate> recruiterPage = candidateRepository.findAllInActiveCandidates(pageable);
+		return recruiterPage.map(candidateBuilder::toDto);
 	}
 	
 

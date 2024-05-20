@@ -74,6 +74,8 @@ public class CandidateDto {
     private LocalDateTime modifiedTimestamp;
     
     private List<HiringFlowActivityDto> HiringFlowActivity;
+    
+    private boolean status;
 
 	public Long getId() {
 		return id;
@@ -308,6 +310,16 @@ public class CandidateDto {
 
 	public void setModifiedTimestamp(LocalDateTime modifiedTimestamp) {
 		this.modifiedTimestamp = modifiedTimestamp;
+	}
+	
+	
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 
 	public void validateREquiredAttibutes(CandidateDto candidateDto) {
