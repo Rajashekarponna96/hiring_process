@@ -2,5 +2,5 @@ package com.mentors.HiringProcess.model;
 
 public enum HiringFlowType {
 
-	Sourced,Screening,Interview,Preboarding,Hired,Archived
+	Sourced,Screening,Interview,Preboarding,Hired,Archived,Reject
 }

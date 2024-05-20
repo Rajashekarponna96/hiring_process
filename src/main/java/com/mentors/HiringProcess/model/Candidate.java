@@ -83,6 +83,8 @@ public class Candidate  implements Serializable {
   
     private Vendor vendor;
     
+    private boolean status;
+    
     
 //    public Candidate() {
 //        this.createdTimestamp = LocalDateTime.now();
@@ -343,6 +345,17 @@ public class Candidate  implements Serializable {
 	public void setVendor(Vendor vendor) {
 		this.vendor = vendor;
 	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+	
+	
+	
 	
 	
 	

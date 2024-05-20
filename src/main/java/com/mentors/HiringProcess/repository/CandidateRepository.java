@@ -33,5 +33,12 @@ public interface CandidateRepository extends JpaRepository<Candidate,Long>{
 	  List<Candidate> findByVendor(Vendor vendor);
 	  
 	  Page<Candidate> findByVendorId(Long id, Pageable pageable);
+	  
+	  //this is for get all candidate list based on status is true with pagination
+	  @Query("SELECT c FROM Candidate c WHERE c.status = true")
+	    Page<Candidate> findAllActiveCandidates(Pageable pageable);
+	  
+	  @Query("SELECT c FROM Candidate c WHERE c.status = false")
+	    Page<Candidate> findAllInActiveCandidates(Pageable pageable);
 
 }

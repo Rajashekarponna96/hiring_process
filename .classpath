@@ -53,5 +53,15 @@
 			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/PC/.m2/repository/com/mysql/mysql-connector-j/8.3.0/mysql-connector-j-8.3.0.jar" sourcepath="C:/Users/PC/.m2/repository/com/mysql/mysql-connector-j/8.3.0/mysql-connector-j-8.3.0-sources.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="test" value="true"/>
+			<attribute name="maven.groupId" value="com.mysql"/>
+			<attribute name="maven.artifactId" value="mysql-connector-j"/>
+			<attribute name="maven.version" value="8.3.0"/>
+			<attribute name="maven.scope" value="runtime"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
