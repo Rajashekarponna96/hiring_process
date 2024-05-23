@@ -40,6 +40,7 @@ public interface CandidateRepository extends JpaRepository<Candidate,Long>{
 	  
 	  @Query("SELECT c FROM Candidate c WHERE c.status = false")
 	    Page<Candidate> findAllInActiveCandidates(Pageable pageable);
+	  
 	  @Query("SELECT c FROM Candidate c WHERE c.stage = 0")
 	  List<Candidate> findByStage();
 
