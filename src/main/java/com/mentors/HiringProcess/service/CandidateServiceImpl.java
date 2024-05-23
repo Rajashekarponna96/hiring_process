@@ -125,12 +125,26 @@ public class CandidateServiceImpl implements CandidateServiceI {
 			//candidate.setCreatedBy(userAccoutRepository.findById(candidate.getCreatedBy().getId()).get());
 			candidate.setModifiedBy(userAccoutRepository.findById(candidate.getModifiedBy().getId()).get());
 			HiringFlowType  candidageStage =candidateDto.getStage();
-			//String stage="Reject";
 			if (candidageStage.name().equals("Reject")) {
 		        candidateDto.setStatus(false);
 		        
 		    }
-			 candidate =candidateRepository.save(candidateBuilder.toModel(candidateDto));
+			 
+			 
+			 Candidate candidateDB = opCandidate.get();
+			 if(candidateDB.getStage().name() != candidateDto.getStage().name()) {
+				 String candidateName = candidateDto.getFirstName();
+					String uploadDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+					EmailTemplate emailTemplate  = emailTemplateRepository.findByTitle(candidateDto.getStage().toString());
+					String body=emailTemplate.getBody();
+					String updatedBody = body.replace("[CandidateName]", candidateName)
+			                 .replace("[UploadDate]", uploadDate);
+					emailService.sendSimpleMessage(candidateDto.getEmail(), emailTemplate.getSubject(),updatedBody,null, null, null);
+					
+				 
+			 }
+				 
+				 candidate =candidateRepository.save(candidateBuilder.toModel(candidateDto));
 			
 			
 			 hiringFlowActivityRepository.save(createdHiringFlowDetails(candidate.getStage(),candidate.getModifiedBy(),candidate));
