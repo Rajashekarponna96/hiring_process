@@ -24,6 +24,7 @@ import com.mentors.HiringProcess.model.Candidate;
 import com.mentors.HiringProcess.model.EmailTemplate;
 import com.mentors.HiringProcess.model.HiringFlowActivity;
 import com.mentors.HiringProcess.model.HiringFlowType;
+import com.mentors.HiringProcess.model.Role;
 import com.mentors.HiringProcess.model.UserAccout;
 
 import com.mentors.HiringProcess.repository.CandidateRepository;
@@ -77,6 +78,15 @@ public class CandidateServiceImpl implements CandidateServiceI {
 		if(candidateRepository.findByMobile(candidateDto.getMobile()).isPresent()) {
 			throw new RuntimeException("Mobile is Already Exit");
 		}
+		UserAccout userAccout= new UserAccout();
+		Role role=new Role();
+		userAccout.setUserName(candidateDto.getEmail());
+		userAccout.setPassword(candidateDto.getMobile());
+		userAccout.setActive(true);
+		role.setName("candidate");
+		role.setDescription("candidate login");
+		userAccout.setRole(role);
+		userAccoutRepository.save(userAccout);
 		candidateDto.setStatus(true);
 		candidateDto.setCreatedTimestamp(LocalDateTime.now());
 	    Candidate candidate = candidateBuilder.toModel(candidateDto);
