@@ -61,6 +61,8 @@ public class Job implements Serializable {
 	private String secondarySkills;
 	
 	private String goodToHave;
+	
+	 private Vendor vendor;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -234,6 +236,14 @@ public class Job implements Serializable {
 		this.goodToHave = goodToHave;
 	}
 	
-	
+	@ManyToOne
+    @JoinColumn(name = "vendor_id", referencedColumnName = "id")
+    public Vendor getVendor() {
+        return vendor;
+    }
+
+    public void setVendor(Vendor vendor) {
+        this.vendor = vendor;
+    }
 
 }

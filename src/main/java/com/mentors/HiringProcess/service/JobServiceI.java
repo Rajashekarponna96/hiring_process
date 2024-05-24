@@ -7,6 +7,8 @@ import org.springframework.data.domain.Pageable;
 
 import com.mentors.HiringProcess.dto.JobDto;
 import com.mentors.HiringProcess.dto.JobSummaryDto;
+import com.mentors.HiringProcess.model.Job;
+import com.mentors.HiringProcess.model.Vendor;
 
 public interface JobServiceI {
 
@@ -17,15 +19,20 @@ public interface JobServiceI {
 	void updateJob(Long id, JobDto jobDto);
 
 	void deleteJob(Long id);
-	
-	 List<JobSummaryDto> getAllJobSummaries();
-	 
-	  List<JobDto> allJobsWithClients();
-	  
-	  Page<JobDto> getAllJobs(Pageable pageable, String code);
-	  
-	  Page<JobDto> getAllJobsWithPagination(Pageable pageable);
-	  
-	  
+
+	List<JobSummaryDto> getAllJobSummaries();
+
+	List<JobDto> allJobsWithClients();
+
+	Page<JobDto> getAllJobs(Pageable pageable, String code);
+
+	Page<JobDto> getAllJobsWithPagination(Pageable pageable);
+
+	//
+	List<Job> getAllJobs();
+
+	List<Vendor> getAllVendors();
+
+	void assignVendorToJob(Long jobId, Long vendorId);
 
 }
