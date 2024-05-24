@@ -13,6 +13,9 @@ public class VendorBuilder {
 	private UserAccoutBuilder userAccoutBuilder;
 
 	public Vendor toModel(VendorDto vendorDto) {
+		if(vendorDto ==null) {
+			return null;
+		}
 
 		Vendor vendor = new Vendor();
 
