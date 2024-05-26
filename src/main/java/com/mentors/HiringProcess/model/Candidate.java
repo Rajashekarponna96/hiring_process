@@ -85,6 +85,8 @@ public class Candidate  implements Serializable {
     
     private boolean status;
     
+    private UserAccout userAccout;
+    
     
 //    public Candidate() {
 //        this.createdTimestamp = LocalDateTime.now();
@@ -354,7 +356,16 @@ public class Candidate  implements Serializable {
 		this.status = status;
 	}
 	
-	
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "useraccount_id", referencedColumnName = "id")
+	public UserAccout getUserAccout() {
+		return userAccout;
+	}
+
+	public void setUserAccout(UserAccout userAccout) {
+		this.userAccout = userAccout;
+	}
 	
 	
 	

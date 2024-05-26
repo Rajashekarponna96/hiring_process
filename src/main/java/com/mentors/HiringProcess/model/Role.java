@@ -60,7 +60,7 @@ public class Role implements Serializable {
 	}
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "role", cascade = CascadeType.MERGE)
 	public List<Permission> getPermissions() {
 		return permissions;
 	}

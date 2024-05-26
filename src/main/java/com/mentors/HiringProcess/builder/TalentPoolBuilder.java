@@ -11,6 +11,10 @@ import com.mentors.HiringProcess.model.TalentPool;
 @Component
 public class TalentPoolBuilder {
 	public TalentPool toModel(TalentPoolDto talentPoolDto) {
+		
+		if(talentPoolDto ==null) {
+			return null;
+		}
 
 		TalentPool talentPool = new TalentPool();
 		if(talentPoolDto!=null) {

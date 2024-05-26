@@ -76,6 +76,8 @@ public class CandidateDto {
     private List<HiringFlowActivityDto> HiringFlowActivity;
     
     private boolean status;
+    
+    private UserAccoutDto userAccout;
 
 	public Long getId() {
 		return id;
@@ -321,6 +323,17 @@ public class CandidateDto {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
+	
+	
+
+	
+	public UserAccoutDto getUserAccout() {
+		return userAccout;
+	}
+
+	public void setUserAccout(UserAccoutDto userAccout) {
+		this.userAccout = userAccout;
+	}
 
 	public void validateREquiredAttibutes(CandidateDto candidateDto) {
 		if(candidateDto.getFirstName()==null) {
@@ -338,9 +351,9 @@ public class CandidateDto {
 		if(candidateDto.getAlterMobile()==null) {
 			throw new RuntimeException("AlternateMobile is Mandatory");
 		}
-		if(candidateDto.getStage()==null) {
-			throw new RuntimeException("HiringStage is Mandatory");
-		}
+//		if(candidateDto.getStage()==null) {
+//			throw new RuntimeException("HiringStage is Mandatory");
+//		}
 		if(candidateDto.getAvialToJoin()==null) {
 			throw new RuntimeException("NoticePeriod is Mandatory");
 		}
@@ -356,9 +369,9 @@ public class CandidateDto {
 		if(candidateDto.getDateOfBirth()==null) {
 			throw new RuntimeException("DateOfBirth is Mandatory");
 		}
-		if(candidateDto.getTalentPool()==null) {
-			throw new RuntimeException("TalentPool is Mandatory");
-		}
+//		if(candidateDto.getTalentPool()==null) {
+//			throw new RuntimeException("TalentPool is Mandatory");
+//		}
 		if(candidateDto.getJob()==null) {
 			throw new RuntimeException("Job is Mandatory");
 		}
@@ -371,9 +384,9 @@ public class CandidateDto {
 		if(candidateDto.getPreferred()==null) {
 			throw new RuntimeException("Preffered Location is Mandatory");
 		}
-		if(candidateDto.getCurrency()==null) {
-			throw new RuntimeException("Currency is Mandatory");
-		}
+//		if(candidateDto.getCurrency()==null) {
+//			throw new RuntimeException("Currency is Mandatory");
+//		}
 		if(skills== null || skills.isEmpty()) {
 			throw new RuntimeException("Skills is Mandatory");
 		}

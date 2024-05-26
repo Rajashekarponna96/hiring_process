@@ -73,7 +73,7 @@ public class UserAccout implements Serializable {
 	}
 
 	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "role_id", referencedColumnName = "id")
 	public Role getRole() {
 		return role;

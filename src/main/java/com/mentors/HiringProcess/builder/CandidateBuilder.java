@@ -24,8 +24,10 @@ public class CandidateBuilder {
 
 	@Autowired
 	private JobBuilder jobBuilder;
-  @Autowired
+	
+    @Autowired
 	private UserAccoutBuilder userAccoutBuilder;
+    
 	@Autowired
 	private ExperienceBuilder experienceBuilder;
 
@@ -34,8 +36,14 @@ public class CandidateBuilder {
 
 	@Autowired
 	private VendorBuilder vendorBuilder;
+	
+
 
 	public Candidate toModel(CandidateDto candidateDto) {
+		
+		if(candidateDto ==null) {
+			return null;
+		}
 
 		Candidate candidate = new Candidate();
 		SourceBuilder sourceBuilder = new SourceBuilder();
@@ -68,6 +76,7 @@ public class CandidateBuilder {
 		candidate.setExperiences(experienceBuilder.toModelList(candidateDto.getExperiences()).stream()
 				.peek(e -> e.setCandidate(candidate)).collect(Collectors.toList()));
 		candidate.setVendor(vendorBuilder.toModel(candidateDto.getVendor()));
+		candidate.setUserAccout(userAccoutBuilder.toModel(candidateDto.getUserAccout()));
 		candidate.setStatus(candidateDto.isStatus());
 		return candidate;
 	}
@@ -100,6 +109,7 @@ public class CandidateBuilder {
 		candidatedto.setCreatedTimestamp(candidate.getCreatedTimestamp());
 		candidatedto.setModifiedTimestamp(candidate.getModifiedTimestamp());
 		candidatedto.setVendor(vendorBuilder.toDto(candidate.getVendor()));
+		candidatedto.setUserAccout(userAccoutBuilder.toDto(candidate.getUserAccout()));
 		candidatedto.setStatus(candidate.isStatus());
 
 		return candidatedto;

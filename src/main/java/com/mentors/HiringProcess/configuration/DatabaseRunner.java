@@ -19,34 +19,39 @@ public class DatabaseRunner implements CommandLineRunner{
 	@Autowired
 	private RecruiterRepository recruiterRepository;
 	
+	@Autowired
+	private UserAccoutRepository userAccoutRepository;
+	
 	
 	@Override
 	public void run(String... args) throws Exception {
 		
 		
-		List<Recruiter> recruiters = (List<Recruiter>) recruiterRepository.findAll();
-		if (recruiters == null || recruiters.isEmpty()) {
-        List<String> all = new ArrayList<String>();
-	    all.add("All");
-	    
-	    Role role=new Role();
-	    role.setName("Admin");
-	    role.setDescription("testing");
+//		List<Recruiter> recruiters = (List<Recruiter>) recruiterRepository.findAll();
+//		if (recruiters == null || recruiters.isEmpty()) {
+//        List<String> all = new ArrayList<String>();
+//	    all.add("All");
+//	    
+//	    Role role=new Role();
+//	    role.setName("Admin");
+//	    role.setDescription("testing");
+//	    
+//		
+//		UserAccout userAccount=new UserAccout();
+//		userAccount.setUserName("admin");
+//		userAccount.setPassword("1234");
+//		userAccount.setActive(true);
+//		userAccount.setRole(role);
+//		userAccoutRepository.saveAndFlush(userAccount); 
 		
-		UserAccout userAccount=new UserAccout();
-		userAccount.setUserName("admin");
-		userAccount.setPassword("1234");
-		userAccount.setActive(true);
-		userAccount.setRole(role);
-		
-		Recruiter recruiter=new Recruiter();
-		recruiter.setFirstName("Recruirer");
-		recruiter.setLastName("Rec_lastname");
-		recruiter.setEmail("recruiter@gmail.com");
-		recruiter.setMobile("0123456789");
-		recruiter.setUserAccout(userAccount);
-		recruiterRepository.save(recruiter);
-		}	
+//		Recruiter recruiter=new Recruiter();
+//		recruiter.setFirstName("Recruirer");
+//		recruiter.setLastName("Rec_lastname");
+//		recruiter.setEmail("recruiter@gmail.com");
+//		recruiter.setMobile("0123456789");
+//		recruiter.setUserAccout(userAccount);
+//		recruiterRepository.saveAndFlush(recruiter);
+//		}	
 		
 		
 		}
