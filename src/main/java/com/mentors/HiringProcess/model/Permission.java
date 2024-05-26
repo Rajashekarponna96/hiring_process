@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -43,7 +44,7 @@ public class Permission implements Serializable {
 		this.description = description;
 	}
 	@JsonIgnore
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "role_id")
 	public Role getRole() {
 		return role;

@@ -8,6 +8,11 @@ import com.mentors.HiringProcess.model.CurrencyType;
 public class CurrencyTypeBuilder {
 	
 	public CurrencyType toModel(CurrencyTypeDto currencyTypeDto) {
+		
+		if(currencyTypeDto ==null) {
+			return null;
+		}
+
 
 		CurrencyType currencyType = new CurrencyType();
 		currencyType.setId(currencyTypeDto.getId());

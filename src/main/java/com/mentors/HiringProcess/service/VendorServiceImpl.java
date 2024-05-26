@@ -13,12 +13,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mentors.HiringProcess.builder.CandidateBuilder;
+import com.mentors.HiringProcess.builder.UserAccoutBuilder;
 import com.mentors.HiringProcess.builder.VendorBuilder;
 import com.mentors.HiringProcess.dto.CandidateDto;
 import com.mentors.HiringProcess.dto.VendorDto;
 import com.mentors.HiringProcess.model.Candidate;
+import com.mentors.HiringProcess.model.Role;
+import com.mentors.HiringProcess.model.UserAccout;
 import com.mentors.HiringProcess.model.Vendor;
 import com.mentors.HiringProcess.repository.CandidateRepository;
+import com.mentors.HiringProcess.repository.RoleRepository;
 import com.mentors.HiringProcess.repository.VendorRepository;
 import com.mentors.HiringProcess.specification.VendorSpecifications;
 
@@ -35,11 +39,32 @@ public class VendorServiceImpl implements VendorService {
 
 	@Autowired
 	CandidateRepository candidateRepository;
+	
+	@Autowired
+	RoleRepository roleRepository;
+	
+	@Autowired
+	UserAccoutBuilder userAccoutBuilder;
 
 	@Override
 	public void addVendor(VendorDto vendorDto) {
+		
+		UserAccout userAccout= new UserAccout();
+		List<Role> roles=roleRepository.findAll();
+		
+		Role role = roles.stream()
+                .filter(r -> r.getName().equals("vendor"))
+                .findFirst()
+                .orElse(null);
+		
+		userAccout.setRole(role);
+		userAccout.setUserName(vendorDto.getEmail());
+		userAccout.setPassword(vendorDto.getMobile());
+		userAccout.setActive(true);
+		vendorDto.setUserAccout(userAccoutBuilder.toDto(userAccout));
+        
+		vendorRepository.saveAndFlush(vendorBuilder.toModel(vendorDto));
 
-		vendorRepository.save(vendorBuilder.toModel(vendorDto));
 	}
 
 	@Override

@@ -15,6 +15,11 @@ public class UserAccoutBuilder {
 	
 
 	public UserAccout toModel(UserAccoutDto userAccoutDto) {
+		
+		if(userAccoutDto ==null) {
+			return null;
+		}
+
 
 		UserAccout userAccout = new UserAccout();
 		userAccout.setId(userAccoutDto.getId());

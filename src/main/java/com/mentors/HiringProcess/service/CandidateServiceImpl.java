@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -17,8 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.mentors.HiringProcess.builder.CandidateBuilder;
 import com.mentors.HiringProcess.builder.EmailTemplateBuilder;
+import com.mentors.HiringProcess.builder.UserAccoutBuilder;
 import com.mentors.HiringProcess.builder.VendorBuilder;
 import com.mentors.HiringProcess.dto.CandidateDto;
+import com.mentors.HiringProcess.dto.TalentPoolDto;
 import com.mentors.HiringProcess.dto.VendorDto;
 import com.mentors.HiringProcess.model.Candidate;
 import com.mentors.HiringProcess.model.EmailTemplate;
@@ -30,6 +33,7 @@ import com.mentors.HiringProcess.model.UserAccout;
 import com.mentors.HiringProcess.repository.CandidateRepository;
 import com.mentors.HiringProcess.repository.EmailTemplateRepository;
 import com.mentors.HiringProcess.repository.HiringFlowActivityRepository;
+import com.mentors.HiringProcess.repository.RoleRepository;
 import com.mentors.HiringProcess.repository.UserAccoutRepository;
 import com.mentors.HiringProcess.specification.CandidateSpecifications;
 
@@ -47,7 +51,7 @@ public class CandidateServiceImpl implements CandidateServiceI {
 	private EmailService emailService;
 
 	@Autowired
-  private EmailTemplateRepository  emailTemplateRepository;
+    private EmailTemplateRepository  emailTemplateRepository;
 	
 	@Autowired
 	private HiringFlowActivityRepository hiringFlowActivityRepository;
@@ -69,6 +73,11 @@ public class CandidateServiceImpl implements CandidateServiceI {
 	@Autowired
 	private VendorBuilder vendorBuilder;
   
+	@Autowired
+	private RoleRepository roleRepository;
+	
+	@Autowired
+	private UserAccoutBuilder userAccoutBuilder;
   
   @Override
 	public void add(CandidateDto candidateDto) {
@@ -79,16 +88,21 @@ public class CandidateServiceImpl implements CandidateServiceI {
 			throw new RuntimeException("Mobile is Already Exit");
 		}
 		UserAccout userAccout= new UserAccout();
-		Role role=new Role();
+        List<Role> roles=roleRepository.findAll();
+		
+		Role role = roles.stream()
+                .filter(r -> r.getName().equals("candidate"))
+                .findFirst()
+                .orElse(null);
+		
+		userAccout.setRole(role);
 		userAccout.setUserName(candidateDto.getEmail());
 		userAccout.setPassword(candidateDto.getMobile());
 		userAccout.setActive(true);
-		role.setName("candidate");
-		role.setDescription("candidate login");
-		userAccout.setRole(role);
-		userAccoutRepository.save(userAccout);
+		candidateDto.setUserAccout(userAccoutBuilder.toDto(userAccout));
 		candidateDto.setStatus(true);
 		candidateDto.setCreatedTimestamp(LocalDateTime.now());
+		candidateDto.setStage(HiringFlowType.Sourced);
 	    Candidate candidate = candidateBuilder.toModel(candidateDto);
 	    List<HiringFlowActivity> hiringFlowActivities =new ArrayList<>();
 	    hiringFlowActivities.add(createdHiringFlowDetails(candidate.getStage(),candidate.getModifiedBy(),candidate));

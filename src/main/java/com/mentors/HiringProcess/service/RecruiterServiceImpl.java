@@ -11,10 +11,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mentors.HiringProcess.builder.RecruiterBuilder;
+import com.mentors.HiringProcess.builder.UserAccoutBuilder;
 import com.mentors.HiringProcess.dto.RecruiterDto;
+import com.mentors.HiringProcess.dto.RoleDto;
 import com.mentors.HiringProcess.exceptions.RecruiterValidationException;
 import com.mentors.HiringProcess.model.Recruiter;
+import com.mentors.HiringProcess.model.Role;
+import com.mentors.HiringProcess.model.UserAccout;
 import com.mentors.HiringProcess.repository.RecruiterRepository;
+import com.mentors.HiringProcess.repository.RoleRepository;
 import com.mentors.HiringProcess.specification.RecruiterSpecifications;
 
 
@@ -27,6 +32,14 @@ public class RecruiterServiceImpl implements RecruiterServiceI {
 
 	@Autowired
 	private RecruiterBuilder recruiterBuilder;
+	
+	@Autowired
+	private RoleRepository roleRepository;
+	
+	@Autowired
+	private UserAccoutBuilder userAccoutBuilder;
+	
+
 
 //	@Override
 //	public void add(RecruiterDto recruiterDto) {
@@ -50,9 +63,22 @@ public class RecruiterServiceImpl implements RecruiterServiceI {
 		if (recruiterRepository.findByMobile(recruiterDto.getMobile()).isPresent()) {
 			throw new RuntimeException("Mobile is Already Exist");
 		}
-
-		// Save the recruiter
-		recruiterRepository.save(recruiterBuilder.toModel(recruiterDto));
+		
+		UserAccout userAccout= new UserAccout();
+		List<Role> roles=roleRepository.findAll();
+		
+		Role role = roles.stream()
+                .filter(r -> r.getName().equals("recruiter"))
+                .findFirst()
+                .orElse(null);
+		
+		userAccout.setRole(role);
+		userAccout.setUserName(recruiterDto.getEmail());
+		userAccout.setPassword(recruiterDto.getMobile());
+		userAccout.setActive(true);
+		recruiterDto.setUserAccout(userAccoutBuilder.toDto(userAccout));
+        
+		recruiterRepository.saveAndFlush(recruiterBuilder.toModel(recruiterDto));
 	}
 
 	public void validateRequiredAttributes(RecruiterDto recruiterDto) {
