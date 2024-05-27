@@ -29,13 +29,17 @@ public class VendorBuilder {
 	}
 
 	public VendorDto toDto(Vendor vendor) {
-		VendorDto vendorDto = new VendorDto();
-		vendorDto.setId(vendor.getId());
-		vendorDto.setVendorName(vendor.getVendorName());
-		vendorDto.setLocation(vendor.getLocation());
-		vendorDto.setEmail(vendor.getEmail());
-		vendorDto.setMobile(vendor.getMobile());
-		vendorDto.setUserAccout(userAccoutBuilder.toDto(vendor.getUserAccout()));
+		VendorDto vendorDto = null;
+		if(vendor!=null) {
+			vendorDto =new VendorDto();
+			vendorDto.setId(vendor.getId());
+			vendorDto.setVendorName(vendor.getVendorName());
+			vendorDto.setLocation(vendor.getLocation());
+			vendorDto.setEmail(vendor.getEmail());
+			vendorDto.setMobile(vendor.getMobile());
+			vendorDto.setUserAccout(userAccoutBuilder.toDto(vendor.getUserAccout()));
+		}
+		
 		return vendorDto;
 	}
 

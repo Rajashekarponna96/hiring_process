@@ -24,11 +24,17 @@ public class CurrencyTypeBuilder {
 
 	
 	public CurrencyTypeDto toDto(CurrencyType currencyType) {
-		CurrencyTypeDto currencyTypeDto = new CurrencyTypeDto();
-		currencyTypeDto.setId(currencyType.getId());
-		currencyTypeDto.setName(currencyType.getName());
-		currencyTypeDto.setCode(currencyType.getCode());
-		currencyTypeDto.setSymbol(currencyType.getSymbol());
+		CurrencyTypeDto currencyTypeDto = null;
+		if(currencyType!= null) {
+			currencyTypeDto =new CurrencyTypeDto();
+			
+			currencyTypeDto.setId(currencyType.getId());
+			currencyTypeDto.setName(currencyType.getName());
+			currencyTypeDto.setCode(currencyType.getCode());
+			currencyTypeDto.setSymbol(currencyType.getSymbol());
+			return currencyTypeDto;
+		}
+		
 		return currencyTypeDto;
 }
 

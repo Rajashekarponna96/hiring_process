@@ -29,13 +29,15 @@ public class TalentPoolBuilder {
 	}
 
 	public TalentPoolDto toDto(TalentPool talentPool) {
-		TalentPoolDto talentPoolDto = new TalentPoolDto();
-		
-	    Long id = talentPool.getId();	
-		talentPoolDto.setId(id);
-		
-		talentPoolDto.setName(talentPool.getName());
-		talentPoolDto.setDescription(talentPool.getDescription());
+		TalentPoolDto talentPoolDto= null;
+		if(talentPool!=null) {
+			 talentPoolDto = new TalentPoolDto();
+			 
+				talentPoolDto.setId(talentPool.getId());
+				talentPoolDto.setName(talentPool.getName());
+				talentPoolDto.setDescription(talentPool.getDescription());
+		}
+	    
 		return talentPoolDto;
 	}
 

@@ -51,7 +51,10 @@ public interface CandidateRepository extends JpaRepository<Candidate,Long>{
 //	  @Query("SELECT c FROM Candidate c WHERE c.stage = hiringFlowType")
 //	  List<Candidate> findByStage(HiringFlowType hiringFlowType);
 	  
-	  @Query("SELECT c FROM Candidate c WHERE c.stage = :hiringFlowType")
-	    List<Candidate> findByStage(@Param("hiringFlowType") HiringFlowType hiringFlowType);
+//	  @Query("SELECT c FROM Candidate c WHERE c.stage = :hiringFlowType")
+//	    List<Candidate> findByStage(@Param("hiringFlowType") HiringFlowType hiringFlowType);
+
+	 
+	    List<Candidate> findByStage(HiringFlowType hiringFlowType);
 
 }
