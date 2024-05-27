@@ -8,9 +8,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.mentors.HiringProcess.dto.VendorDto;
 import com.mentors.HiringProcess.model.Candidate;
+import com.mentors.HiringProcess.model.HiringFlowType;
 import com.mentors.HiringProcess.model.Vendor;
 
 public interface CandidateRepository extends JpaRepository<Candidate,Long>{
@@ -41,7 +43,15 @@ public interface CandidateRepository extends JpaRepository<Candidate,Long>{
 	  @Query("SELECT c FROM Candidate c WHERE c.status = false")
 	    Page<Candidate> findAllInActiveCandidates(Pageable pageable);
 	  
-	  @Query("SELECT c FROM Candidate c WHERE c.stage = 0")
-	  List<Candidate> findByStage();
+	  
+	  
+//	  @Query("SELECT c FROM Candidate c WHERE c.stage = 1")
+//	  List<Candidate> findByStage();
+//	  
+//	  @Query("SELECT c FROM Candidate c WHERE c.stage = hiringFlowType")
+//	  List<Candidate> findByStage(HiringFlowType hiringFlowType);
+	  
+	  @Query("SELECT c FROM Candidate c WHERE c.stage = :hiringFlowType")
+	    List<Candidate> findByStage(@Param("hiringFlowType") HiringFlowType hiringFlowType);
 
 }
