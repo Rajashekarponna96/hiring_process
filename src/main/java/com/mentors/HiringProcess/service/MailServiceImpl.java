@@ -27,7 +27,7 @@ public class MailServiceImpl {
 	
 	private static Logger log = Logger.getAnonymousLogger();
 	
-	//private static Logger logger = Logger.getLogger('hello', MailServiceImpl.class)
+	//private static Logger logger = Logger.getLogger( MailServiceImpl.class);
 	
 	@Autowired
 	public CandidateRepository candidateRepository;
