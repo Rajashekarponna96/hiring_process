@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,7 @@ import com.mentors.HiringProcess.specification.CandidateSpecifications;
 @Service
 @Transactional
 public class CandidateServiceImpl implements CandidateServiceI {
+	private static Logger log = Logger.getGlobal();
 
 	@Autowired
 	private CandidateRepository candidateRepository;
@@ -110,6 +112,7 @@ public class CandidateServiceImpl implements CandidateServiceI {
 	    candidate.setHiringFlowActivity(hiringFlowActivities);
 	  	
 		candidateRepository.saveAndFlush(candidate);
+		try {
 		String candidateName = candidateDto.getFirstName();
 		String uploadDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 		EmailTemplate emailTemplate  = emailTemplateRepository.findByTitle(candidateDto.getStage().toString());
@@ -117,6 +120,10 @@ public class CandidateServiceImpl implements CandidateServiceI {
 		String updatedBody = body.replace("[CandidateName]", candidateName)
                  .replace("[UploadDate]", uploadDate);
 		emailService.sendSimpleMessage(candidateDto.getEmail(), emailTemplate.getSubject(),updatedBody,null, null, null);
+		}
+		catch (Exception e) {
+			log.info("Email sent failure"+e.getMessage());
+		}
 		
 		
 	                
@@ -157,6 +164,7 @@ public class CandidateServiceImpl implements CandidateServiceI {
 			 
 			 Candidate candidateDB = opCandidate.get();
 			 if(candidateDB.getStage().name() != candidateDto.getStage().name()) {
+				 try {
 				 String candidateName = candidateDto.getFirstName();
 					String uploadDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 					EmailTemplate emailTemplate  = emailTemplateRepository.findByTitle(candidateDto.getStage().toString());
@@ -164,6 +172,10 @@ public class CandidateServiceImpl implements CandidateServiceI {
 					String updatedBody = body.replace("[CandidateName]", candidateName)
 			                 .replace("[UploadDate]", uploadDate);
 					emailService.sendSimpleMessage(candidateDto.getEmail(), emailTemplate.getSubject(),updatedBody,null, null, null);
+				 }
+				 catch (Exception e) {
+					log.info("candidate Stage Update sent mail failure:"+e.getMessage());
+				}
 					
 				 
 			 }

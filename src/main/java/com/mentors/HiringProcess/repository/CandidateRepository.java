@@ -27,7 +27,7 @@ public interface CandidateRepository extends JpaRepository<Candidate,Long>{
 	           "and (:email is null or c.email = :email)")
 	List<Candidate> findByCriteria(String firstName, String lastName, String email);
 	
-    @Query("SELECT c FROM Candidate c WHERE c.status = true")
+    //@Query("SELECT c FROM Candidate c WHERE c.status = true")
 	Page<Candidate> findAll(Specification<Candidate> spec, Pageable pageable); // Custom method for fetching entities based on specifications and pageable
 
 	 List<Candidate> findByVendor(VendorDto vendor);

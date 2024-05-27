@@ -3,6 +3,7 @@ package com.mentors.HiringProcess.service;
 import java.io.File;
 import java.util.List;
 import java.util.Spliterator;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -15,24 +16,16 @@ import jakarta.mail.internet.MimeMessage;
 @Service
 public class EmailService {
 	
+	private static Logger log = Logger.getGlobal();
+	
 	@Autowired
     private JavaMailSender emailSender;
 
     public void sendSimpleMessage(String to, String subject, String text,String attachmentPath,String htmlContent,List<String> cc) {
-//        MimeMessage message = emailSender.createMimeMessage();
-//        MimeMessageHelper helper = new MimeMessageHelper(message);
-//        try {
-//            helper.setTo(to);
-//            helper.setSubject(subject);
-//            helper.setText(text);
-//        } catch (MessagingException e) {
-//            e.printStackTrace(); // Handle the exception appropriately
-//        }
-//        emailSender.send(message);
-//    }
+    	try {
     	
     	MimeMessage message = emailSender.createMimeMessage();
-        try {
+       
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
             helper.setTo(to);
@@ -57,7 +50,7 @@ public class EmailService {
 
             emailSender.send(message);
         } catch (MessagingException e) {
-            e.printStackTrace(); // Handle the exception appropriately
+            log.info("Email sent failure"+e.getMessage());
         }
     }
 
