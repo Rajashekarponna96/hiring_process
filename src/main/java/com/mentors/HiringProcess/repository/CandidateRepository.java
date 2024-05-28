@@ -56,5 +56,7 @@ public interface CandidateRepository extends JpaRepository<Candidate,Long>{
 
 	 
 	    List<Candidate> findByStage(HiringFlowType hiringFlowType);
+	    
+	    Page<Candidate> findByStage(HiringFlowType hiringFlowType,Pageable pageable);
 
 }

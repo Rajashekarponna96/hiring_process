@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import com.mentors.HiringProcess.dto.CandidateDto;
 import com.mentors.HiringProcess.dto.RecruiterDto;
 import com.mentors.HiringProcess.dto.VendorDto;
+import com.mentors.HiringProcess.model.HiringFlowType;
 
 public interface CandidateServiceI {
 
@@ -30,6 +31,13 @@ public interface CandidateServiceI {
 	 Page<CandidateDto> getAllInCandidatesWithPagination(Pageable pageable);
 	 
 	 List<CandidateDto> getCandidatesByVendorId(Long vendorId);
+	 
+	 CandidateDto getCandidateDetailsByUserId(Long userId);
+	  
+	List<CandidateDto> getCandidatesDettailsByStage(HiringFlowType stage);
+	
+	Page<CandidateDto> getCandidatesDettailsByStagewithPagination(HiringFlowType stage,Pageable pageable);
+	 
 
 
 }

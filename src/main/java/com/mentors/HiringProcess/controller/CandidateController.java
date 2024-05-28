@@ -27,6 +27,7 @@ import com.mentors.HiringProcess.dto.RecruiterDto;
 import com.mentors.HiringProcess.dto.VendorDto;
 import com.mentors.HiringProcess.model.Candidate;
 import com.mentors.HiringProcess.model.EmailTemplate;
+import com.mentors.HiringProcess.model.HiringFlowType;
 import com.mentors.HiringProcess.repository.CandidateRepository;
 import com.mentors.HiringProcess.repository.EmailTemplateRepository;
 import com.mentors.HiringProcess.service.CandidateServiceI;
@@ -120,34 +121,23 @@ public class CandidateController {
 		    return candidateServiceI.getAllInCandidatesWithPagination(pageable);
 		}
 		
-		//@Scheduled emails
-		@GetMapping("/mail")
-		public void mail() {
-//			List<Candidate> candidateList = candidateRepository.findByStage();
-//			System.out.println("we are in sourced delay time ----------------------");
-//			LocalDateTime   presentTime = LocalDateTime.now();
-//			for (Candidate candidate : candidateList) {
-//				LocalDateTime	createdTime =candidate.getCreatedTimestamp();
-//				Duration duration = Duration.between(createdTime, presentTime);
-//		        long timedifference = duration.toMinutes(); // You can change toSeconds(), toHours(), etc. based on your need
-//		        System.out.println("Time difference in minutes: " + timedifference);
-//		        long fixedTime = 2880;
-//		        if(timedifference > 2880) {
-//		        	String candidateName = candidate.getFirstName();
-//		        	String uploadDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-//		        	EmailTemplate emailTemplate  = emailTemplateRepository.findByTitle(candidate.getStage().toString());
-//		    		String body=emailTemplate.getBody();
-//		    		String updatedBody = body.replace("[CandidateName]", candidateName)
-//		                     .replace("[UploadDate]", uploadDate);
-//		    		emailService.sendSimpleMessage(candidate.getEmail(), emailTemplate.getSubject(),updatedBody,null, null, null);
-//
-//		        }
-//				
-//				
-//			}
-//				
+		@GetMapping("/userid/{id}")
+		public CandidateDto getCandidateDetailsByUserId(@PathVariable("id") Long userId) {
+			return candidateServiceI.getCandidateDetailsByUserId(userId);
 		}
-
+		
+		@GetMapping("/candidateStage/{stage}")
+		public List<CandidateDto> getCandidatesDettailsByStage(@PathVariable("stage") HiringFlowType stage){
+			return candidateServiceI.getCandidatesDettailsByStage(stage);
+		}
+		
+		//candidate list based on stage with pgination
+		@GetMapping("/candidateStage1/{stage}")
+		public Page<CandidateDto> getCandidatesDettailsByStagewithPagination(@PathVariable("stage")HiringFlowType stage,@RequestParam int page, @RequestParam int size){
+			Pageable pageable = PageRequest.of(page, size);
+			return candidateServiceI.getCandidatesDettailsByStagewithPagination(stage,pageable);
+		}
+		
 
 
 
