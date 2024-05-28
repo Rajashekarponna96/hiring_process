@@ -80,6 +80,9 @@ public class CandidateServiceImpl implements CandidateServiceI {
 	
 	@Autowired
 	private UserAccoutBuilder userAccoutBuilder;
+	
+	@Autowired
+	private UserAccoutRepository userRepository;
   
   @Override
 	public void add(CandidateDto candidateDto) {
@@ -218,6 +221,7 @@ public class CandidateServiceImpl implements CandidateServiceI {
 		// TODO Auto-generated method stub
 		Optional<Candidate> dbaCandidate = candidateRepository.findById(id);
 		if (dbaCandidate.isPresent()) {
+			System.out.println("candidate is present-----------");
 			return candidateBuilder.toDto(dbaCandidate.get());
 		} else {
 			return null;
@@ -273,6 +277,55 @@ public class CandidateServiceImpl implements CandidateServiceI {
 	public Page<CandidateDto> getAllInCandidatesWithPagination(Pageable pageable) {
 		Page<Candidate> recruiterPage = candidateRepository.findAllInActiveCandidates(pageable);
 		return recruiterPage.map(candidateBuilder::toDto);
+	}
+
+	@Override
+	public CandidateDto getCandidateDetailsByUserId(Long userId) {
+		if(userId !=null) {
+			Optional<UserAccout> user = userRepository.findById(userId);
+			if(user.isPresent()) {
+				String userEmailId = user.get().getUserName();
+				if(userEmailId !=null)
+				{
+					Optional<Candidate> candidate =candidateRepository.findByEmail(userEmailId);
+					return candidateBuilder.toDto(candidate.get());
+				}
+			}
+			
+		}
+	
+		return null;
+	}
+
+	@Override
+	public List<CandidateDto> getCandidatesDettailsByStage(HiringFlowType stage) {
+		List<CandidateDto> candidateDtosList = new ArrayList<>();
+		if(stage != null) {
+			List<Candidate> candidatesList = candidateRepository.findByStage(stage);
+		     for (Candidate candidate : candidatesList) {
+		    	 if(candidate!=null) {
+		    		 CandidateDto candidateDto =candidateBuilder.toDto(candidate);
+		    		 candidateDtosList.add(candidateDto);
+		    	 }
+		    	 
+		     }
+		     return candidateDtosList;
+		}
+		
+		return null;
+	}
+
+	@Override
+	public Page<CandidateDto> getCandidatesDettailsByStagewithPagination(HiringFlowType stage, Pageable pageable) {
+		
+		
+		if(stage != null) {
+			Page<Candidate> candidatesList = candidateRepository.findByStage(stage,pageable);
+		     
+		     return candidatesList.map(candidateBuilder::toDto);
+		}
+		
+		return null;
 	}
 	
 
