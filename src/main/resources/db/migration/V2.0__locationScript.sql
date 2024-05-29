@@ -10,4 +10,5 @@ INSERT INTO location (id, name, code) VALUES
 (9,'Delhi','009'),
 (10,'Kolkata','010'),
 (11,'Ahmedabad','011'),
-(12,'others','012');
+(12,'others','012'),
+(13,'Remote/WFH','013');
