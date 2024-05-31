@@ -19,9 +19,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mentors.HiringProcess.dto.AssignJobsToRecruitersDto;
+import com.mentors.HiringProcess.dto.AssignJobsToVendorsDto;
 import com.mentors.HiringProcess.dto.JobDto;
 import com.mentors.HiringProcess.dto.JobSummaryDto;
 import com.mentors.HiringProcess.model.Job;
+import com.mentors.HiringProcess.model.Recruiter;
 import com.mentors.HiringProcess.model.Vendor;
 import com.mentors.HiringProcess.service.JobServiceI;
 
@@ -86,6 +89,11 @@ public class JobController {
 	public List<Vendor> getAllVendors() {
 		return jobServiceI.getAllVendors();
 	}
+	
+	@GetMapping("/allrecruiterslist")
+	public List<Recruiter> getAllRecruiters() {
+		return jobServiceI.getAllRecruiters();
+	}
  
 	@PostMapping("/{jobId}/vendors")
 	public ResponseEntity<Void> assignVendorToJob(@PathVariable Long jobId,
@@ -94,5 +102,11 @@ public class JobController {
 		jobServiceI.assignVendorToJob(jobId, vendorId);
 		return ResponseEntity.noContent().build();
 	}
+	
+	 @PostMapping("/assign-jobs-to-vendors")
+	    public ResponseEntity<Void> assignJobsToVendors(@RequestBody AssignJobsToVendorsDto dto) {
+		 jobServiceI.assignJobsToVendors(dto);
+	        return ResponseEntity.ok().build();
+	    }
 
 }
