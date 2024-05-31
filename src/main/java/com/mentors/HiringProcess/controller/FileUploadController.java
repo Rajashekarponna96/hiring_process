@@ -58,10 +58,10 @@ public class FileUploadController {
 	
 	private void saveFileToLocal(MultipartFile file) throws IOException {
         // Define the path where you want to save the file
-        String localPath = "E:/fileupload-files/" + file.getOriginalFilename(); // Change the path as needed
+        String localPath = "E:/fileupload1-files/" + file.getOriginalFilename(); // Change the path as needed
 
         // Create the directory if it doesn't exist
-        File directory = new File("G:/fileupload-files/");
+        File directory = new File("E:/fileupload1-files/");
         if (!directory.exists()) {
             directory.mkdirs();
         }

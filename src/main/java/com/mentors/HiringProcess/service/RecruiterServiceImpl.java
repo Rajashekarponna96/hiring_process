@@ -20,6 +20,7 @@ import com.mentors.HiringProcess.model.Role;
 import com.mentors.HiringProcess.model.UserAccout;
 import com.mentors.HiringProcess.repository.RecruiterRepository;
 import com.mentors.HiringProcess.repository.RoleRepository;
+import com.mentors.HiringProcess.repository.UserAccoutRepository;
 import com.mentors.HiringProcess.specification.RecruiterSpecifications;
 
 
@@ -38,6 +39,9 @@ public class RecruiterServiceImpl implements RecruiterServiceI {
 	
 	@Autowired
 	private UserAccoutBuilder userAccoutBuilder;
+	
+	@Autowired
+	private UserAccoutRepository userAccoutRepository;
 	
 
 
@@ -144,6 +148,8 @@ public class RecruiterServiceImpl implements RecruiterServiceI {
 
 	    // Check if the recruiter with the given id exists in the database
 	    Optional<Recruiter> dbRecruiter = recruiterRepository.findById(id);
+	    
+	    
 	    if (dbRecruiter.isPresent()) {
 	        // Update the existing recruiter with the new details
 	        Recruiter existingRecruiter = dbRecruiter.get();
@@ -151,9 +157,25 @@ public class RecruiterServiceImpl implements RecruiterServiceI {
 	        existingRecruiter.setLastName(recruiterDto.getLastName());
 	        existingRecruiter.setEmail(recruiterDto.getEmail());
 	        existingRecruiter.setMobile(recruiterDto.getMobile());
-
+	        
+	        //in user table also update with this details
+	        Long userId = dbRecruiter.get().getUserAccout().getId();
+	        Optional<UserAccout> userAccout= userAccoutRepository.findById(userId);
+	        if(userAccout.isPresent()) {
+	        	UserAccout updateUserAccout =userAccout.get();
+	        	updateUserAccout.setUserName(recruiterDto.getEmail());
+	        	updateUserAccout.setPassword(recruiterDto.getMobile());
+	        	updateUserAccout.setActive(userAccout.get().isActive());
+	        	updateUserAccout.setRole(userAccout.get().getRole());
+	        	updateUserAccout.setCandidate(userAccout.get().getCandidate());
+				
+	        	existingRecruiter.setUserAccout(updateUserAccout);
+	
+	        }
+			
+			
 	        // Save the updated recruiter
-	        recruiterRepository.save(existingRecruiter);
+	        recruiterRepository.saveAndFlush(existingRecruiter);
 	    } else {
 	        // If recruiter with the given id does not exist, throw an exception
 	        throw new RuntimeException("Recruiter with id " + id + " not found");

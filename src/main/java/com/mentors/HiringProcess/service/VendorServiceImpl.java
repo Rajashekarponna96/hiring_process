@@ -23,6 +23,7 @@ import com.mentors.HiringProcess.model.UserAccout;
 import com.mentors.HiringProcess.model.Vendor;
 import com.mentors.HiringProcess.repository.CandidateRepository;
 import com.mentors.HiringProcess.repository.RoleRepository;
+import com.mentors.HiringProcess.repository.UserAccoutRepository;
 import com.mentors.HiringProcess.repository.VendorRepository;
 import com.mentors.HiringProcess.specification.VendorSpecifications;
 
@@ -45,6 +46,9 @@ public class VendorServiceImpl implements VendorService {
 	
 	@Autowired
 	UserAccoutBuilder userAccoutBuilder;
+	
+	@Autowired
+	UserAccoutRepository userAccoutRepository;
 
 	@Override
 	public void addVendor(VendorDto vendorDto) {
@@ -83,6 +87,18 @@ public class VendorServiceImpl implements VendorService {
 	public void updateClient(Long id, VendorDto vendorDto) {
 		Optional<Vendor> dbVendor = vendorRepository.findById(id);
 		if (dbVendor.isPresent()) {
+			Long userId = dbVendor.get().getUserAccout().getId();
+	        Optional<UserAccout> userAccout= userAccoutRepository.findById(userId);
+	        if(userAccout.isPresent()) {
+	        	UserAccout updateUserAccout =userAccout.get();
+	        	updateUserAccout.setUserName(vendorDto.getEmail());
+	        	updateUserAccout.setPassword(vendorDto.getMobile());
+	        	updateUserAccout.setActive(userAccout.get().isActive());
+	        	updateUserAccout.setRole(userAccout.get().getRole());
+	        	updateUserAccout.setCandidate(userAccout.get().getCandidate());
+	        	vendorDto.setUserAccout(userAccoutBuilder.toDto(updateUserAccout));
+	        	}
+			
 			vendorRepository.save(vendorBuilder.toModel(vendorDto));
 		}
 
