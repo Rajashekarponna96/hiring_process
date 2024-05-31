@@ -11,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -31,6 +32,8 @@ public class Vendor  implements Serializable{
 	
 	private UserAccout userAccout;
 	
+    private List<Job> jobs;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO )
 	public long getId() {
@@ -81,6 +84,16 @@ public class Vendor  implements Serializable{
 
 	public void setUserAccout(UserAccout userAccout) {
 		this.userAccout = userAccout;
+	}
+    
+	@JsonIgnore
+    @ManyToMany(mappedBy = "vendors")
+	public List<Job> getJobs() {
+		return jobs;
+	}
+
+	public void setJobs(List<Job> jobs) {
+		this.jobs = jobs;
 	}
 	
 	

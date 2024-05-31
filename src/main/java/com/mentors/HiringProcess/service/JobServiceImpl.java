@@ -13,13 +13,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mentors.HiringProcess.builder.JobBuilder;
+import com.mentors.HiringProcess.dto.AssignJobsToVendorsDto;
 import com.mentors.HiringProcess.dto.ClientDto;
 import com.mentors.HiringProcess.dto.JobDto;
 import com.mentors.HiringProcess.dto.JobSummaryDto;
 import com.mentors.HiringProcess.model.Client;
 import com.mentors.HiringProcess.model.Job;
+import com.mentors.HiringProcess.model.Recruiter;
 import com.mentors.HiringProcess.model.Vendor;
 import com.mentors.HiringProcess.repository.JobRepository;
+import com.mentors.HiringProcess.repository.RecruiterRepository;
 import com.mentors.HiringProcess.repository.VendorRepository;
 import com.mentors.HiringProcess.specification.JobSpecifications;
 
@@ -36,6 +39,9 @@ public class JobServiceImpl implements JobServiceI {
 
 	@Autowired
 	private JobBuilder jobBuilder;
+	
+	@Autowired
+	private RecruiterRepository recruiterRepository;
 
 	@Override
 	public void addJob(JobDto jobDto) {
@@ -153,7 +159,25 @@ public class JobServiceImpl implements JobServiceI {
 		Job job = jobRepository.findById(jobId).orElseThrow(() -> new RuntimeException("Job not found"));
 		Vendor vendor = vendorRepository.findById(vendorId).orElseThrow(() -> new RuntimeException("Vendor not found"));
 
-		job.setVendor(vendor);
+		//job.setVendor(vendor);
 		jobRepository.save(job);
+	}
+
+	@Override
+	public List<Recruiter> getAllRecruiters() {
+		return recruiterRepository.findAll();
+	}
+
+	@Override
+	public void assignJobsToVendors(AssignJobsToVendorsDto dto) {
+		List<Job> jobs = jobRepository.findAllById(dto.getJobIds());
+        List<Vendor> vendors = vendorRepository.findAllById(dto.getVendorIds());
+
+        for (Job job : jobs) {
+            job.setVendors(vendors);
+            jobRepository.save(job);
+        }  
+    
+		
 	}
 }

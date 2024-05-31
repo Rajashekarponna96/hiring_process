@@ -14,6 +14,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -62,7 +64,7 @@ public class Job implements Serializable {
 	
 	private String goodToHave;
 	
-	 private Vendor vendor;
+    private List<Vendor> vendors;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -235,15 +237,20 @@ public class Job implements Serializable {
 	public void setGoodToHave(String goodToHave) {
 		this.goodToHave = goodToHave;
 	}
-	
-	@ManyToOne
-    @JoinColumn(name = "vendor_id", referencedColumnName = "id")
-    public Vendor getVendor() {
-        return vendor;
-    }
 
-    public void setVendor(Vendor vendor) {
-        this.vendor = vendor;
-    }
+	@ManyToMany
+    @JoinTable(
+      name = "job_vendor",
+      joinColumns = @JoinColumn(name = "job_id"),
+      inverseJoinColumns = @JoinColumn(name = "vendor_id"))
+	public List<Vendor> getVendors() {
+		return vendors;
+	}
+
+	public void setVendors(List<Vendor> vendors) {
+		this.vendors = vendors;
+	}
+	
+	
 
 }
