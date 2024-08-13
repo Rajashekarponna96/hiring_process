@@ -21,8 +21,8 @@ public class FileUpload {
     
 //    private byte[] content;
     
-    @Lob // Use Lob annotation to specify large object data type
-    private Blob content;
+//    @Lob // Use Lob annotation to specify large object data type
+//    private Blob content;
 
 	public Long getId() {
 		return id;
@@ -40,13 +40,13 @@ public class FileUpload {
 		this.fileName = fileName;
 	}
 
-	public Blob getContent() {
-		return content;
-	}
-
-	public void setContent(Blob content) {
-		this.content = content;
-	}
+//	public Blob getContent() {
+//		return content;
+//	}
+//
+//	public void setContent(Blob content) {
+//		this.content = content;
+//	}
 
 //	public byte[] getContent() {
 //		return content;
@@ -55,6 +55,8 @@ public class FileUpload {
 //	public void setContent(byte[] content) {
 //		this.content = content;
 //	}
+	
+	
 //    
 	
     
