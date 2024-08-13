@@ -11,10 +11,10 @@ public class FileUploadSpecification {
 	public static Specification<FileUpload > hasFields(String code) {
         return (root, query, builder) -> {
             String likeSearchTerm = "%" + code + "%";
-            Predicate predicateCompanyName = builder.like(root.get("companyName"), likeSearchTerm);
-            Predicate predicateLocation = builder.like(root.get("location"), likeSearchTerm);
+            Predicate predicateFileNme = builder.like(root.get("fileName"), likeSearchTerm);
            
-            return builder.or(predicateCompanyName, predicateLocation);
+           
+            return builder.or(predicateFileNme);
         };
     }
 
