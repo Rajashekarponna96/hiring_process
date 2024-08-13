@@ -26,14 +26,14 @@ import java.nio.file.Paths;
 public class FileUploadServiceImpl  implements FileUploadService{
 	
 	@Autowired
-	private FileUploadRepository fileUploadRepository;
-	
-	private final Path fileStorageLocation;
+    private FileUploadRepository fileUploadRepository;
+
+    private final Path fileStorageLocation;
 
     public FileUploadServiceImpl() {
         this.fileStorageLocation = Paths.get("C:/fileupload1-files/")
                 .toAbsolutePath().normalize();
-        
+
         try {
             Files.createDirectories(this.fileStorageLocation);
         } catch (IOException ex) {
@@ -42,31 +42,26 @@ public class FileUploadServiceImpl  implements FileUploadService{
     }
 
     public Path loadFileAsResource(String fileName) {
-        return this.fileStorageLocation.resolve(fileName).normalize();
+        System.out.println("File name is ----------" + fileName);
+        Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
+        
+        if (Files.exists(filePath) && Files.isReadable(filePath)) {
+            return filePath;
+        } else {
+            throw new RuntimeException("File not found or not readable: " + fileName);
+        }
     }
 
-	@Override
-	public Page<FileUpload> getAllResumesWithPagination(Pageable pageable) {
-		Page<FileUpload> fileUploadPage = fileUploadRepository.findAll(pageable);
-        return fileUploadPage; 
-	}
+    @Override
+    public Page<FileUpload> getAllResumesWithPagination(Pageable pageable) {
+        return fileUploadRepository.findAll(pageable);
+    }
 
-	@Override
-	public Page<FileUpload> getAllResumes(Pageable pageable, String code) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public Page<FileUpload> getAllResumes(Pageable pageable, String code) {
+        return null;
+    }
 
-//	@Override
-//	public Page<FileUpload> getAllResumes(Pageable pageable, String code) {
-//		Specification<FileUpload> spec = Specification.where(null); // Start with an empty specification
-//
-//        if (code != null && !code.isEmpty()) {
-//            spec = spec.and(ClientSprecifications.hasFields(code));
-//        }
-//
-//        Page<Client> recruiterPage = clientRepository.findAll(spec, pageable);
-//        return recruiterPage.map(clientBuilder::toDto);
-//	}
+
 
 }

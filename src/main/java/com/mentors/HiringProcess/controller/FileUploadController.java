@@ -57,58 +57,7 @@ public class FileUploadController {
 	@Autowired
 	private FileUploadRepository fileUploadRepository;
 	
-
-//	@PostMapping("/")
-//    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
-//        try {
-//            // Create FileUpload entity
-//            FileUpload fileContent = new FileUpload();
-//            fileContent.setFileName(file.getOriginalFilename());
-//
-//            // Convert MultipartFile to Blob
-//            Blob content = new SerialBlob(file.getBytes());
-//            fileContent.setContent(content);
-//
-//            // Save the entity
-//            fileUploadRepository.save(fileContent);
-//            
-//         // Save the file to the local system
-//            saveFileToLocal(file);
-//
-//            return ResponseEntity.ok("File uploaded successfully");
-//        } catch (IOException | SQLException e) {
-//            e.printStackTrace();
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file");
-//        }
-//    }
-//	
-//	private void saveFileToLocal(MultipartFile file) throws IOException {
-//        // Define the path where you want to save the file
-//        String localPath = "E:/fileupload-files/" + file.getOriginalFilename(); // Change the path as needed
-//        String localPath1 = "";
-//
-//        // Create the directory if it doesn't exist
-//        File directory = new File("E:/fileupload1-files/");
-//        if (!directory.exists()) {
-//            directory.mkdirs();
-//            localPath1 = "E:/fileupload1-files/" + file.getOriginalFilename(); // Change the path as needed
-//        }
-//
-//        // Write the file to the local system
-//        if(localPath!=null) {
-//        try (FileOutputStream fos = new FileOutputStream(localPath)) {
-//            fos.write(file.getBytes());
-//        }
-//        }
-//        try (FileOutputStream fos = new FileOutputStream(localPath1)) {
-//            fos.write(file.getBytes());
-//        }
-//    }
-//	
-	
-	 
-	
-	@PostMapping("/")
+    @PostMapping("/")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
         try {
             // Create FileUpload entity
@@ -182,48 +131,145 @@ public class FileUploadController {
     
     
     //View Api For Localstorage Resumes
+//    @GetMapping("/{fileName}")
+//    public ResponseEntity<?> downloadFile(@PathVariable String fileName) {
+//        try {
+//            Path filePath = fileUploadService.loadFileAsResource(fileName);
+//            Resource resource = new UrlResource(filePath.toUri());
+//            String contentType = Files.probeContentType(filePath);
+//
+//            return ResponseEntity.ok()
+//                    .contentType(MediaType.parseMediaType(contentType))
+//                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+//                    .body(resource);
+//
+//        } catch (RuntimeException e) {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+//                    .body("File not found or not readable: " + fileName);
+//        } catch (MalformedURLException e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                    .body("Error occurred while processing the file URL.");
+//        } catch (IOException e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                    .body("Could not determine file type.");
+//        }
+//    }
+    
+    
     @GetMapping("/{fileName}")
-    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName) {
-        Path filePath = fileUploadService.loadFileAsResource(fileName);
-        Resource resource;
+    public ResponseEntity<?> viewFileContent(@PathVariable String fileName) {
         try {
-            resource = new UrlResource(filePath.toUri());
-            if (resource.exists() && resource.isReadable()) {
-                String contentType = Files.probeContentType(filePath);
+            Path filePath = fileUploadService.loadFileAsResource(fileName);
+            Resource resource = new UrlResource(filePath.toUri());
+            String contentType = Files.probeContentType(filePath);
 
-                return ResponseEntity.ok()
-                        .contentType(MediaType.parseMediaType(contentType))
-                        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
-                        .body(resource);
-            } else {
-                throw new RuntimeException("File not found or not readable");
+            // If contentType couldn't be determined, default to plain text
+            if (contentType == null) {
+                contentType = "text/plain";
             }
+
+            // Return the file content to be displayed inline in the browser
+            return ResponseEntity.ok()
+                    .contentType(MediaType.parseMediaType(contentType))
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + resource.getFilename() + "\"")
+                    .body(resource);
+
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("File not found or not readable: " + fileName);
         } catch (MalformedURLException e) {
-            throw new RuntimeException("File not found or not readable", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error occurred while processing the file URL.");
         } catch (IOException e) {
-            throw new RuntimeException("Could not determine file type.", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Could not determine file type.");
         }
     }
+
     
     
+    
+//    @GetMapping("/view/{fileName}")
+//    public ResponseEntity<byte[]> viewPDF(@PathVariable String fileName) {
+//        try {
+//            File file = new File("C:/fileupload-files1" + fileName);
+//            byte[] pdfBytes = Files.readAllBytes(file.toPath());
+//
+//            HttpHeaders headers = new HttpHeaders();
+//            headers.setContentType(MediaType.APPLICATION_PDF);
+//            headers.setContentDispositionFormData(fileName, fileName);
+//
+//            return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//    }
+
     
     @GetMapping("/view/{fileName}")
-    public ResponseEntity<byte[]> viewPDF(@PathVariable String fileName) {
+
+    public ResponseEntity<byte[]> viewFile(@PathVariable String fileName) {
+
         try {
-            File file = new File("C:/fileupload-files1" + fileName);
-            byte[] pdfBytes = Files.readAllBytes(file.toPath());
+
+            // Define the correct path to your files
+
+            String filePath = "C:/fileupload1-files/" + fileName;
+
+            File file = new File(filePath);
+
+            
+
+            // Check if the file exists and is readable
+
+            if (!file.exists() || !file.isFile()) {
+
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+            }
+
+ 
+
+            // Determine content type
+
+            String contentType = Files.probeContentType(file.toPath());
+
+            if (contentType == null) {
+
+                contentType = "application/octet-stream"; // Fallback content type
+
+            }
+
+ 
+
+            // Read the file bytes
+
+            byte[] fileBytes = Files.readAllBytes(file.toPath());
+
+ 
+
+            // Set headers
 
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData(fileName, fileName);
 
-            return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
+            headers.setContentType(MediaType.parseMediaType(contentType));
+
+ 
+
+            // No content disposition header means the file will be displayed inline
+
+            return new ResponseEntity<>(fileBytes, headers, HttpStatus.OK);
+
         } catch (IOException e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
 
+            e.printStackTrace();
+
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+
+        }
+
+    }
 	
 	
 

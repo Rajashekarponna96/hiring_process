@@ -12,6 +12,6 @@ public interface FileUploadService {
 	
 	public Page<FileUpload> getAllResumesWithPagination(Pageable pageable);
 	
-	Page<FileUpload> getAllResumes(Pageable pageable, String code);
+	public Page<FileUpload> getAllResumes(Pageable pageable, String code);
 
 }
