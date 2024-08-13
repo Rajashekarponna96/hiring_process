@@ -48,7 +48,7 @@ import java.nio.file.Path;
 
 @RestController
 @RequestMapping(value = "/fileupload")
-@CrossOrigin(origins = "*")
+@CrossOrigin
 public class FileUploadController {
 	
 	@Autowired
