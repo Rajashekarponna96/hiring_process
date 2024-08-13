@@ -10,11 +10,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.FileSystemUtils;
 
+import com.mentors.HiringProcess.builder.FileUploadBuilder;
 import com.mentors.HiringProcess.model.Client;
 import com.mentors.HiringProcess.model.FileUpload;
 import com.mentors.HiringProcess.repository.ClientRepository;
 import com.mentors.HiringProcess.repository.FileUploadRepository;
 import com.mentors.HiringProcess.specification.ClientSprecifications;
+import com.mentors.HiringProcess.specification.FileUploadSpecification;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,6 +31,9 @@ public class FileUploadServiceImpl  implements FileUploadService{
     private FileUploadRepository fileUploadRepository;
 
     private final Path fileStorageLocation;
+    
+    @Autowired
+    private FileUploadBuilder fileUploadBuilder;
 
     public FileUploadServiceImpl() {
         this.fileStorageLocation = Paths.get("C:/fileupload1-files/")
@@ -59,7 +64,14 @@ public class FileUploadServiceImpl  implements FileUploadService{
 
     @Override
     public Page<FileUpload> getAllResumes(Pageable pageable, String code) {
-        return null;
+    	Specification<FileUpload> spec = Specification.where(null); // Start with an empty specification
+
+        if (code != null && !code.isEmpty()) {
+            spec = spec.and(FileUploadSpecification.hasFields(code));
+        }
+
+        Page<FileUpload> fileUploadPage = fileUploadRepository.findAll(spec, pageable);
+        return fileUploadPage.map(fileUploadBuilder::toModel);
     }
 
 
