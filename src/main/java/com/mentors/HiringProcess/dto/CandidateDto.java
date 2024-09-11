@@ -366,9 +366,9 @@ public class CandidateDto {
 		if(candidateDto.getGender()==null) {
 			throw new RuntimeException("Gender is Mandatory");
 		}
-		if(candidateDto.getDateOfBirth()==null) {
-			throw new RuntimeException("DateOfBirth is Mandatory");
-		}
+//		if(candidateDto.getDateOfBirth()==null) {
+//			throw new RuntimeException("DateOfBirth is Mandatory");
+//		}
 //		if(candidateDto.getTalentPool()==null) {
 //			throw new RuntimeException("TalentPool is Mandatory");
 //		}
@@ -387,9 +387,9 @@ public class CandidateDto {
 //		if(candidateDto.getCurrency()==null) {
 //			throw new RuntimeException("Currency is Mandatory");
 //		}
-		if(skills== null || skills.isEmpty()) {
-			throw new RuntimeException("Skills is Mandatory");
-		}
+//		if(skills== null || skills.isEmpty()) {
+//			throw new RuntimeException("Skills is Mandatory");
+//		}
 		if (educations == null || educations.isEmpty()) {
             throw new RuntimeException("At least one Education is required");
         }
