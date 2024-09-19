@@ -1,16 +1,14 @@
 package com.mentors.HiringProcess.controller;
 
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+//import org.springdoc.core.converters.models.Sort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,10 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mentors.HiringProcess.dto.CandidateDto;
-import com.mentors.HiringProcess.dto.RecruiterDto;
-import com.mentors.HiringProcess.dto.VendorDto;
-import com.mentors.HiringProcess.model.Candidate;
-import com.mentors.HiringProcess.model.EmailTemplate;
 import com.mentors.HiringProcess.model.HiringFlowType;
 import com.mentors.HiringProcess.repository.CandidateRepository;
 import com.mentors.HiringProcess.repository.EmailTemplateRepository;
@@ -109,10 +103,16 @@ public class CandidateController {
 	
 	
 	   //candidate list with pagination
+//		@GetMapping("/candidatelistwithpagination")
+//		public Page<CandidateDto> getAllCandidatesWithPagination(@RequestParam int page, @RequestParam int size) {
+//		    Pageable pageable = PageRequest.of(page, size);
+//		    return candidateServiceI.getAllCandidatesWithPagination(pageable);
+//		}
+		
 		@GetMapping("/candidatelistwithpagination")
-		public Page<CandidateDto> getAllCandidatesWithPagination(@RequestParam int page, @RequestParam int size) {
-		    Pageable pageable = PageRequest.of(page, size);
-		    return candidateServiceI.getAllCandidatesWithPagination(pageable);
+		public Page<CandidateDto> getAllCandidatesWithPaginationAndSort(@RequestParam int page, @RequestParam int size) {
+		    Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdTimestamp"));
+		    return candidateServiceI.getAllCandidatesWithPaginationAndSort(pageable);
 		}
 		
 		@GetMapping("/inactivecandidatelistwithpagination")
@@ -134,7 +134,9 @@ public class CandidateController {
 		//candidate list based on stage with pgination
 		@GetMapping("/candidateStage1/{stage}")
 		public Page<CandidateDto> getCandidatesDettailsByStagewithPagination(@PathVariable("stage")HiringFlowType stage,@RequestParam int page, @RequestParam int size){
-			Pageable pageable = PageRequest.of(page, size);
+//			Pageable pageable = PageRequest.of(page, size);
+			 Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdTimestamp"));
+			   
 			return candidateServiceI.getCandidatesDettailsByStagewithPagination(stage,pageable);
 		}
 		
