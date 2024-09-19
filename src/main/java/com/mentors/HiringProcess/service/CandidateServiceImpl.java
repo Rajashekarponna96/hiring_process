@@ -252,12 +252,12 @@ public class CandidateServiceImpl implements CandidateServiceI {
 		return candidatePage.map(candidateBuilder::toDto);
 	}
 
-	@Override
-	public Page<CandidateDto> getAllCandidatesWithPagination(Pageable pageable) {
-		//Page<Candidate> recruiterPage = candidateRepository.findAll(pageable);
-		Page<Candidate> recruiterPage = candidateRepository.findAllActiveCandidates(pageable);
-		return recruiterPage.map(candidateBuilder::toDto);
-	}
+//	@Override
+//	public Page<CandidateDto> getAllCandidatesWithPagination(Pageable pageable) {
+//		//Page<Candidate> recruiterPage = candidateRepository.findAll(pageable);
+//		Page<Candidate> recruiterPage = candidateRepository.findAllActiveCandidates(pageable);
+//		return recruiterPage.map(candidateBuilder::toDto);
+//	}
 	
 	@Override
 	public List<CandidateDto> getCandidatesByVendorId(Long vendorId) {
@@ -326,6 +326,13 @@ public class CandidateServiceImpl implements CandidateServiceI {
 		}
 		
 		return null;
+	}
+
+	@Override
+	public Page<CandidateDto> getAllCandidatesWithPaginationAndSort(Pageable pageable) {
+		Page<Candidate> recruiterPage = candidateRepository.findAllActiveCandidates(pageable);
+	    return recruiterPage.map(candidateBuilder::toDto);
+
 	}
 	
 

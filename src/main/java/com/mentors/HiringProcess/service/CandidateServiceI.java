@@ -26,7 +26,9 @@ public interface CandidateServiceI {
 	 
 	 Page<CandidateDto> getAllCandidates(Pageable pageable, String code);
 	 
-	 Page<CandidateDto> getAllCandidatesWithPagination(Pageable pageable);
+	 //Page<CandidateDto> getAllCandidatesWithPagination(Pageable pageable);
+	 
+	 //Page<CandidateDto> getAllCandidatesWithPaginationAndSort(Pageable pageable);
 	 
 	 Page<CandidateDto> getAllInCandidatesWithPagination(Pageable pageable);
 	 
@@ -37,6 +39,8 @@ public interface CandidateServiceI {
 	List<CandidateDto> getCandidatesDettailsByStage(HiringFlowType stage);
 	
 	Page<CandidateDto> getCandidatesDettailsByStagewithPagination(HiringFlowType stage,Pageable pageable);
+
+	Page<CandidateDto> getAllCandidatesWithPaginationAndSort(Pageable pageable);
 	 
 
 
