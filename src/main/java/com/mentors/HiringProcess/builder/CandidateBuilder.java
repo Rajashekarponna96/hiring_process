@@ -78,6 +78,7 @@ public class CandidateBuilder {
 		candidate.setVendor(vendorBuilder.toModel(candidateDto.getVendor()));
 		candidate.setUserAccout(userAccoutBuilder.toModel(candidateDto.getUserAccout()));
 		candidate.setStatus(candidateDto.isStatus());
+		candidate.setFileName(candidateDto.getFileName());
 		return candidate;
 	}
 
@@ -111,6 +112,7 @@ public class CandidateBuilder {
 		candidatedto.setVendor(vendorBuilder.toDto(candidate.getVendor()));
 		candidatedto.setUserAccout(userAccoutBuilder.toDto(candidate.getUserAccout()));
 		candidatedto.setStatus(candidate.isStatus());
+		candidatedto.setFileName(candidate.getFileName());
 
 		return candidatedto;
 	}

@@ -87,6 +87,8 @@ public class Candidate  implements Serializable {
     
     private UserAccout userAccout;
     
+    private String fileName;
+    
     
 //    public Candidate() {
 //        this.createdTimestamp = LocalDateTime.now();
@@ -366,6 +368,16 @@ public class Candidate  implements Serializable {
 	public void setUserAccout(UserAccout userAccout) {
 		this.userAccout = userAccout;
 	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	
+	
 	
 	
 	
