@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.mentors.HiringProcess.builder.CandidateBuilder;
 import com.mentors.HiringProcess.builder.EmailTemplateBuilder;
@@ -115,6 +116,7 @@ public class CandidateServiceImpl implements CandidateServiceI {
 	    candidate.setHiringFlowActivity(hiringFlowActivities);
 	  	
 		candidateRepository.saveAndFlush(candidate);
+		//for email service code
 		try {
 		String candidateName = candidateDto.getFirstName();
 		String uploadDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
@@ -132,6 +134,62 @@ public class CandidateServiceImpl implements CandidateServiceI {
 	                
 	                
 		 
+	}
+  
+  
+  
+  @Override
+	public void addWithCandidateResumeFileName(CandidateDto candidateDto, MultipartFile file) {
+	  if(candidateRepository.findByEmail(candidateDto.getEmail()).isPresent()) {
+			throw new RuntimeException("Email is Already Exit");
+		}
+		if(candidateRepository.findByMobile(candidateDto.getMobile()).isPresent()) {
+			throw new RuntimeException("Mobile is Already Exit");
+		}
+		UserAccout userAccout= new UserAccout();
+      List<Role> roles=roleRepository.findAll();
+		
+		Role role = roles.stream()
+              .filter(r -> r.getName().equals("candidate"))
+              .findFirst()
+              .orElse(null);
+		
+		userAccout.setRole(role);
+		userAccout.setUserName(candidateDto.getEmail());
+		userAccout.setPassword(candidateDto.getMobile());
+		userAccout.setActive(true);
+		candidateDto.setUserAccout(userAccoutBuilder.toDto(userAccout));
+		candidateDto.setStatus(true);
+		candidateDto.setCreatedTimestamp(LocalDateTime.now());
+		candidateDto.setStage(HiringFlowType.Sourced);
+		candidateDto.setFileName(file.getOriginalFilename());
+	    Candidate candidate = candidateBuilder.toModel(candidateDto);
+	    List<HiringFlowActivity> hiringFlowActivities =new ArrayList<>();
+	    hiringFlowActivities.add(createdHiringFlowDetails(candidate.getStage(),candidate.getModifiedBy(),candidate));
+	    
+	    candidate.setHiringFlowActivity(hiringFlowActivities);
+	  	
+		candidateRepository.saveAndFlush(candidate);
+		//for email service code
+		try {
+		String candidateName = candidateDto.getFirstName();
+		String uploadDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+		EmailTemplate emailTemplate  = emailTemplateRepository.findByTitle(candidateDto.getStage().toString());
+		String body=emailTemplate.getBody();
+		String updatedBody = body.replace("[CandidateName]", candidateName)
+               .replace("[UploadDate]", uploadDate);
+		emailService.sendSimpleMessage(candidateDto.getEmail(), emailTemplate.getSubject(),updatedBody,null, null, null);
+		}
+		catch (Exception e) {
+			log.info("Email sent failure"+e.getMessage());
+		}
+		
+		
+	                
+	                
+		 
+
+		
 	}
 	
 	public HiringFlowActivity  createdHiringFlowDetails(HiringFlowType hiringFlowType,UserAccout userAccount,Candidate candidate) {
@@ -334,6 +392,8 @@ public class CandidateServiceImpl implements CandidateServiceI {
 	    return recruiterPage.map(candidateBuilder::toDto);
 
 	}
+
+	
 	
 
 }

@@ -78,6 +78,8 @@ public class CandidateDto {
     private boolean status;
     
     private UserAccoutDto userAccout;
+    
+    private String fileName;
 
 	public Long getId() {
 		return id;
@@ -333,6 +335,16 @@ public class CandidateDto {
 
 	public void setUserAccout(UserAccoutDto userAccout) {
 		this.userAccout = userAccout;
+	}
+	
+	
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 	public void validateREquiredAttibutes(CandidateDto candidateDto) {

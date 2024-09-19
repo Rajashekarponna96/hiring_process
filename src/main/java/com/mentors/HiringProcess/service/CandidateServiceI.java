@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.mentors.HiringProcess.dto.CandidateDto;
 import com.mentors.HiringProcess.dto.RecruiterDto;
@@ -13,6 +14,8 @@ import com.mentors.HiringProcess.model.HiringFlowType;
 public interface CandidateServiceI {
 
 	void add(CandidateDto candidateDto);
+	
+	void addWithCandidateResumeFileName(CandidateDto candidateDto,MultipartFile file);
 
 	void update(Long id, CandidateDto candidateDto);
 
