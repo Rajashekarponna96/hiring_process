@@ -37,7 +37,7 @@ private Long id;
 	
 	private List<HiringFlowDto> flows;
 	
-	private Double experience;
+	private String experience;
 	
 	private List<CandidateDto> candidates;
 	
@@ -149,11 +149,13 @@ private Long id;
 		this.flows = flows;
 	}
 
-	public Double getExperience() {
+	
+
+	public String getExperience() {
 		return experience;
 	}
 
-	public void setExperience(Double experience) {
+	public void setExperience(String experience) {
 		this.experience = experience;
 	}
 
