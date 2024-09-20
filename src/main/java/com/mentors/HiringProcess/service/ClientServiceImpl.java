@@ -1,5 +1,6 @@
 package com.mentors.HiringProcess.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +31,7 @@ public class ClientServiceImpl implements ClientServiceI{
 
 	@Override
 	public void addClient(ClientDto clientDto) {
+		clientDto.setCreatedTimestamp(LocalDateTime.now());
 		clientRepository.save(clientBuilder.toModel(clientDto));
 		
 	}

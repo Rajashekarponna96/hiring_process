@@ -2,6 +2,7 @@ package com.mentors.HiringProcess.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -65,6 +66,10 @@ public class Job implements Serializable {
 	private String goodToHave;
 	
     private List<Vendor> vendors;
+    
+    private LocalDateTime createdTimestamp;
+    
+    private LocalDateTime modifiedTimestamp;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -236,6 +241,22 @@ public class Job implements Serializable {
 
 	public void setGoodToHave(String goodToHave) {
 		this.goodToHave = goodToHave;
+	}
+	
+	public LocalDateTime getCreatedTimestamp() {
+		return createdTimestamp;
+	}
+
+	public void setCreatedTimestamp(LocalDateTime createdTimestamp) {
+		this.createdTimestamp = createdTimestamp;
+	}
+
+	public LocalDateTime getModifiedTimestamp() {
+		return modifiedTimestamp;
+	}
+
+	public void setModifiedTimestamp(LocalDateTime modifiedTimestamp) {
+		this.modifiedTimestamp = modifiedTimestamp;
 	}
 
 	@ManyToMany

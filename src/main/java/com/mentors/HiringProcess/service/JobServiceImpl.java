@@ -1,5 +1,6 @@
 package com.mentors.HiringProcess.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -45,6 +46,7 @@ public class JobServiceImpl implements JobServiceI {
 
 	@Override
 	public void addJob(JobDto jobDto) {
+		jobDto.setCreatedTimestamp(LocalDateTime.now());
 		jobRepository.save(jobBuilder.toModel(jobDto));
 	}
 

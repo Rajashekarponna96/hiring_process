@@ -53,6 +53,8 @@ public class JobBuilder {
 		job.setPrimarySkills(jobDto.getPrimarySkills());
 		job.setSecondarySkills(jobDto.getSecondarySkills());
 		job.setGoodToHave(jobDto.getGoodToHave());
+		job.setCreatedTimestamp(jobDto.getCreatedTimestamp());
+		job.setModifiedTimestamp(jobDto.getModifiedTimestamp());
 		return job;
 	}
 
@@ -77,6 +79,8 @@ public class JobBuilder {
 		jobdto.setPrimarySkills(job.getPrimarySkills());
 		jobdto.setSecondarySkills(job.getSecondarySkills());
 		jobdto.setGoodToHave(job.getGoodToHave());
+		jobdto.setCreatedTimestamp(job.getCreatedTimestamp());
+		jobdto.setModifiedTimestamp(job.getModifiedTimestamp());
 		
 //		List<LocationDto> locationDtos = new ArrayList<>();
 //	    for (Location location : job.getLocations()) {

@@ -115,7 +115,7 @@ public class CandidateController {
 //		    Pageable pageable = PageRequest.of(page, size);
 //		    return candidateServiceI.getAllCandidatesWithPagination(pageable);
 //		}
-		
+	//candidate list with pagination and desc sorting also	
 		@GetMapping("/candidatelistwithpagination")
 		public Page<CandidateDto> getAllCandidatesWithPaginationAndSort(@RequestParam int page, @RequestParam int size) {
 		    Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdTimestamp"));
