@@ -48,7 +48,7 @@ public class Job implements Serializable {
 	
 	private List<HiringFlow> flows;
 	
-	private Double experience;
+	private String experience;
 	
 	private List<Candidate> candidates;
 	
@@ -170,13 +170,15 @@ public class Job implements Serializable {
 		this.flows = flows;
 	}
 	
-	public Double getExperience() {
+	
+	public String getExperience() {
 		return experience;
 	}
 
-	public void setExperience(Double experience) {
+	public void setExperience(String experience) {
 		this.experience = experience;
 	}
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "job")
 	public List<Candidate> getCandidates() {
