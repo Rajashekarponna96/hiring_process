@@ -1,6 +1,7 @@
 package com.mentors.HiringProcess.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,6 +21,10 @@ public class EmailTemplate implements Serializable{
 	 private String body;
 	 
 	 private String title;
+	 
+	 private LocalDateTime createdTimestamp;
+	    
+	 private LocalDateTime modifiedTimestamp;
 	 
 	 
 	@Id
@@ -55,6 +60,22 @@ public class EmailTemplate implements Serializable{
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	
+	public LocalDateTime getCreatedTimestamp() {
+		return createdTimestamp;
+	}
+
+	public void setCreatedTimestamp(LocalDateTime createdTimestamp) {
+		this.createdTimestamp = createdTimestamp;
+	}
+
+	public LocalDateTime getModifiedTimestamp() {
+		return modifiedTimestamp;
+	}
+
+	public void setModifiedTimestamp(LocalDateTime modifiedTimestamp) {
+		this.modifiedTimestamp = modifiedTimestamp;
 	}
 	 
 	 

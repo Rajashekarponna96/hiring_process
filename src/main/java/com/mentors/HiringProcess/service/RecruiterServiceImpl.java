@@ -1,5 +1,6 @@
 package com.mentors.HiringProcess.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -80,6 +81,7 @@ public class RecruiterServiceImpl implements RecruiterServiceI {
 		userAccout.setUserName(recruiterDto.getEmail());
 		userAccout.setPassword(recruiterDto.getMobile());
 		userAccout.setActive(true);
+		recruiterDto.setCreatedTimestamp(LocalDateTime.now());
 		recruiterDto.setUserAccout(userAccoutBuilder.toDto(userAccout));
         
 		recruiterRepository.saveAndFlush(recruiterBuilder.toModel(recruiterDto));

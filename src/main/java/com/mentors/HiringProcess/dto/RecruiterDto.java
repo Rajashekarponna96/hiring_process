@@ -1,5 +1,7 @@
 package com.mentors.HiringProcess.dto;
 
+import java.time.LocalDateTime;
+
 import com.mentors.HiringProcess.model.UserAccout;
 
 public class RecruiterDto {
@@ -15,6 +17,10 @@ public class RecruiterDto {
 	private String mobile;
 	
 	private UserAccoutDto userAccout;
+	
+    private LocalDateTime createdTimestamp;
+    
+    private LocalDateTime modifiedTimestamp;
 
 	public Long getId() {
 		return id;
@@ -62,6 +68,22 @@ public class RecruiterDto {
 
 	public void setUserAccout(UserAccoutDto userAccout) {
 		this.userAccout = userAccout;
+	}
+	
+	public LocalDateTime getCreatedTimestamp() {
+		return createdTimestamp;
+	}
+
+	public void setCreatedTimestamp(LocalDateTime createdTimestamp) {
+		this.createdTimestamp = createdTimestamp;
+	}
+
+	public LocalDateTime getModifiedTimestamp() {
+		return modifiedTimestamp;
+	}
+
+	public void setModifiedTimestamp(LocalDateTime modifiedTimestamp) {
+		this.modifiedTimestamp = modifiedTimestamp;
 	}
 
 	public void validateRequiredAttibutes(RecruiterDto recruiterDto) {

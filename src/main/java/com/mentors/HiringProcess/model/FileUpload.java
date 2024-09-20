@@ -1,6 +1,7 @@
 package com.mentors.HiringProcess.model;
 
 import java.sql.Blob;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,6 +19,10 @@ public class FileUpload {
     private Long id;
     
     private String fileName;
+    
+    private LocalDateTime createdTimestamp;
+    
+    private LocalDateTime modifiedTimestamp;
     
 //    private byte[] content;
     
@@ -59,6 +64,22 @@ public class FileUpload {
 	
 //    
 	
+	
+	public LocalDateTime getCreatedTimestamp() {
+		return createdTimestamp;
+	}
+
+	public void setCreatedTimestamp(LocalDateTime createdTimestamp) {
+		this.createdTimestamp = createdTimestamp;
+	}
+
+	public LocalDateTime getModifiedTimestamp() {
+		return modifiedTimestamp;
+	}
+
+	public void setModifiedTimestamp(LocalDateTime modifiedTimestamp) {
+		this.modifiedTimestamp = modifiedTimestamp;
+	}
     
 	
 

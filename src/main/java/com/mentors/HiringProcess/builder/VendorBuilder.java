@@ -24,6 +24,8 @@ public class VendorBuilder {
 		vendor.setLocation(vendorDto.getLocation());
 		vendor.setEmail(vendorDto.getEmail());
 		vendor.setMobile(vendorDto.getMobile());
+		vendor.setCreatedTimestamp(vendorDto.getCreatedTimestamp());
+		vendor.setModifiedTimestamp(vendorDto.getModifiedTimestamp());
 		vendor.setUserAccout(userAccoutBuilder.toModel(vendorDto.getUserAccout()));
 		return vendor;
 	}
@@ -37,6 +39,8 @@ public class VendorBuilder {
 			vendorDto.setLocation(vendor.getLocation());
 			vendorDto.setEmail(vendor.getEmail());
 			vendorDto.setMobile(vendor.getMobile());
+			vendorDto.setCreatedTimestamp(vendor.getCreatedTimestamp());
+			vendorDto.setModifiedTimestamp(vendor.getModifiedTimestamp());
 			vendorDto.setUserAccout(userAccoutBuilder.toDto(vendor.getUserAccout()));
 		}
 		

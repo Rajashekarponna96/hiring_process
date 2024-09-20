@@ -25,6 +25,8 @@ public class RecruiterBuilder {
 		recruiter.setEmail(recruiterDto.getEmail());
 		recruiter.setMobile(recruiterDto.getMobile());
 		recruiter.setUserAccout(userAccoutBuilder.toModel(recruiterDto.getUserAccout()));
+		recruiter.setCreatedTimestamp(recruiterDto.getCreatedTimestamp());
+		recruiter.setModifiedTimestamp(recruiterDto.getModifiedTimestamp());
 		
 		
 		return recruiter;
@@ -39,6 +41,8 @@ public class RecruiterBuilder {
 		recruiterdto.setEmail(recruiter.getEmail());
 		recruiterdto.setMobile(recruiter.getMobile());
 		recruiterdto.setUserAccout(userAccoutBuilder.toDto(recruiter.getUserAccout()));
+		recruiterdto.setCreatedTimestamp(recruiter.getCreatedTimestamp());
+		recruiterdto.setModifiedTimestamp(recruiter.getModifiedTimestamp());
 		return recruiterdto;
 }
 

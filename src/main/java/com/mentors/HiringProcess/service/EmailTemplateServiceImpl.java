@@ -143,6 +143,7 @@ public class EmailTemplateServiceImpl implements EmailTemplateServiceI{
 	@Override
 	public void addCandidateEmails(EmailTemplateDto candidateEmailDto) {
 		
+		candidateEmailDto.setCreatedTimestamp(LocalDateTime.now());
 		EmailTemplate candidateEmail = candidateEmailBuilder.toModel(candidateEmailDto);
 		candidateEmailRepository.save(candidateEmail);
 	}
