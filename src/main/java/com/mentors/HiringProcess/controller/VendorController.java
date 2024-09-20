@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -59,7 +60,8 @@ public class VendorController {
 	// Vendor list with pagination
 	@GetMapping("/vendorlistwithpagination")
 	public Page<VendorDto> getAllLientsWithPagination(@RequestParam int page, @RequestParam int size) {
-		Pageable pageable = PageRequest.of(page, size);
+		//Pageable pageable = PageRequest.of(page, size);
+		Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdTimestamp"));
 		return vendorService.getAllLientsWithPagination(pageable);
 	}
 

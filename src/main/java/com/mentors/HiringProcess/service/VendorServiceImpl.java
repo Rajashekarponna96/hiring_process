@@ -1,5 +1,6 @@
 package com.mentors.HiringProcess.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -65,6 +66,7 @@ public class VendorServiceImpl implements VendorService {
 		userAccout.setUserName(vendorDto.getEmail());
 		userAccout.setPassword(vendorDto.getMobile());
 		userAccout.setActive(true);
+		vendorDto.setCreatedTimestamp(LocalDateTime.now());
 		vendorDto.setUserAccout(userAccoutBuilder.toDto(userAccout));
         
 		vendorRepository.saveAndFlush(vendorBuilder.toModel(vendorDto));

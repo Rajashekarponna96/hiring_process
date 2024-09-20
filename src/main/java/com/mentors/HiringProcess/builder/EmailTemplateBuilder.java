@@ -16,6 +16,8 @@ public class EmailTemplateBuilder {
 		candidateEmail.setSubject(candidateEmailDto.getSubject());
 		candidateEmail.setBody(candidateEmailDto.getBody());
 		candidateEmail.setTitle(candidateEmailDto.getTitle());
+		candidateEmail.setCreatedTimestamp(candidateEmailDto.getCreatedTimestamp());
+		candidateEmail.setModifiedTimestamp(candidateEmailDto.getModifiedTimestamp());
 		return candidateEmail;
 	}
 
@@ -26,6 +28,8 @@ public class EmailTemplateBuilder {
 		candidateEmailDto.setSubject(candidateEmail.getSubject());
 		candidateEmailDto.setBody(candidateEmail.getBody());
 		candidateEmailDto.setTitle(candidateEmail.getTitle());
+		candidateEmailDto.setCreatedTimestamp(candidateEmail.getCreatedTimestamp());
+		candidateEmailDto.setModifiedTimestamp(candidateEmail.getModifiedTimestamp());
 		return candidateEmailDto;
 }
 

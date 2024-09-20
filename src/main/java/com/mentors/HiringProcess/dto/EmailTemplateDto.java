@@ -1,5 +1,7 @@
 package com.mentors.HiringProcess.dto;
 
+import java.time.LocalDateTime;
+
 public class EmailTemplateDto {
 	
 	 private Long id;
@@ -9,6 +11,10 @@ public class EmailTemplateDto {
 	 private String body;
 	 
 	 private String title;
+	 
+	 private LocalDateTime createdTimestamp;
+	    
+	 private LocalDateTime modifiedTimestamp;
 
 	 
 	public Long getId() {
@@ -50,6 +56,23 @@ public class EmailTemplateDto {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
+	public LocalDateTime getCreatedTimestamp() {
+		return createdTimestamp;
+	}
+
+	public void setCreatedTimestamp(LocalDateTime createdTimestamp) {
+		this.createdTimestamp = createdTimestamp;
+	}
+
+	public LocalDateTime getModifiedTimestamp() {
+		return modifiedTimestamp;
+	}
+
+	public void setModifiedTimestamp(LocalDateTime modifiedTimestamp) {
+		this.modifiedTimestamp = modifiedTimestamp;
+	}
+	 
 	
 	
 
