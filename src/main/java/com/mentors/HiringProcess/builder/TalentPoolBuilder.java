@@ -24,6 +24,8 @@ public class TalentPoolBuilder {
 		}
 		talentPool.setName(talentPoolDto.getName());
 		talentPool.setDescription(talentPoolDto.getDescription());
+		talentPool.setCreatedTimestamp(talentPoolDto.getCreatedTimestamp());
+		talentPool.setModifiedTimestamp(talentPoolDto.getModifiedTimestamp());
 
 		return talentPool;
 	}
@@ -36,6 +38,8 @@ public class TalentPoolBuilder {
 				talentPoolDto.setId(talentPool.getId());
 				talentPoolDto.setName(talentPool.getName());
 				talentPoolDto.setDescription(talentPool.getDescription());
+				talentPoolDto.setCreatedTimestamp(talentPool.getCreatedTimestamp());
+				talentPoolDto.setModifiedTimestamp(talentPool.getModifiedTimestamp());
 		}
 	    
 		return talentPoolDto;

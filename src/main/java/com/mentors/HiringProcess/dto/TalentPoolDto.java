@@ -1,5 +1,6 @@
 package com.mentors.HiringProcess.dto;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.mentors.HiringProcess.model.Candidate;
@@ -14,6 +15,10 @@ public class TalentPoolDto {
 	private String description;
 	
 	private List<CandidateDto> candidates;
+	
+    private LocalDateTime createdTimestamp;
+    
+    private LocalDateTime modifiedTimestamp;
 
 	public Long getId() {
 		return id;
@@ -45,6 +50,22 @@ public class TalentPoolDto {
 
 	public void setCandidates(List<CandidateDto> candidates) {
 		this.candidates = candidates;
+	}
+	
+	public LocalDateTime getCreatedTimestamp() {
+		return createdTimestamp;
+	}
+
+	public void setCreatedTimestamp(LocalDateTime createdTimestamp) {
+		this.createdTimestamp = createdTimestamp;
+	}
+
+	public LocalDateTime getModifiedTimestamp() {
+		return modifiedTimestamp;
+	}
+
+	public void setModifiedTimestamp(LocalDateTime modifiedTimestamp) {
+		this.modifiedTimestamp = modifiedTimestamp;
 	}
 
 	public void validateRequiredAttibutes(TalentPoolDto talentPoolDto) {

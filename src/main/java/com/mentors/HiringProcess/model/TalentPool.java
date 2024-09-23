@@ -1,6 +1,7 @@
 package com.mentors.HiringProcess.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -26,6 +27,10 @@ public class TalentPool implements Serializable {
 	private String description;
 	
 	private List<Candidate> candidates;
+	
+    private LocalDateTime createdTimestamp;
+    
+    private LocalDateTime modifiedTimestamp;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -60,6 +65,22 @@ public class TalentPool implements Serializable {
 
 	public void setCandidates(List<Candidate> candidates) {
 		this.candidates = candidates;
+	}
+	
+	public LocalDateTime getCreatedTimestamp() {
+		return createdTimestamp;
+	}
+
+	public void setCreatedTimestamp(LocalDateTime createdTimestamp) {
+		this.createdTimestamp = createdTimestamp;
+	}
+
+	public LocalDateTime getModifiedTimestamp() {
+		return modifiedTimestamp;
+	}
+
+	public void setModifiedTimestamp(LocalDateTime modifiedTimestamp) {
+		this.modifiedTimestamp = modifiedTimestamp;
 	}
 	
 	
