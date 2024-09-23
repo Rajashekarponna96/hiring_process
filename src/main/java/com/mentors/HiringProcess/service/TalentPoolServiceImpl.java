@@ -1,5 +1,6 @@
 package com.mentors.HiringProcess.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,6 +36,7 @@ public class TalentPoolServiceImpl implements TalentPoolServiceI {
 		if (talentPool != null) {
 			throw new RuntimeException("Talent Pool already exists.");
 		}
+		talentPoolDto.setCreatedTimestamp(LocalDateTime.now());
 		talentPoolRepository.save(talentPoolBuilder.toModel(talentPoolDto));
 	}
 
