@@ -49,7 +49,8 @@ public class TalentPoolController {
 	@GetMapping("/searchpage")
     public Page<TalentPoolDto> getAllJobs(@RequestParam int page, @RequestParam int size,
 		        @RequestParam String code) {
-		    Pageable pageable = PageRequest.of(page, size);
+		   // Pageable pageable = PageRequest.of(page, size);
+		    Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdTimestamp"));
 		    return talentPoolServiceI.getAllTalentPool(pageable,code);
 		}
 	

@@ -53,7 +53,8 @@ public class VendorController {
 
 	@GetMapping("/searchpage")
 	public Page<VendorDto> getAllLients(@RequestParam int page, @RequestParam int size, @RequestParam String code) {
-		Pageable pageable = PageRequest.of(page, size);
+		//Pageable pageable = PageRequest.of(page, size);
+		Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdTimestamp"));
 		return vendorService.getAllClients(pageable, code);
 	}
 

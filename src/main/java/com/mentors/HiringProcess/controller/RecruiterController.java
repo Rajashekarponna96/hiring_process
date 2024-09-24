@@ -54,7 +54,8 @@ public class RecruiterController {
 	@GetMapping("/searchpage")
 	public Page<RecruiterDto> getAllRecruiters(@RequestParam int page, @RequestParam int size,
 	        @RequestParam String code) {
-	    Pageable pageable = PageRequest.of(page, size);
+	    //Pageable pageable = PageRequest.of(page, size);
+		Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdTimestamp"));
 	    return recruiterServiceI.getAllRecruiters(pageable,code);
 	}
 	

@@ -104,7 +104,8 @@ public class CandidateController {
 	@GetMapping("/searchpage")
 	public Page<CandidateDto> getAllRecruiters(@RequestParam int page, @RequestParam int size,
 	        @RequestParam String code) {
-	    Pageable pageable = PageRequest.of(page, size);
+	    //Pageable pageable = PageRequest.of(page, size);
+		Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdTimestamp"));
 	    return candidateServiceI.getAllCandidates(pageable,code);
 	}
 	
