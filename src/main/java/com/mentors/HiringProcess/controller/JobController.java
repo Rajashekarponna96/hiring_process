@@ -70,7 +70,8 @@ public class JobController {
 
 	@GetMapping("/searchpage")
 	public Page<JobDto> getAllJobs(@RequestParam int page, @RequestParam int size, @RequestParam String code) {
-		Pageable pageable = PageRequest.of(page, size);
+		//Pageable pageable = PageRequest.of(page, size);
+		Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdTimestamp"));
 		return jobServiceI.getAllJobs(pageable, code);
 	}
 
