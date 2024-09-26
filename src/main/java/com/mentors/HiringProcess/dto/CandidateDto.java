@@ -80,6 +80,8 @@ public class CandidateDto {
     private UserAccoutDto userAccout;
     
     private String fileName;
+    
+    private String primarySkill;
 
 	public Long getId() {
 		return id;
@@ -346,6 +348,14 @@ public class CandidateDto {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
+	
+	public String getPrimarySkill() {
+		return primarySkill;
+	}
+
+	public void setPrimarySkill(String primarySkill) {
+		this.primarySkill = primarySkill;
+	}
 
 	public void validateREquiredAttibutes(CandidateDto candidateDto) {
 		if(candidateDto.getFirstName()==null) {
@@ -384,9 +394,9 @@ public class CandidateDto {
 //		if(candidateDto.getTalentPool()==null) {
 //			throw new RuntimeException("TalentPool is Mandatory");
 //		}
-		if(candidateDto.getJob()==null) {
-			throw new RuntimeException("Job is Mandatory");
-		}
+//		if(candidateDto.getJob()==null) {
+//			throw new RuntimeException("Job is Mandatory");
+//		}
 		if(candidateDto.getSource()==null) {
 			throw new RuntimeException("Source is Mandatory");
 		}

@@ -64,7 +64,9 @@ public class CandidateBuilder {
 		candidate.setGender(candidateDto.getGender());
 		candidate.setDateOfBirth(candidateDto.getDateOfBirth());
 		candidate.setTalentPool(talentPoolBuilder.toModel(candidateDto.getTalentPool()));
-		candidate.setJob(jobBuilder.toModel(candidateDto.getJob()));
+		if (candidateDto.getJob() != null) {
+	        candidate.setJob(jobBuilder.toModel(candidateDto.getJob()));
+	    }
 		candidate.setSkills(candidateDto.getSkills());
 		candidate.setStage(candidateDto.getStage());
 //		candidate.setCreatedBy(userAccoutBuilder.toModel(candidateDto.getCreatedBy()));
@@ -79,6 +81,7 @@ public class CandidateBuilder {
 		candidate.setUserAccout(userAccoutBuilder.toModel(candidateDto.getUserAccout()));
 		candidate.setStatus(candidateDto.isStatus());
 		candidate.setFileName(candidateDto.getFileName());
+		candidate.setPrimarySkill(candidateDto.getPrimarySkill());
 		return candidate;
 	}
 
@@ -100,7 +103,9 @@ public class CandidateBuilder {
 		candidatedto.setGender(candidate.getGender());
 		candidatedto.setDateOfBirth(candidate.getDateOfBirth());
 		candidatedto.setTalentPool(talentPoolBuilder.toDto(candidate.getTalentPool()));
-		candidatedto.setJob(jobBuilder.toDto(candidate.getJob()));
+		if (candidate.getJob() != null) {
+	        candidatedto.setJob(jobBuilder.toDto(candidate.getJob()));
+	    }
 		candidatedto.setSkills(candidate.getSkills());
 		candidatedto.setEducations(educationBuilder.toDtoList(candidate.getEducations()));
 		candidatedto.setExperiences(experienceBuilder.toDtoList(candidate.getExperiences()));
@@ -113,6 +118,7 @@ public class CandidateBuilder {
 		candidatedto.setUserAccout(userAccoutBuilder.toDto(candidate.getUserAccout()));
 		candidatedto.setStatus(candidate.isStatus());
 		candidatedto.setFileName(candidate.getFileName());
+		candidatedto.setPrimarySkill(candidate.getPrimarySkill());
 
 		return candidatedto;
 	}

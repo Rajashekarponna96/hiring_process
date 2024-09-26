@@ -89,6 +89,8 @@ public class Candidate  implements Serializable {
     
     private String fileName;
     
+    private String primarySkill;
+    
     
 //    public Candidate() {
 //        this.createdTimestamp = LocalDateTime.now();
@@ -375,6 +377,14 @@ public class Candidate  implements Serializable {
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+	
+	public String getPrimarySkill() {
+		return primarySkill;
+	}
+
+	public void setPrimarySkill(String primarySkill) {
+		this.primarySkill = primarySkill;
 	}
 	
 	

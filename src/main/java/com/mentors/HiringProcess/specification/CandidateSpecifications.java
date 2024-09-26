@@ -16,6 +16,8 @@ public class CandidateSpecifications {
             Predicate predicateEmail = builder.like(root.get("email"), likeSearchTerm);
             Predicate predicateMobile = builder.like(root.get("mobile"), likeSearchTerm);
             Predicate predicateAlterMobile = builder.like(root.get("alterMobile"),likeSearchTerm);
+            Predicate predicatePrimarySkill = builder.like(root.get("primarySkill"),likeSearchTerm);
+            
            // Predicate predicateSource = builder.like(root.get("source"),likeSearchTerm);
             //Predicate predicateStage = builder.like(root.get("stage"),likeSearchTerm);
            // Predicate predicateCurrent = builder.like(root.get("current"),likeSearchTerm);
@@ -40,7 +42,7 @@ public class CandidateSpecifications {
 //            		predicateAvialToJoin,predicatePreferred,predicateCurrentSalary,predicateExpectedSalary,predicateCurrency,predicateGender,predicateDateOfBirth,predicateSkills,
 //            		predicateExperiences,predicateEducations,predicateEducations,predicateTalentPool,predicateJob);
             
-            return builder.or(predicateFirstName, predicateLastName, predicateEmail, predicateMobile,predicateAlterMobile, predicateAvialToJoin);
+            return builder.or(predicateFirstName, predicateLastName, predicateEmail, predicateMobile,predicateAlterMobile, predicateAvialToJoin,predicatePrimarySkill);
 
         };
     }
