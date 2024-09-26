@@ -26,7 +26,7 @@ public class Experience implements Serializable{
 	
 	private LocalDate dateOfJoining;
 	
-	private LocalDate dateOfRelieving;
+	private String dateOfRelieving;
 	
 	private String location;
 	
@@ -74,14 +74,15 @@ public class Experience implements Serializable{
 		this.dateOfJoining = dateOfJoining;
 	}
 	
-	public LocalDate getDateOfRelieving() {
+	
+	public String getDateOfRelieving() {
 		return dateOfRelieving;
 	}
 
-	public void setDateOfRelieving(LocalDate dateOfRelieving) {
+	public void setDateOfRelieving(String dateOfRelieving) {
 		this.dateOfRelieving = dateOfRelieving;
 	}
-	
+
 	public String getLocation() {
 		return location;
 	}
