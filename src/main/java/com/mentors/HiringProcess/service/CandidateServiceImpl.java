@@ -154,6 +154,11 @@ public class CandidateServiceImpl implements CandidateServiceI {
               .findFirst()
               .orElse(null);
 		
+		if (candidateDto.getJob() == null) {
+	        
+			candidateDto.setJob(null);
+	    }
+		
 		userAccout.setRole(role);
 		userAccout.setUserName(candidateDto.getEmail());
 		userAccout.setPassword(candidateDto.getMobile());
